@@ -45,6 +45,40 @@ details{border-top:1px solid var(--line);padding:20px 0}details summary{cursor:p
 .buy{width:100%;text-align:center;font-size:14px;padding:17px}
 input,select,textarea{padding:10px;margin:6px 0;width:100%;box-sizing:border-box;border:1px solid #d8cbb0;border-radius:6px;background:#fff}
 table{width:100%;border-collapse:collapse;background:#fff}td,th{border:1px solid #eee;padding:8px;text-align:left;font-size:14px}
-@media(max-width:900px){.hero{height:78vh}.hero-text{padding:0 28px}.hero-text h2{font-size:46px}.tiles,.grid{grid-template-columns:repeat(2,1fr)}.story,.product,.foot{grid-template-columns:1fr}.product{padding-top:110px}header{padding:14px 20px}nav a{margin-left:14px}}
-@media(max-width:560px){.tiles,.grid,.values{grid-template-columns:1fr}.btn-outline{margin-left:0;margin-top:10px}.card-body h3{min-height:0}}
+/* Hamburger menu: hidden on desktop, the only nav control on mobile */
+.menu-btn{display:none;background:none;border:1px solid rgba(255,255,255,.4);color:#fff;font-size:22px;line-height:1;padding:8px 12px;cursor:pointer;border-radius:6px}
+.mobile-menu{display:none}
+html,body{overflow-x:hidden}img,video,iframe{max-width:100%}
+@media(max-width:900px){
+ header{padding:14px 20px}
+ header:has(.menu-btn){display:grid;grid-template-columns:44px 1fr 44px;align-items:center}
+ header nav:not(.mobile-menu){display:none}
+ header h1{text-align:center;font-size:20px}
+ .menu-btn{display:block}
+ .mobile-menu{display:none;position:absolute;top:100%;left:0;right:0;background:rgba(22,16,19,.98);flex-direction:column;padding:8px 20px 20px;z-index:30}
+ header.menu-open .mobile-menu{display:flex}
+ .mobile-menu a{color:#fff;text-decoration:none;padding:14px 0;border-top:1px solid rgba(255,255,255,.14);font-size:13px;letter-spacing:.22em;margin:0}
+ .hero{height:78vh}.hero-text{padding:0 28px}.hero-text h2{font-size:46px}
+ .tiles,.grid{grid-template-columns:repeat(2,1fr)}
+ .story,.product,.foot{grid-template-columns:1fr}
+ .product{padding:110px 20px 48px;gap:32px}.policy{padding:110px 20px 48px}
+ .wrap{padding:0 20px}section{padding:48px 0}
+ .thumbs img{width:64px;height:80px}
+ table{display:block;overflow-x:auto}
+ .admin .imgrow{flex-wrap:wrap}.admin .row{flex-direction:column}
+}
+@media(max-width:560px){
+ .tiles,.grid,.values{grid-template-columns:1fr}
+ .btn-outline{margin-left:0;margin-top:10px}.card-body h3{min-height:0}
+ header h1{font-size:18px;letter-spacing:.24em}header h1 small{font-size:7px}
+ .hero{height:auto;min-height:520px;padding:120px 0 64px}.hero-text{padding:0 20px}.hero-text h2{font-size:38px}.hero-text p{font-size:16px}
+ .hero-text .btn{display:block;text-align:center;margin:12px 0 0}
+ .sec-head h2{font-size:32px}.story h2{font-size:32px}.feature blockquote{font-size:28px}.feature{height:auto;min-height:360px;padding:64px 0}
+ .tile{height:300px}.grid{gap:28px}
+ .ptitle{font-size:36px}.policy h1{font-size:36px}.policy h2{font-size:24px}
+ .picker button{padding:11px 16px;min-height:44px}.badges{grid-template-columns:1fr}
+ .thumbs img{width:56px;height:70px}
+ footer{padding:48px 20px 24px}.foot{gap:28px}
+ .btn{padding:15px 20px}
+}
 .policy{max-width:860px;margin:0 auto;padding:130px 32px 64px}.policy h1{font-size:52px;line-height:1.1;margin:0 0 8px}.policy h2{font-size:30px;margin-top:36px}.policy h3{font-size:24px;margin-top:28px}.policy .note{background:var(--paper);border-left:4px solid var(--gold);padding:16px 20px;margin:24px 0}
