@@ -1,6 +1,6 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Magracia - Silk Shirts, Pants and Shrugs for Women. Buy on Etsy.">
-<title>Magracia | Silk Shirts, Pants &amp; Shrugs for Women</title><link rel="stylesheet" href="styles.css?v=4"></head>
+<title>Magracia | Silk Shirts, Pants &amp; Shrugs for Women</title><link rel="stylesheet" href="styles.css?v=5"></head>
 <body>
 <header><nav><a href="/">HOME</a><a href="#collections">SHOP</a></nav><h1>MAGRACIA<small>CHOSEN, NOT CHASED</small></h1><nav><a href="mailto:support@magracia.com">CONTACT</a><a href="https://www.etsy.com/shop/MagraciaOfficial">ETSY SHOP</a></nav></header>
 <main>
@@ -18,7 +18,7 @@
 </main>
 <footer><div class="foot"><div><h4>Magracia</h4><p>Silk shirts, pants and shrugs for women.</p></div><div><h4>Collections</h4><p><a href="#collections">Women Shirt Collection</a><br><a href="#collections">Co-ord Sets</a><br><a href="#collections">Women Pants And Trousers</a><br><a href="#collections">Women Shrug Collection</a></p></div><div><h4>Shop</h4><p><a href="https://www.etsy.com/shop/MagraciaOfficial">Etsy Shop</a><br><a href="mailto:support@magracia.com">support@magracia.com</a></p></div></div><p style="text-align:center;margin-top:36px">© 2026 MAGRACIA</p></footer>
 <script>
-fetch('products.json?v=4').then(r=>r.json()).then(products=>{
+fetch('products.json?v=5').then(r=>r.json()).then(products=>{
   const tiles=document.getElementById('tiles'); const groups={};
   products.forEach(p=>{(groups[p.collection]=groups[p.collection]||[]).push(p)});
   tiles.innerHTML=Object.keys(groups).map(name=>'<a class="tile" href="#col-'+encodeURIComponent(name)+'"><img src="'+groups[name][0].images[0]+'" alt="'+name+'"><span><b>'+name+'</b><i>'+groups[name].length+' pieces</i></span></a>').join('');
