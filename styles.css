@@ -42,3 +42,4 @@ input,select,textarea{padding:10px;margin:6px 0;width:100%;box-sizing:border-box
 table{width:100%;border-collapse:collapse;background:#fff}td,th{border:1px solid #eee;padding:8px;text-align:left;font-size:14px}
 @media(max-width:900px){.hero{height:78vh}.hero-text{padding:0 28px}.hero-text h2{font-size:46px}.tiles,.grid{grid-template-columns:repeat(2,1fr)}.story,.product,.foot{grid-template-columns:1fr}.product{padding-top:110px}header{padding:14px 20px}nav a{margin-left:14px}}
 @media(max-width:560px){.tiles,.grid,.values{grid-template-columns:1fr}.btn-outline{margin-left:0;margin-top:10px}}
+.policy{max-width:860px;margin:0 auto;padding:120px 32px 64px}.policy h1{font-size:52px;line-height:1.1;margin:0 0 8px}.policy h2{font-size:30px;margin-top:36px}.policy h3{font-size:24px;margin-top:28px}.policy .note{background:#fff;border-left:4px solid var(--gold);padding:16px 20px;margin:24px 0}
