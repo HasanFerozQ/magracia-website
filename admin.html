@@ -1,90 +1,159 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, nofollow"><title>Magracia Admin - Private</title><link rel="stylesheet" href="styles.css?v=8"></head>
-<body><header><h1>MAGRACIA ADMIN</h1></header><main class="wrap"><section>
+<meta name="robots" content="noindex, nofollow"><title>Magracia Admin - Private</title><link rel="stylesheet" href="styles.css?v=9">
+<style>
+.admin h2{margin-top:28px}.admin .card{background:#fff;border:1px solid #e5dcc3;padding:16px;margin:12px 0;border-radius:8px}
+.admin .warn{color:#9a3b12}.admin .ok{color:#1d6b3a}.admin small{color:#777}
+.admin .imgrow{display:flex;gap:10px;align-items:center;margin:8px 0}.admin .imgrow img{width:80px;height:100px;object-fit:cover;border:1px solid #eee}
+.admin .imgrow select{width:auto}.admin .row{display:flex;gap:12px}.admin .row>*{flex:1}
+.admin .pill{display:inline-block;background:#f3ead6;border-radius:20px;padding:2px 10px;margin:2px;font-size:13px}
+.admin details{margin:14px 0}.admin details summary{cursor:pointer;font-weight:700}
+.admin .counter{font-size:13px;color:#777}
+</style></head>
+<body><header><h1>MAGRACIA ADMIN</h1></header><main class="wrap admin"><section>
 <p>This page is not linked from the shop. Do not share its address. Saving requires the admin password set in Vercel, checked on the server.</p>
-<label>Admin password <input type="password" id="pw"></label>
-<button class="btn" id="loadBtn">Load listings</button><p id="status"></p>
-<div id="list"></div><div id="editor" style="display:none">
-<h2 id="editTitle">Edit listing</h2>
-<label>Title <input id="fTitle"></label>
-<label>Collection <select id="fCollection"><option>Women Shirt Collection</option><option>Co-ord Sets</option><option>Women Pants And Trousers</option><option>Women Shrug Collection</option></select></label>
-<label>Etsy URL <input id="fEtsy" placeholder="https://www.etsy.com/listing/..."></label>
+<div class="card"><label>Admin password <input type="password" id="pw" autocomplete="current-password"></label>
+<button class="btn" id="loadBtn">Load listings</button> <span id="status"></span></div>
+<div id="dashboard"></div>
+<div class="card"><h2>Collections</h2><p id="collections"></p>
+<p><input id="newCollection" placeholder="New collection name, e.g. Evening Wear"> <button class="btn" id="createCollectionBtn">Create collection + new listing</button></p>
+<p><small>A collection appears on the homepage once a listing is assigned to it. The footer collection links are fixed in the page header, so a brand-new collection will show in the homepage tiles and sections, not in the footer, until the footer is updated.</small></p></div>
+<div class="card"><h2>Listings</h2>
+<p><input id="search" placeholder="Search by title or collection…"> <select id="filterCollection"><option value="">All collections</option></select></p>
+<div id="list"></div></div>
+<div id="editor" style="display:none" class="card">
+<h2 id="editTitle">Edit listing</h2><div id="checks"></div>
+<details open><summary>1. Basics</summary>
+<div class="row"><div><label>Title <input id="fTitle"></label></div><div><label>Handle (web address part) <input id="fHandle"></label><small id="handleNote"></small></div></div>
+<label>Collection <input id="fCollection" list="collectionList" placeholder="Type an existing collection, or a brand-new one"></label><datalist id="collectionList"></datalist>
+<label>Etsy URL <input id="fEtsy" placeholder="https://www.etsy.com/listing/..."></label><small id="etsyNote"></small>
+<label>SEO title (aim under 60 characters) <input id="fSeoTitle" maxlength="80"></label><span class="counter" id="seoTitleCount"></span>
+<label>SEO description (aim under 160 characters) <textarea id="fSeoDesc" rows="3" maxlength="200"></textarea></label><span class="counter" id="seoDescCount"></span>
+</details>
+<details open><summary>2. Description &amp; styling</summary>
 <label>Description <textarea id="fDesc" rows="5"></textarea></label>
 <label>Styling bullets, one per line <textarea id="fStyling" rows="4"></textarea></label>
+</details>
+<details open><summary>3. Photos, videos &amp; colour per photo</summary>
+<p><small>Pick a colour for each photo. On the live product page, choosing that colour switches the main photo to the first photo of that colour. Leave a photo on “All colours” if it is a group or detail shot that suits every colour. Drag order: use ↑ ↓ to move a photo, ★ to make it the main photo.</small></p>
+<div id="imgs"></div>
+<p><input type="file" id="imgFile" accept="image/*"> <button class="btn" id="uploadBtn">Upload photo</button> <input id="imgUrl" placeholder="Or paste an image URL"> <button class="btn" id="addUrlBtn">Add URL</button></p>
+<h3>Videos</h3><p><small>Videos under about 4 MB can be uploaded here. For a larger video, upload it elsewhere and paste the link (MP4, WebM, or a YouTube link all play on the product page).</small></p>
+<div id="vids"></div>
+<p><input type="file" id="vidFile" accept="video/*"> <button class="btn" id="uploadVidBtn">Upload video</button> <input id="vidUrl" placeholder="Or paste a video / YouTube URL"> <button class="btn" id="addVidBtn">Add video URL</button></p>
+</details>
+<details open><summary>4. Size chart</summary>
+<p><small>Upload the size chart image for this listing, or paste its URL. It shows as its own “Size Chart” section on the product page, with a link to open it full size.</small></p>
+<div id="sizeChartBox"></div>
+<p><input type="file" id="chartFile" accept="image/*"> <button class="btn" id="uploadChartBtn">Upload size chart</button> <input id="chartUrl" placeholder="Or paste a size chart image URL"> <button class="btn" id="addChartBtn">Add size chart URL</button> <button class="btn" id="removeChartBtn">Remove size chart</button></p>
+</details>
+<details open><summary>5. Colours, sizes &amp; stock</summary>
 <label>Colours, comma separated <input id="fColours"></label>
 <label>Sizes <span id="fSizes"></span></label>
+<p><button class="btn" id="rebuildBtn">Apply colours &amp; sizes to stock table</button> <small>Stock you already entered is kept for colour/size pairs that still exist.</small></p>
+<div id="variants"></div>
+<p><label>Set all variant stock to <input id="setAll" type="number" min="0"></label> <button class="btn" id="setAllBtn">Apply to all</button> <button class="btn" id="inStockBtn">Mark all “In stock” (no number)</button></p>
+</details>
+<details open><summary>6. Details, custom sizing &amp; shipping</summary>
 <label>Custom Sizing <textarea id="fCustom" rows="4"></textarea></label>
+<p><span id="customTemplates"></span></p>
 <label>Details <textarea id="fDetails" rows="3"></textarea></label>
-<label>Shipping &amp; Returns <textarea id="fShip" rows="3"></textarea></label>
-<h3>Images</h3><div id="imgs"></div>
-<p><input type="file" id="imgFile" accept="image/*"> <button class="btn" id="uploadBtn">Upload image</button> <input id="imgUrl" placeholder="Or paste an image URL"> <button class="btn" id="addUrlBtn">Add URL</button></p>
-<h3>Stock by variation</h3><p>Leave blank for “In stock” with no number. Enter 0 for out of stock for that colour/size.</p>
-<div id="variants"></div><p><label>Set all variant stock to <input id="setAll" type="number" min="0"></label> <button class="btn" id="setAllBtn">Apply to all</button></p>
+<label>Shipping &amp; Returns <textarea id="fShip" rows="4"></textarea></label>
+<p><button class="btn" id="standardShipBtn">Use the standard Shipping &amp; Returns text</button></p>
+</details>
 <p><button class="btn" id="saveBtn">Save this listing</button> <button class="btn" id="backBtn">Back to list</button></p>
 </div>
 <p><button class="btn" id="addBtn">+ Add new listing</button> <button class="btn" id="saveAllBtn">Save all changes to live site</button> <button class="btn" id="downloadBtn">Download products.json</button></p>
-<p>Saving commits products.json to GitHub and Vercel redeploys. Uploaded images are saved in the repo under /images/ and served from the live site.</p>
+<p>Saving commits products.json to GitHub and Vercel redeploys. Uploaded images and videos are saved in the repo under /images/ and served from the live site.</p>
 </section></main>
 <script>
-let products=[], editIdx=-1; const SIZES=["XS","S","M","L","XL"];
+let products=[], editIdx=-1, stdShip='', customTpl={}; const SIZES=["XS","S","M","L","XL"];
 function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;')}
-function renderList(){
-  document.getElementById('list').innerHTML='<table><tr><th>Title</th><th>Collection</th><th>Images</th><th>Variants</th><th></th></tr>'+products.map((p,i)=>'<tr><td>'+esc(p.title)+'</td><td>'+esc(p.collection)+'</td><td>'+(p.images||[]).length+'</td><td>'+(p.variants||[]).length+'</td><td><button onclick="edit('+i+')">Edit</button> <button onclick="del('+i+')">Delete</button></td></tr>').join('')+'</table>';
-}
-function rebuildVariants(){
-  const cols=document.getElementById('fColours').value.split(',').map(s=>s.trim()).filter(Boolean);
-  const sizes=[...document.querySelectorAll('#fSizes input:checked')].map(e=>e.value);
-  const old={}; (products[editIdx].variants||[]).forEach(v=>old[v.colour+'|'+v.size]=v.stock);
-  const vars=[]; cols.forEach(c=>sizes.forEach(s=>vars.push({colour:c,size:s,stock:(old[c+'|'+s]!==undefined?old[c+'|'+s]:null)})));
-  products[editIdx].colours=cols; products[editIdx].sizes=sizes; products[editIdx].variants=vars;
-  document.getElementById('variants').innerHTML='<table><tr><th>Colour</th><th>Size</th><th>Stock</th></tr>'+vars.map((v,i)=>'<tr><td>'+esc(v.colour)+'</td><td>'+v.size+'</td><td><input type="number" min="0" data-vi="'+i+'" value="'+(v.stock===null||v.stock===undefined?'':v.stock)+'"></td></tr>').join('')+'</table>';
-  document.querySelectorAll('[data-vi]').forEach(el=>el.addEventListener('input',e=>{const v=vars[+e.target.dataset.vi]; v.stock=e.target.value==='' ? null : parseInt(e.target.value,10)}));
-}
-function renderImgs(){
-  const p=products[editIdx];
-  document.getElementById('imgs').innerHTML=(p.images||[]).map((im,i)=>'<div><img src="'+im+'" style="width:90px;height:110px;object-fit:cover"> <span>'+esc(im)+'</span> <button onclick="delImg('+i+')">Remove</button></div>').join('')||'<p>No images yet.</p>';
-}
-window.edit=i=>{editIdx=i; const p=products[i];
-  document.getElementById('editTitle').textContent='Edit: '+p.title;
-  document.getElementById('fTitle').value=p.title; document.getElementById('fCollection').value=p.collection; document.getElementById('fEtsy').value=p.etsy_url||'';
-  document.getElementById('fDesc').value=p.description||''; document.getElementById('fStyling').value=(p.styling||[]).join('\n'); document.getElementById('fColours').value=(p.colours||[]).join(', ');
-  document.getElementById('fSizes').innerHTML=SIZES.map(s=>'<label style="display:inline-block;margin-right:12px"><input type="checkbox" value="'+s+'" '+(p.sizes||[]).includes(s)?'checked':'')+'> '+s+'</label>').join('');
-  document.getElementById('fCustom').value=p.custom_sizing||''; document.getElementById('fDetails').value=p.details||''; document.getElementById('fShip').value=p.shipping_returns||'';
-  document.getElementById('editor').style.display='block'; renderImgs(); rebuildVariants();
-  document.querySelectorAll('#fSizes input').forEach(e=>e.addEventListener('change',rebuildVariants));
-  document.getElementById('fColours').onchange=rebuildVariants;
-};
-window.del=i=>{if(confirm('Delete this listing?')){products.splice(i,1);renderList()}};
-window.delImg=i=>{products[editIdx].images.splice(i,1);renderImgs()};
-function syncEdit(){
-  if(editIdx<0) return; const p=products[editIdx];
-  p.title=document.getElementById('fTitle').value.trim(); p.collection=document.getElementById('fCollection').value; p.etsy_url=document.getElementById('fEtsy').value.trim();
-  p.description=document.getElementById('fDesc').value; p.styling=document.getElementById('fStyling').value.split('\n').map(s=>s.trim()).filter(Boolean);
-  p.custom_sizing=document.getElementById('fCustom').value; p.details=document.getElementById('fDetails').value; p.shipping_returns=document.getElementById('fShip').value;
-  if(!p.handle) p.handle=p.title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
-}
-document.getElementById('loadBtn').onclick=async()=>{const r=await fetch('products.json?v=3'); products=await r.json(); renderList(); document.getElementById('status').textContent=products.length+' listings loaded.'};
-document.getElementById('addBtn').onclick=()=>{products.push({handle:'',title:'New Piece',collection:'Women Shirt Collection',images:[],description:'',styling:[],colours:[],sizes:['XS','S','M','L','XL'],variants:[],badges:{made_with_care:true,great_value:true},custom_sizing:'',details:'',shipping_returns:'',etsy_url:'https://www.etsy.com/shop/MagraciaOfficial'}); renderList(); edit(products.length-1)};
-document.getElementById('backBtn').onclick=()=>{syncEdit(); renderList(); document.getElementById('editor').style.display='none'};
-document.getElementById('saveBtn').onclick=()=>{syncEdit(); renderList(); document.getElementById('status').textContent='Listing updated in this editor. Click “Save all changes to live site” to publish.'};
+function slug(s){return (s||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')}
+function collections(){const s=[]; products.forEach(p=>{if(p.collection&&!s.includes(p.collection)) s.push(p.collection)}); return s}
+function refreshCollectionLists(){const opts=collections().map(c=>'<option>'+esc(c)+'</option>').join('');
+ document.getElementById('collectionList').innerHTML=opts;
+ document.getElementById('filterCollection').innerHTML='<option value="">All collections</option>'+collections().map(c=>'<option>'+esc(c)+'</option>').join('');
+ document.getElementById('collections').innerHTML=collections().map(c=>{const n=products.filter(p=>p.collection===c).length; return '<span class="pill">'+esc(c)+' · '+n+'</span>'}).join(' ')||'No collections yet.';}
+function checksFor(p){const w=[]; if(!(p.images||[]).length) w.push('No photos'); if(!p.etsy_url||!/etsy\.com/.test(p.etsy_url)) w.push('Etsy link missing or not an Etsy link'); if(!(p.colours||[]).length) w.push('No colours'); if(!(p.sizes||[]).length) w.push('No sizes'); if(!p.size_chart) w.push('No size chart'); if(!p.seo_description) w.push('No SEO description'); if((p.seo_title||'').length>60) w.push('SEO title over 60 characters'); if((p.seo_description||'').length>160) w.push('SEO description over 160 characters'); return w}
+function renderDashboard(){const cols=collections(); const missingChart=products.filter(p=>!p.size_chart).length; const missingEtsy=products.filter(p=>!/etsy\.com/.test(p.etsy_url||'')).length;
+ document.getElementById('dashboard').innerHTML='<div class="card"><h2>At a glance</h2><p>'+products.length+' listings · '+cols.length+' collections · '+products.reduce((a,p)=>a+(p.images||[]).length,0)+' photos · '+products.reduce((a,p)=>a+(p.videos||[]).length,0)+' videos</p><p>'+(missingChart?'<span class="warn">'+missingChart+' listings have no size chart.</span> ':'<span class="ok">Every listing has a size chart.</span> ')+(missingEtsy?'<span class="warn">'+missingEtsy+' listings have no Etsy link.</span>':'<span class="ok">Every listing links to Etsy.</span>')+'</p></div>'}
+function renderList(){const q=(document.getElementById('search').value||'').toLowerCase(); const fc=document.getElementById('filterCollection').value;
+ const rows=products.map((p,i)=>({p,i})).filter(o=>(!q||o.p.title.toLowerCase().includes(q)||(o.p.collection||'').toLowerCase().includes(q))&&(!fc||o.p.collection===fc));
+ document.getElementById('list').innerHTML='<table><tr><th></th><th>Title</th><th>Collection</th><th>Photos / Videos</th><th>Size chart</th><th>Checks</th><th></th></tr>'+rows.map(o=>{const w=checksFor(o.p); return '<tr><td>'+(o.p.images&&o.p.images[0]?'<img src="'+o.p.images[0]+'" style="width:50px;height:62px;object-fit:cover">':'')+'</td><td>'+esc(o.p.title)+'</td><td>'+esc(o.p.collection)+'</td><td>'+(o.p.images||[]).length+' / '+(o.p.videos||[]).length+'</td><td>'+(o.p.size_chart?'Yes':'<span class="warn">No</span>')+'</td><td>'+(w.length?'<span class="warn">'+esc(w.join('; '))+'</span>':'<span class="ok">Looks good</span>')+'</td><td><button onclick="edit('+o.i+')">Edit</button> <button onclick="dup('+o.i+')">Duplicate</button> <button onclick="del('+o.i+')">Delete</button></td></tr>'}).join('')+'</table><p><small>'+rows.length+' listings shown.</small></p>';}
+function rebuildVariants(){const cols=document.getElementById('fColours').value.split(',').map(s=>s.trim()).filter(Boolean);
+ const sizes=[...document.querySelectorAll('#fSizes input:checked')].map(e=>e.value);
+ const old={}; (products[editIdx].variants||[]).forEach(v=>old[v.colour+'|'+v.size]=v.stock);
+ const vars=[]; cols.forEach(c=>sizes.forEach(s=>vars.push({colour:c,size:s,stock:(old[c+'|'+s]!==undefined?old[c+'|'+s]:null)})));
+ products[editIdx].colours=cols; products[editIdx].sizes=sizes; products[editIdx].variants=vars;
+ document.getElementById('variants').innerHTML='<table><tr><th>Colour</th><th>Size</th><th>Stock</th></tr>'+vars.map((v,i)=>'<tr><td>'+esc(v.colour)+'</td><td>'+v.size+'</td><td><input type="number" min="0" data-vi="'+i+'" value="'+(v.stock===null||v.stock===undefined?'':v.stock)+'"></td></tr>').join('')+'</table>';
+ document.querySelectorAll('[data-vi]').forEach(el=>el.addEventListener('input',e=>{const v=vars[+e.target.dataset.vi]; v.stock=e.target.value==='' ? null : parseInt(e.target.value,10)}));
+ renderImgs();}
+function renderImgs(){const p=products[editIdx]; if(!p.image_colours) p.image_colours=(p.images||[]).map(()=> '');
+ while(p.image_colours.length<(p.images||[]).length) p.image_colours.push('');
+ const cols=p.colours||[];
+ document.getElementById('imgs').innerHTML=(p.images||[]).map((im,i)=>'<div class="imgrow"><img src="'+im+'" alt=""><span style="flex:1;word-break:break-all"><small>'+esc(im)+'</small></span><select data-ic="'+i+'"><option value="">All colours</option>'+cols.map(c=>'<option '+(p.image_colours[i]===c?'selected':'')+'>'+esc(c)+'</option>').join('')+'</select><button onclick="moveImg('+i+',-1)">↑</button><button onclick="moveImg('+i+',1)">↓</button><button onclick="mainImg('+i+')">★ Main</button><button onclick="delImg('+i+')">Remove</button></div>').join('')||'<p>No images yet.</p>';
+ document.querySelectorAll('[data-ic]').forEach(el=>el.addEventListener('change',e=>{p.image_colours[+e.target.dataset.ic]=e.target.value}));}
+function renderVids(){const p=products[editIdx]; document.getElementById('vids').innerHTML=(p.videos||[]).map((v,i)=>'<div class="imgrow"><span style="flex:1;word-break:break-all">'+esc(v)+'</span><button onclick="delVid('+i+')">Remove</button></div>').join('')||'<p>No videos yet.</p>';}
+function renderSizeChart(){const p=products[editIdx]; document.getElementById('sizeChartBox').innerHTML=p.size_chart?'<img src="'+p.size_chart+'" style="max-width:320px;border:1px solid #e5dcc3"><p><small>'+esc(p.size_chart)+'</small></p>':'<p>No size chart set for this listing.</p>';}
+window.moveImg=(i,d)=>{const p=products[editIdx]; const j=i+d; if(j<0||j>=p.images.length) return; [p.images[i],p.images[j]]=[p.images[j],p.images[i]]; if(p.image_colours) [p.image_colours[i],p.image_colours[j]]=[p.image_colours[j],p.image_colours[i]]; renderImgs()};
+window.mainImg=i=>{const p=products[editIdx]; const im=p.images.splice(i,1)[0]; p.images.unshift(im); if(p.image_colours){const c=p.image_colours.splice(i,1)[0]; p.image_colours.unshift(c)} renderImgs()};
+window.delImg=i=>{const p=products[editIdx]; p.images.splice(i,1); if(p.image_colours) p.image_colours.splice(i,1); renderImgs()};
+window.delVid=i=>{products[editIdx].videos.splice(i,1); renderVids()};
+function showChecks(){const p=products[editIdx]; const w=checksFor(p); document.getElementById('checks').innerHTML=w.length?'<p class="warn">Before publishing, check: '+esc(w.join('; '))+'</p>':'<p class="ok">This listing looks complete.</p>';
+ document.getElementById('handleNote').textContent=p.handle?('Live address: product.html?handle='+p.handle):''; document.getElementById('etsyNote').textContent=(p.etsy_url&&!/etsy\.com/.test(p.etsy_url))?'Warning: this does not look like an Etsy link.':'';}
+window.edit=i=>{editIdx=i; const p=products[i]; if(!p.videos) p.videos=[]; if(!p.image_colours) p.image_colours=(p.images||[]).map(()=>'');
+ document.getElementById('editTitle').textContent='Edit: '+p.title;
+ document.getElementById('fTitle').value=p.title||''; document.getElementById('fHandle').value=p.handle||''; document.getElementById('fCollection').value=p.collection||''; document.getElementById('fEtsy').value=p.etsy_url||'';
+ document.getElementById('fSeoTitle').value=p.seo_title||''; document.getElementById('fSeoDesc').value=p.seo_description||'';
+ document.getElementById('fDesc').value=p.description||''; document.getElementById('fStyling').value=(p.styling||[]).join('\n'); document.getElementById('fColours').value=(p.colours||[]).join(', ');
+ document.getElementById('fSizes').innerHTML=SIZES.map(s=>'<label style="display:inline-block;margin-right:12px"><input type="checkbox" value="'+s+'" '+((p.sizes||[]).includes(s)?'checked':'')+'> '+s+'</label>').join('');
+ document.getElementById('fCustom').value=p.custom_sizing||''; document.getElementById('fDetails').value=p.details||''; document.getElementById('fShip').value=p.shipping_returns||'';
+ document.getElementById('customTemplates').innerHTML=Object.keys(customTpl).map(k=>'<button class="btn" data-tpl="'+esc(k)+'">Use '+esc(k)+' custom sizing</button> ').join('');
+ document.querySelectorAll('[data-tpl]').forEach(b=>b.addEventListener('click',()=>{document.getElementById('fCustom').value=customTpl[b.dataset.tpl]}));
+ document.getElementById('editor').style.display='block'; renderImgs(); renderVids(); renderSizeChart(); rebuildVariants(); showChecks(); updateSeoCounts();
+ document.querySelectorAll('#fSizes input').forEach(e=>e.addEventListener('change',rebuildVariants));
+ document.getElementById('fColours').onchange=rebuildVariants;
+ document.getElementById('fTitle').oninput=()=>{if(!document.getElementById('fHandle').value) document.getElementById('fHandle').value=slug(document.getElementById('fTitle').value)};
+ document.getElementById('fSeoTitle').oninput=updateSeoCounts; document.getElementById('fSeoDesc').oninput=updateSeoCounts;};
+function updateSeoCounts(){document.getElementById('seoTitleCount').textContent=document.getElementById('fSeoTitle').value.length+' / 60 characters'; document.getElementById('seoDescCount').textContent=document.getElementById('fSeoDesc').value.length+' / 160 characters';}
+window.del=i=>{if(confirm('Delete this listing?')){products.splice(i,1);renderList();renderDashboard();refreshCollectionLists()}};
+window.dup=i=>{const c=JSON.parse(JSON.stringify(products[i])); c.title=c.title+' (Copy)'; c.handle=''; products.push(c); renderList(); renderDashboard(); refreshCollectionLists(); edit(products.length-1)};
+function syncEdit(){if(editIdx<0) return; const p=products[editIdx];
+ p.title=document.getElementById('fTitle').value.trim(); p.handle=document.getElementById('fHandle').value.trim()||slug(p.title); p.collection=document.getElementById('fCollection').value.trim(); p.etsy_url=document.getElementById('fEtsy').value.trim();
+ p.seo_title=document.getElementById('fSeoTitle').value.trim(); p.seo_description=document.getElementById('fSeoDesc').value.trim();
+ p.description=document.getElementById('fDesc').value; p.styling=document.getElementById('fStyling').value.split('\n').map(s=>s.trim()).filter(Boolean);
+ p.custom_sizing=document.getElementById('fCustom').value; p.details=document.getElementById('fDetails').value; p.shipping_returns=document.getElementById('fShip').value;
+ if(products.filter(x=>x.handle===p.handle).length>1) alert('Warning: another listing already uses this handle. Change it, or the two listings will clash.');}
+async function uploadFile(file, kind){const pw=document.getElementById('pw').value; if(!pw){alert('Enter the admin password');return null}
+ document.getElementById('status').textContent='Uploading…';
+ const data=await new Promise(res=>{const r=new FileReader(); r.onload=()=>res(r.result); r.readAsDataURL(file)});
+ const r=await fetch('/api/upload',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:pw,filename:file.name,data})});
+ const j=await r.json().catch(()=>({})); if(!r.ok){document.getElementById('status').textContent='Upload failed: '+(j.error||r.status);return null}
+ document.getElementById('status').textContent='Uploaded: '+j.url; return j.url;}
+document.getElementById('loadBtn').onclick=async()=>{const r=await fetch('products.json?v=3'); products=await r.json();
+ if(products.length){stdShip=products[0].shipping_returns||''; products.forEach(p=>{if(p.custom_sizing&&!customTpl[p.collection]) customTpl[p.collection]=p.custom_sizing});}
+ renderDashboard(); refreshCollectionLists(); renderList(); document.getElementById('status').textContent=products.length+' listings loaded.'};
+document.getElementById('search').oninput=renderList; document.getElementById('filterCollection').onchange=renderList;
+document.getElementById('addBtn').onclick=()=>{products.push({handle:'',title:'New Piece',collection:collections()[0]||'New Collection',images:[],image_colours:[],videos:[],description:'',styling:[],colours:[],sizes:['XS','S','M','L','XL'],variants:[],custom_sizing:'',details:'',shipping_returns:stdShip,size_chart:'',seo_title:'',seo_description:'',etsy_url:'https://www.etsy.com/shop/MagraciaOfficial'}); renderList(); renderDashboard(); refreshCollectionLists(); edit(products.length-1)};
+document.getElementById('createCollectionBtn').onclick=()=>{const name=document.getElementById('newCollection').value.trim(); if(!name){alert('Type a collection name first');return}
+ products.push({handle:'',title:'New Piece',collection:name,images:[],image_colours:[],videos:[],description:'',styling:[],colours:[],sizes:['XS','S','M','L','XL'],variants:[],custom_sizing:'',details:'',shipping_returns:stdShip,size_chart:'',seo_title:'',seo_description:'',etsy_url:'https://www.etsy.com/shop/MagraciaOfficial'}); renderList(); renderDashboard(); refreshCollectionLists(); edit(products.length-1)};
+document.getElementById('backBtn').onclick=()=>{syncEdit(); renderList(); renderDashboard(); refreshCollectionLists(); document.getElementById('editor').style.display='none'};
+document.getElementById('saveBtn').onclick=()=>{syncEdit(); renderList(); renderDashboard(); refreshCollectionLists(); document.getElementById('status').textContent='Listing updated in this editor. Click “Save all changes to live site” to publish.'};
+document.getElementById('rebuildBtn').onclick=rebuildVariants;
 document.getElementById('setAllBtn').onclick=()=>{const v=document.getElementById('setAll').value; if(v==='') return; products[editIdx].variants.forEach(x=>x.stock=parseInt(v,10)); rebuildVariants()};
-document.getElementById('addUrlBtn').onclick=()=>{const u=document.getElementById('imgUrl').value.trim(); if(u){products[editIdx].images.push(u); renderImgs()}};
-document.getElementById('uploadBtn').onclick=async()=>{
-  const f=document.getElementById('imgFile').files[0]; if(!f){alert('Choose an image file first');return}
-  const pw=document.getElementById('pw').value; if(!pw){alert('Enter the admin password');return}
-  document.getElementById('status').textContent='Uploading image…';
-  const data=await new Promise(res=>{const r=new FileReader(); r.onload=()=>res(r.result); r.readAsDataURL(f)});
-  const r=await fetch('/api/upload',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:pw,filename:f.name,data})});
-  const j=await r.json().catch(()=>({}));
-  if(!r.ok){document.getElementById('status').textContent='Upload failed: '+(j.error||r.status);return}
-  products[editIdx].images.push(j.url); renderImgs(); document.getElementById('status').textContent='Image uploaded: '+j.url;
-};
-async function saveAll(){
-  const pw=document.getElementById('pw').value; if(!pw){alert('Enter the admin password');return}
-  syncEdit(); document.getElementById('status').textContent='Saving…';
-  const r=await fetch('/api/admin',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:pw,products})});
-  const j=await r.json().catch(()=>({})); document.getElementById('status').textContent=r.ok?'Saved. Vercel will redeploy shortly.':('Save failed: '+(j.error||r.status));
-}
+document.getElementById('inStockBtn').onclick=()=>{products[editIdx].variants.forEach(x=>x.stock=null); rebuildVariants()};
+document.getElementById('standardShipBtn').onclick=()=>{document.getElementById('fShip').value=stdShip};
+document.getElementById('addUrlBtn').onclick=()=>{const u=document.getElementById('imgUrl').value.trim(); if(u){products[editIdx].images.push(u); if(!products[editIdx].image_colours) products[editIdx].image_colours=[]; products[editIdx].image_colours.push(''); renderImgs()}};
+document.getElementById('uploadBtn').onclick=async()=>{const f=document.getElementById('imgFile').files[0]; if(!f){alert('Choose an image file first');return} const url=await uploadFile(f); if(url){products[editIdx].images.push(url); if(!products[editIdx].image_colours) products[editIdx].image_colours=[]; products[editIdx].image_colours.push(''); renderImgs()}};
+document.getElementById('addVidBtn').onclick=()=>{const u=document.getElementById('vidUrl').value.trim(); if(u){if(!products[editIdx].videos) products[editIdx].videos=[]; products[editIdx].videos.push(u); renderVids()}};
+document.getElementById('uploadVidBtn').onclick=async()=>{const f=document.getElementById('vidFile').files[0]; if(!f){alert('Choose a video file first');return} const url=await uploadFile(f); if(url){if(!products[editIdx].videos) products[editIdx].videos=[]; products[editIdx].videos.push(url); renderVids()}};
+document.getElementById('addChartBtn').onclick=()=>{const u=document.getElementById('chartUrl').value.trim(); if(u){products[editIdx].size_chart=u; renderSizeChart(); showChecks()}};
+document.getElementById('uploadChartBtn').onclick=async()=>{const f=document.getElementById('chartFile').files[0]; if(!f){alert('Choose a size chart image first');return} const url=await uploadFile(f); if(url){products[editIdx].size_chart=url; renderSizeChart(); showChecks()}};
+document.getElementById('removeChartBtn').onclick=()=>{products[editIdx].size_chart=''; renderSizeChart(); showChecks()};
+async function saveAll(){const pw=document.getElementById('pw').value; if(!pw){alert('Enter the admin password');return}
+ syncEdit(); document.getElementById('status').textContent='Saving…';
+ const r=await fetch('/api/admin',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:pw,products})});
+ const j=await r.json().catch(()=>({})); document.getElementById('status').textContent=r.ok?'Saved. Vercel will redeploy shortly.':('Save failed: '+(j.error||r.status));}
 document.getElementById('saveAllBtn').onclick=saveAll;
 document.getElementById('downloadBtn').onclick=()=>{syncEdit(); const a=document.createElement('a'); a.href='data:application/json,'+encodeURIComponent(JSON.stringify(products,null,2)); a.download='products.json'; a.click()};
 </script></body></html>
