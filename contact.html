@@ -1,9 +1,36 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Contact | Magracia</title><link rel="stylesheet" href="styles.css?v=7"></head>
+<title>Contact | Magracia</title><link rel="stylesheet" href="styles.css?v=7">
+<style>.contact-form label{display:block;margin:14px 0;font-size:12px;letter-spacing:.14em;text-transform:uppercase}.contact-form input,.contact-form textarea{font-size:16px;letter-spacing:0;text-transform:none}.contact-form textarea{min-height:150px;resize:vertical}.form-status{margin:16px 0;padding:14px 18px;background:#fff;border-left:4px solid #b08d57}.hp{position:absolute;left:-9999px}</style></head>
 <body>
 <header><nav><a href="/">HOME</a><a href="/#collection">SHOP</a></nav><h1>MAGRACIA<small>CHOSEN, NOT CHASED</small></h1><nav><a href="contact.html">CONTACT</a><a href="https://www.etsy.com/shop/MagraciaOfficial">ETSY SHOP</a></nav></header>
 <main class="policy"><h1>Drop Us A Line</h1>
 <p>Whether you're facing a billing dispute or product issues, we're here to help you navigate with transparency.</p>
+<form class="contact-form" id="contactForm">
+<label>Your name <input type="text" id="cfName" required autocomplete="name"></label>
+<label>Your email <input type="email" id="cfEmail" required autocomplete="email"></label>
+<label>Headline <input type="text" id="cfHeadline" required placeholder="What is your message about?"></label>
+<label>Message <textarea id="cfMessage" required placeholder="Type your message here"></textarea></label>
+<input type="text" id="cfWebsite" class="hp" tabindex="-1" autocomplete="off">
+<p><button class="btn" type="submit" id="cfSend">Send Message</button></p>
+<p class="form-status" id="cfStatus" hidden></p>
+</form>
+<script>
+document.getElementById('contactForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+  var name=document.getElementById('cfName').value.trim();
+  var email=document.getElementById('cfEmail').value.trim();
+  var headline=document.getElementById('cfHeadline').value.trim();
+  var message=document.getElementById('cfMessage').value.trim();
+  var status=document.getElementById('cfStatus'); status.hidden=false;
+  try{
+    var r=await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:name,email:email,headline:headline,message:message,website:document.getElementById('cfWebsite').value})});
+    if(r.ok){ status.textContent='Thank you, your message has been sent. We will reply to '+email+' as soon as we can.'; e.target.reset(); return; }
+  }catch(err){}
+  var body='Name: '+name+'\nEmail: '+email+'\nHeadline: '+headline+'\n\n'+message;
+  window.location.href='mailto:support@magracia.com?subject='+encodeURIComponent(headline)+'&body='+encodeURIComponent(body);
+  status.textContent='Direct sending is not set up yet, so your email app has opened with your message addressed to support@magracia.com. Please press Send there to deliver it.';
+});
+</script>
 <p><strong>Email:</strong> <a href="mailto:support@magracia.com">support@magracia.com</a><br>
 <strong>Phone:</strong> +92-331-8035-398<br>
 <strong>Address:</strong> Block 13, Gulistan-e-Johar, Karachi, 75400, Pakistan</p>
