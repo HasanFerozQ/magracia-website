@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Magracia Admin - Private</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header><h1>MAGRACIA ADMIN</h1></header>
+<main>
+<section>
+<p>This page is not linked from the shop. Do not share its address. Saving requires the admin password set in Vercel, which is checked on the server, not in this page.</p>
+<label>Admin password <input type="password" id="pw"></label>
+<button class="btn" id="loadBtn">Load listings</button>
+<p id="status"></p>
+<div id="editor" style="display:none">
+<table id="tbl"><thead><tr><th>Title</th><th>Collection</th><th>Image URL</th><th>Etsy URL</th><th></th></tr></thead><tbody></tbody></table>
+<h3>Add a listing</h3>
+<label>Title <input id="newTitle"></label>
+<label>Collection <select id="newCollection"><option>Women Shirt Collection</option><option>Co-ord Sets</option><option>Women Pants And Trousers</option><option>Women Shrug Collection</option></select></label>
+<label>Image URL <input id="newImage" placeholder="Paste an image URL"></label>
+<label>Etsy URL <input id="newEtsy" placeholder="https://www.etsy.com/listing/..."></label>
+<button class="btn" id="addBtn">Add listing</button>
+<p><button class="btn" id="saveBtn">Save all changes to the live site</button> <button class="btn" id="downloadBtn">Download products.json instead</button></p>
+<p>Saving commits the updated products list to GitHub, and Vercel redeploys automatically. If the server save is not configured yet, use Download and commit products.json manually.</p>
+</div>
+</section>
+</main>
+<script>
+let products=[];
+function render(){
+  const tb=document.querySelector('#tbl tbody'); tb.innerHTML='';
+  products.forEach((p,i)=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML='<td><input data-f="title" data-i="'+i+'" value="'+p.title.replace(/"/g,'&quot;')+'"></td><td><input data-f="collection" data-i="'+i+'" value="'+p.collection.replace(/"/g,'&quot;')+'"></td><td><input data-f="image" data-i="'+i+'" value="'+p.image.replace(/"/g,'&quot;')+'"></td><td><input data-f="etsy_url" data-i="'+i+'" value="'+p.etsy_url.replace(/"/g,'&quot;')+'"></td><td><button data-del="'+i+'">Delete</button></td>';
+    tb.appendChild(tr);
+  });
+  tb.querySelectorAll('input').forEach(el=>el.addEventListener('input',e=>{products[+e.target.dataset.i][e.target.dataset.f]=e.target.value}));
+  tb.querySelectorAll('[data-del]').forEach(el=>el.addEventListener('click',e=>{products.splice(+e.target.dataset.del,1);render()}));
+}
+document.getElementById('loadBtn').onclick=async()=>{
+  const r=await fetch('products.json'); products=await r.json(); render();
+  document.getElementById('editor').style.display='block';
+  document.getElementById('status').textContent=products.length+' listings loaded. Edit, add or delete, then Save.';
+};
+document.getElementById('addBtn').onclick=()=>{
+  const title=document.getElementById('newTitle').value.trim();
+  if(!title){alert('Title is required');return}
+  products.push({handle:title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''),title,collection:document.getElementById('newCollection').value,image:document.getElementById('newImage').value.trim(),etsy_url:document.getElementById('newEtsy').value.trim()});
+  render();
+};
+document.getElementById('downloadBtn').onclick=()=>{
+  const a=document.createElement('a'); a.href='data:application/json,'+encodeURIComponent(JSON.stringify(products,null,2)); a.download='products.json'; a.click();
+};
+document.getElementById('saveBtn').onclick=async()=>{
+  const pw=document.getElementById('pw').value;
+  if(!pw){alert('Enter the admin password');return}
+  document.getElementById('status').textContent='Saving...';
+  const r=await fetch('/api/admin',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:pw,products})});
+  const j=await r.json().catch(()=>({}));
+  document.getElementById('status').textContent=r.ok?'Saved. Vercel will redeploy shortly.':('Save failed: '+(j.error||r.status));
+};
+</script>
+</body>
+</html>

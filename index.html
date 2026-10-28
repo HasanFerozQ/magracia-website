@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Magracia - Silk Shirts, Pants and Shrugs for Women. Buy on Etsy.">
+<title>Magracia | Silk Shirts, Pants &amp; Shrugs for Women</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header><h1>MAGRACIA</h1><nav><a href="/">HOME</a><a href="#collection">SHOP</a><a href="https://www.etsy.com/shop/MagraciaOfficial">ETSY SHOP</a></nav></header>
+<main>
+<section class="hero">
+<h2>Magracia<br>Silk Shirts and Office Wear<br>for Modern Women</h2>
+<p>Elegant Women's Clothing for Every Occasion</p>
+<a class="btn" href="#collection">Shop now</a>
+</section>
+<div class="marquee">We don't design for the mirror. We design for the room you walk into</div>
+<div id="collection"></div>
+<section>
+<h2>About Magracia</h2>
+<p>Silk shirts, pants and shrugs for women. Every product on this site is bought through Etsy. No prices are shown here.</p>
+<p>Contact: support@magracia.com &middot; +92-331-8035-398</p>
+<p><a href="https://www.facebook.com/profile.php?id=61591413465941">Facebook</a> &middot; <a href="https://www.instagram.com/shopmagracia">Instagram</a></p>
+</section>
+</main>
+<footer><p>&copy; 2026 MAGRACIA &middot; <a href="https://www.etsy.com/shop/MagraciaOfficial">Buy Now On ETSY</a></p></footer>
+<script>
+fetch('products.json').then(r=>r.json()).then(products=>{
+  const wrap=document.getElementById('collection');
+  const groups={};
+  products.forEach(p=>{(groups[p.collection]=groups[p.collection]||[]).push(p)});
+  Object.keys(groups).forEach(name=>{
+    const sec=document.createElement('section');
+    sec.innerHTML='<h2>'+name+'</h2><div class="grid">'+groups[name].map(p=>
+      '<article class="card"><img src="'+p.image+'" alt="'+p.title.replace(/"/g,'')+'" loading="lazy"><h3>'+p.title+'</h3><a class="btn" href="'+p.etsy_url+'">Buy Now On ETSY</a></article>').join('')+'</div>';
+    wrap.appendChild(sec);
+  });
+});
+</script>
+</body>
+</html>
