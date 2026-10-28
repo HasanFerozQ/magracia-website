@@ -1,5 +1,5 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, nofollow"><title>Magracia Admin - Private</title><link rel="stylesheet" href="styles.css"></head>
+<meta name="robots" content="noindex, nofollow"><title>Magracia Admin - Private</title><link rel="stylesheet" href="styles.css?v=3"></head>
 <body><header><h1>MAGRACIA ADMIN</h1></header><main class="wrap"><section>
 <p>This page is not linked from the shop. Do not share its address. Saving requires the admin password set in Vercel, checked on the server.</p>
 <label>Admin password <input type="password" id="pw"></label>
@@ -63,7 +63,7 @@ function syncEdit(){
   p.custom_sizing=document.getElementById('fCustom').value; p.details=document.getElementById('fDetails').value; p.shipping_returns=document.getElementById('fShip').value;
   if(!p.handle) p.handle=p.title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 }
-document.getElementById('loadBtn').onclick=async()=>{const r=await fetch('products.json'); products=await r.json(); renderList(); document.getElementById('status').textContent=products.length+' listings loaded.'};
+document.getElementById('loadBtn').onclick=async()=>{const r=await fetch('products.json?v=3'); products=await r.json(); renderList(); document.getElementById('status').textContent=products.length+' listings loaded.'};
 document.getElementById('addBtn').onclick=()=>{products.push({handle:'',title:'New Piece',collection:'Women Shirt Collection',images:[],description:'',styling:[],colours:[],sizes:['XS','S','M','L','XL'],variants:[],badges:{made_with_care:true,great_value:true},custom_sizing:'',details:'',shipping_returns:'',etsy_url:'https://www.etsy.com/shop/MagraciaOfficial'}); renderList(); edit(products.length-1)};
 document.getElementById('backBtn').onclick=()=>{syncEdit(); renderList(); document.getElementById('editor').style.display='none'};
 document.getElementById('saveBtn').onclick=()=>{syncEdit(); renderList(); document.getElementById('status').textContent='Listing updated in this editor. Click “Save all changes to live site” to publish.'};

@@ -1,6 +1,6 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Magracia - Silk Shirts, Pants and Shrugs for Women. Buy on Etsy.">
-<title>Magracia | Silk Shirts, Pants &amp; Shrugs for Women</title><link rel="stylesheet" href="styles.css"></head>
+<title>Magracia | Silk Shirts, Pants &amp; Shrugs for Women</title><link rel="stylesheet" href="styles.css?v=3"></head>
 <body>
 <header><h1>MAGRACIA<small>CHOSEN, NOT CHASED</small></h1><nav><a href="/">HOME</a><a href="#collection">SHOP</a><a href="mailto:support@magracia.com">CONTACT</a><a href="https://www.etsy.com/shop/MagraciaOfficial">ETSY SHOP</a></nav></header>
 <main>
@@ -14,7 +14,7 @@
 </main>
 <footer><p>© 2026 MAGRACIA · <a href="https://www.etsy.com/shop/MagraciaOfficial">Buy Now On ETSY</a></p></footer>
 <script>
-fetch('products.json').then(r=>r.json()).then(products=>{
+fetch('products.json?v=3').then(r=>r.json()).then(products=>{
   const wrap=document.getElementById('collection'); const groups={};
   products.forEach(p=>{(groups[p.collection]=groups[p.collection]||[]).push(p)});
   Object.keys(groups).forEach(name=>{

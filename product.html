@@ -1,12 +1,12 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Magracia | Product</title><link rel="stylesheet" href="styles.css"></head>
+<title>Magracia | Product</title><link rel="stylesheet" href="styles.css?v=3"></head>
 <body>
 <header><h1>MAGRACIA<small>CHOSEN, NOT CHASED</small></h1><nav><a href="/">HOME</a><a href="/#collection">SHOP</a><a href="mailto:support@magracia.com">CONTACT</a></nav></header>
 <main><div id="product" class="product"><p>Loading…</p></div><div class="wrap"><section id="related"></section></div></main>
 <footer><p>© 2026 MAGRACIA · <a href="https://www.etsy.com/shop/MagraciaOfficial">Buy Now On ETSY</a></p></footer>
 <script>
 const handle=new URLSearchParams(location.search).get('handle');
-fetch('products.json').then(r=>r.json()).then(products=>{
+fetch('products.json?v=3').then(r=>r.json()).then(products=>{
   const p=products.find(x=>x.handle===handle);
   if(!p){document.getElementById('product').innerHTML='<p>Sorry, that piece could not be found. <a href="/">Back to the collection</a></p>';return}
   document.title='Magracia | '+p.title;
