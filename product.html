@@ -1,12 +1,12 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Magracia | Product</title><link rel="stylesheet" href="styles.css?v=6"></head>
+<title>Magracia | Product</title><link rel="stylesheet" href="styles.css?v=7"></head>
 <body>
-<header><h1>MAGRACIA<small>CHOSEN, NOT CHASED</small></h1><nav><a href="/">HOME</a><a href="/#collection">SHOP</a><a href="mailto:support@magracia.com">CONTACT</a></nav></header>
+<header><nav><a href="/">HOME</a><a href="/#collection">SHOP</a></nav><h1>MAGRACIA<small>CHOSEN, NOT CHASED</small></h1><nav><a href="contact.html">CONTACT</a><a href="https://www.etsy.com/shop/MagraciaOfficial">ETSY SHOP</a></nav></header>
 <main><div id="product" class="product"><p>Loading…</p></div><div class="wrap"><section id="related"></section></div></main>
-<footer><p>© 2026 MAGRACIA · <a href="https://www.etsy.com/shop/MagraciaOfficial">Buy Now On ETSY</a></p></footer>
+<footer><div class="foot"><div><h4>Magracia</h4><p>Silk shirts, pants and shrugs for women.<br>Chosen, not chased.</p><p><a href="mailto:support@magracia.com">support@magracia.com</a><br>+92-331-8035-398<br>Block 13, Gulistan-e-Johar,<br>Karachi, 75400, Pakistan</p></div><div><h4>Collections</h4><p><a href="/#col-Women%20Shirt%20Collection">Women Shirt Collection</a><br><a href="/#col-Co-ord%20Sets">Co-ord Sets</a><br><a href="/#col-Women%20Pants%20And%20Trousers">Women Pants And Trousers</a><br><a href="/#col-Women%20Shrug%20Collection">Women Shrug Collection</a></p></div><div><h4>Navigate</h4><p><a href="/">Home</a><br><a href="/#collection">Shop</a><br><a href="contact.html">Contact</a><br><a href="https://www.etsy.com/shop/MagraciaOfficial">Etsy Shop</a></p></div><div><h4>Policies &amp; Social</h4><p><a href="privacy.html">Privacy Policy</a><br><a href="refund.html">Refund Policy</a><br><a href="shipping.html">Shipping Policy</a><br><a href="terms.html">Terms of Service</a></p><p><a href="https://www.facebook.com/profile.php?id=61591413465941">Facebook</a><br><a href="https://www.instagram.com/shopmagracia">Instagram</a></p></div></div><p class="foot-bottom">© 2026 MAGRACIA · Buy Now On ETSY</p></footer>
 <script>
 const handle=new URLSearchParams(location.search).get('handle');
-fetch('products.json?v=6').then(r=>r.json()).then(products=>{
+fetch('products.json?v=7').then(r=>r.json()).then(products=>{
   const p=products.find(x=>x.handle===handle);
   if(!p){document.getElementById('product').innerHTML='<p>Sorry, that piece could not be found. <a href="/">Back to the collection</a></p>';return}
   document.title='Magracia | '+p.title;
@@ -30,6 +30,6 @@ fetch('products.json?v=6').then(r=>r.json()).then(products=>{
   window.setColour=c=>{colour=c;render()}; window.setSize=s=>{size=s;render()};
   render();
   const rel=products.filter(x=>x.collection===p.collection&&x.handle!==p.handle).slice(0,4);
-  document.getElementById('related').innerHTML='<h2 class="sec">More in '+p.collection+'</h2><div class="grid">'+rel.map(x=>'<article class="card"><a href="product.html?handle='+encodeURIComponent(x.handle)+'"><img src="'+(x.images[0]||'')+'" alt="'+x.title.replace(/"/g,'')+'"></a><div class="card-body"><h3>'+x.title+'</h3><a class="btn" href="product.html?handle='+encodeURIComponent(x.handle)+'">View Piece</a></div></article>').join('')+'</div>';
+  document.getElementById('related').innerHTML='<h2 class="sec">More in '+p.collection+'</h2><div class="grid">'+rel.map(x=>'<article class="card"><a href="product.html?handle='+encodeURIComponent(x.handle)+'"><div class="imgwrap"><img src="'+(x.images[0]||'')+'" alt="'+x.title.replace(/"/g,'')+'" loading="lazy"></div></a><div class="card-body"><span class="label">'+x.collection+'</span><h3>'+x.title+'</h3><a class="viewlink" href="product.html?handle='+encodeURIComponent(x.handle)+'">View Piece →</a></div></article>').join('')+'</div>';
 });
 </script></body></html>
