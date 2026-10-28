@@ -42,4 +42,4 @@ fetch('products.json?v=8').then(r=>r.json()).then(products=>{
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.1});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 });
-</script></body></html>
+</script><script>function toggleMenu(b){var h=document.querySelector("header"); var open=h.classList.toggle("menu-open"); b.setAttribute("aria-expanded",open); b.textContent=open?"✕":"☰";} document.addEventListener("click",function(e){var h=document.querySelector("header"); if(h&&h.classList.contains("menu-open")&&!h.contains(e.target)){h.classList.remove("menu-open"); var b=document.querySelector(".menu-btn"); if(b){b.setAttribute("aria-expanded","false"); b.textContent="☰";}}});</script></body></html>
