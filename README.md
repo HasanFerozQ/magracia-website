@@ -8,3 +8,5 @@
   The server function api/admin.js checks the password on the server and commits products.json to GitHub, then Vercel redeploys.
   Until those variables are set, the admin page can still download an updated products.json to commit manually.
 - Images: paste an image URL when adding a listing. Before cancelling Shopify, save product images locally, or Shopify CDN links may stop working.
+
+Trigger: Vercel auto-deploy check - 28 Oct 2026.
