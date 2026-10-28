@@ -1,5 +1,5 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Magracia | Product</title><link rel="stylesheet" href="styles.css?v=7"></head>
+<title>Magracia | Product</title><link rel="stylesheet" href="styles.css?v=8"></head>
 <body>
 <header><nav><a href="/">HOME</a><a href="/#collection">SHOP</a></nav><h1>MAGRACIA<small>CHOSEN, NOT CHASED</small></h1><nav><a href="contact.html">CONTACT</a><a href="https://www.etsy.com/shop/MagraciaOfficial">ETSY SHOP</a></nav></header>
 <main><div id="product" class="product"><p>Loading…</p></div><div class="wrap"><section id="related"></section></div></main>
@@ -17,14 +17,14 @@ fetch('products.json?v=7').then(r=>r.json()).then(products=>{
   function render(){
     document.getElementById('product').innerHTML=
     '<div class="gallery"><img class="main" id="mainImg" src="'+(p.images[0]||'')+'" alt="'+p.title.replace(/"/g,'')+'"><div class="thumbs">'+(p.images||[]).map((im,i)=>'<img src="'+im+'" class="'+(i===0?'active':'')+'" onclick="document.getElementById(\'mainImg\').src=this.src;document.querySelectorAll(\'.thumbs img\').forEach(x=>x.classList.remove(\'active\'));this.classList.add(\'active\')">').join('')+'</div></div>'+
-    '<div><p class="stock" id="stockLine">● '+stockText()+'</p><h1 class="ptitle">'+p.title+'</h1><p>'+(p.description||'')+'</p>'+
+    '<div><p class="stock" id="stockLine">● '+stockText()+'</p><h1 class="ptitle">'+p.title+'</h1><p>'+br(p.description)+'</p>'+
     (p.styling&&p.styling.length?'<h3>Styling</h3><ul>'+p.styling.map(s=>'<li>'+s+'</li>').join('')+'</ul>':'')+
     '<div class="picker"><strong>Colour:</strong> '+p.colours.map(c=>'<button class="'+(c===colour?'sel':'')+'" onclick="setColour(\''+c.replace(/'/g,'')+'\')">'+c+'</button>').join('')+'</div>'+
     '<div class="picker"><strong>Size:</strong> '+p.sizes.map(s=>'<button class="'+(s===size?'sel':'')+'" onclick="setSize(\''+s+'\')">'+s+'</button>').join('')+'</div>'+
     '<div class="badges"><div class="badge">♡<br>Made with care</div><div class="badge">◈<br>Great value</div></div>'+
-    '<details open><summary>Custom Sizing</summary><p>'+(p.custom_sizing||'')+'</p></details>'+
-    '<details><summary>Details</summary><p>'+(p.details||'')+'</p></details>'+
-    '<details><summary>Shipping &amp; Returns</summary><p>'+(p.shipping_returns||'')+'</p></details>'+
+    '<details open><summary>Custom Sizing</summary><p>'+br(p.custom_sizing)+'</p></details>'+
+    '<details><summary>Details</summary><p>'+br(p.details)+'</p></details>'+
+    '<details><summary>Shipping &amp; Returns</summary><p>'+br(p.shipping_returns)+'</p></details>'+
     '<p><a class="btn buy" href="'+p.etsy_url+'">BUY NOW ON ETSY</a></p><p><a href="/#collection">← Back to the collection</a></p></div>';
   }
   window.setColour=c=>{colour=c;render()}; window.setSize=s=>{size=s;render()};

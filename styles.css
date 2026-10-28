@@ -41,7 +41,7 @@ footer{background:var(--ink);color:#cfc4bd;padding:64px 36px 28px}.foot{display:
 .stock{color:#2e7d32;font-weight:400}.ptitle{font-size:54px;line-height:1.05;margin:8px 0 16px}
 .picker{margin:18px 0}.picker button{padding:9px 15px;margin:4px 6px 4px 0;border:1px solid #d8cbb0;background:#fff;cursor:pointer;border-radius:20px;transition:border-color .3s}.picker button:hover{border-color:var(--ink)}.picker button.sel{background:var(--ink);color:#fff;border-color:var(--ink)}
 .badges{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0}.badge{background:var(--paper);color:var(--ink);border:1px solid var(--line);text-align:center;padding:22px;border-radius:0;font-family:'Cormorant Garamond',serif;font-size:21px}
-details{border-top:1px solid var(--line);padding:18px 0}details summary{cursor:pointer;font-family:'Cormorant Garamond',serif;font-size:22px}
+details{border-top:1px solid var(--line);padding:20px 0}details summary{cursor:pointer;font-family:'Cormorant Garamond',serif;font-size:22px}details p{line-height:1.85;margin:0}
 .buy{width:100%;text-align:center;font-size:14px;padding:17px}
 input,select,textarea{padding:10px;margin:6px 0;width:100%;box-sizing:border-box;border:1px solid #d8cbb0;border-radius:6px;background:#fff}
 table{width:100%;border-collapse:collapse;background:#fff}td,th{border:1px solid #eee;padding:8px;text-align:left;font-size:14px}
