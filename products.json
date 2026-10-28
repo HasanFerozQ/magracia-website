@@ -3,126 +3,2748 @@
     "handle": "sable-stripe-shirt",
     "title": "Sable Stripe Sheer Shirt",
     "collection": "Women Shirt Collection",
-    "image": "https://cdn.shopify.com/s/files/1/1017/0076/3970/files/ChatGPTImageAug13_2026_03_18_01PM.webp?v=1786631612",
+    "images": [
+      "https://cdn.shopify.com/s/files/1/1017/0076/3970/files/ChatGPTImageAug13_2026_03_18_01PM.webp?v=1786631612"
+    ],
+    "description": "Elevate your everyday wardrobe with the Sable Stripe Sheer Shirt & Satin Camisole Set, a sophisticated two-piece layering combination designed to b",
+    "styling": [],
+    "colours": [
+      "Smoky Olive",
+      "Emerald Green",
+      "Burgundy",
+      "Beige",
+      "Navy",
+      "Black"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "variants": [
+      {
+        "colour": "Smoky Olive",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Smoky Olive",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Smoky Olive",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Emerald Green",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Emerald Green",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Emerald Green",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Burgundy",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Burgundy",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Burgundy",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Navy",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Navy",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Navy",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "L",
+        "stock": null
+      }
+    ],
+    "badges": {
+      "made_with_care": true,
+      "great_value": true
+    },
+    "custom_sizing": "Custom sizing is offered. Please provide your measurements in inches, either at checkout or through an Etsy message. Shirt measurements: Bust, Chest, Waist/Hip. Pant measurements: Waist, Length, Inseam. Custom-sized items are final sale and cannot be returned or exchanged.",
+    "details": "Crafted with quality materials to ensure durability and performance.",
+    "shipping_returns": "Orders are processed and shipped promptly. Delivery times vary by location. If you wish to return an item, please reach out to our team and we will evaluate every return request with care.",
     "etsy_url": "https://www.etsy.com/listing/4594787518"
   },
   {
     "handle": "silk-shirts-for-women",
     "title": "Silk Shirts For Women",
     "collection": "Women Shirt Collection",
-    "image": "https://cdn.shopify.com/s/files/1/1017/0076/3970/files/ChatGPTImageJul1_2026_01_18_34PM.png?v=1784560643",
+    "images": [
+      "https://cdn.shopify.com/s/files/1/1017/0076/3970/files/ChatGPTImageJul1_2026_01_18_34PM.png?v=1784560643"
+    ],
+    "description": "This Silk Shirt For Women is cut from liquid-smooth fabric with a soft, natural sheen that catches the light without ever looking flashy. It moves",
+    "styling": [],
+    "colours": [
+      "Gold",
+      "Red",
+      "Emerald Green",
+      "Silver",
+      "Maroon",
+      "Black",
+      "Purple",
+      "Blue"
+    ],
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "variants": [
+      {
+        "colour": "Gold",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Gold",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Gold",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Gold",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Gold",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Red",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Red",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Red",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Red",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Red",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Emerald Green",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Emerald Green",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Emerald Green",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Emerald Green",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Emerald Green",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Silver",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Silver",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Silver",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Silver",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Silver",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Maroon",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Maroon",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Maroon",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Maroon",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Maroon",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Purple",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Purple",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Purple",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Purple",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Purple",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Blue",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Blue",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Blue",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Blue",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Blue",
+        "size": "XL",
+        "stock": null
+      }
+    ],
+    "badges": {
+      "made_with_care": true,
+      "great_value": true
+    },
+    "custom_sizing": "Custom sizing is offered. Please provide your measurements in inches, either at checkout or through an Etsy message. Shirt measurements: Bust, Chest, Waist/Hip. Pant measurements: Waist, Length, Inseam. Custom-sized items are final sale and cannot be returned or exchanged.",
+    "details": "Crafted with quality materials to ensure durability and performance.",
+    "shipping_returns": "Orders are processed and shipped promptly. Delivery times vary by location. If you wish to return an item, please reach out to our team and we will evaluate every return request with care.",
     "etsy_url": "https://www.etsy.com/listing/4594767938"
   },
   {
     "handle": "nyx-half-net-shirt",
     "title": "Nyx Half Net Shirt",
     "collection": "Women Shirt Collection",
-    "image": "https://cdn.shopify.com/s/files/1/1017/0076/3970/files/Gemini_Generated_Image_hyt5iyhyt5iyhyt5.webp?v=1786794602",
+    "images": [
+      "https://cdn.shopify.com/s/files/1/1017/0076/3970/files/Gemini_Generated_Image_hyt5iyhyt5iyhyt5.webp?v=1786794602"
+    ],
+    "description": "Half tailored shirt, half statement piece, The Nyx pairs a structured collared bodice with sheer fishnet sleeve panels for a look that's polished u",
+    "styling": [],
+    "colours": [
+      "Navy",
+      "Black",
+      "Maroon",
+      "White"
+    ],
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "variants": [
+      {
+        "colour": "Navy",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Navy",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Navy",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Navy",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Navy",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Maroon",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Maroon",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Maroon",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Maroon",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Maroon",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "XL",
+        "stock": null
+      }
+    ],
+    "badges": {
+      "made_with_care": true,
+      "great_value": true
+    },
+    "custom_sizing": "Custom sizing is offered. Please provide your measurements in inches, either at checkout or through an Etsy message. Shirt measurements: Bust, Chest, Waist/Hip. Pant measurements: Waist, Length, Inseam. Custom-sized items are final sale and cannot be returned or exchanged.",
+    "details": "Crafted with quality materials to ensure durability and performance.",
+    "shipping_returns": "Orders are processed and shipped promptly. Delivery times vary by location. If you wish to return an item, please reach out to our team and we will evaluate every return request with care.",
     "etsy_url": "https://www.etsy.com/listing/4594107259"
   },
   {
     "handle": "mesh-sleeve-button-up-shirt",
     "title": "Mesh-Sleeve Button-Up Shirt",
     "collection": "Women Shirt Collection",
-    "image": "https://cdn.shopify.com/s/files/1/1017/0076/3970/files/Gemini_Generated_Image_n3it03n3it03n3it.webp?v=1786794403",
+    "images": [
+      "https://cdn.shopify.com/s/files/1/1017/0076/3970/files/Gemini_Generated_Image_n3it03n3it03n3it.webp?v=1786794403"
+    ],
+    "description": "A crisp, tailored button-up on top, Sheer fishnet mesh running down both sleeves. It's the shirt that lets you keep the professional silhouette whi",
+    "styling": [],
+    "colours": [
+      "Black",
+      "Maroon",
+      "Navy",
+      "White"
+    ],
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "variants": [
+      {
+        "colour": "Black",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Maroon",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Maroon",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Maroon",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Maroon",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Maroon",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Navy",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Navy",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Navy",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Navy",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Navy",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "XL",
+        "stock": null
+      }
+    ],
+    "badges": {
+      "made_with_care": true,
+      "great_value": true
+    },
+    "custom_sizing": "Custom sizing is offered. Please provide your measurements in inches, either at checkout or through an Etsy message. Shirt measurements: Bust, Chest, Waist/Hip. Pant measurements: Waist, Length, Inseam. Custom-sized items are final sale and cannot be returned or exchanged.",
+    "details": "Crafted with quality materials to ensure durability and performance.",
+    "shipping_returns": "Orders are processed and shipped promptly. Delivery times vary by location. If you wish to return an item, please reach out to our team and we will evaluate every return request with care.",
     "etsy_url": "https://www.etsy.com/listing/4594107363"
   },
   {
     "handle": "eclipse-mesh-sleeve-tailored-shirt",
     "title": "Eclipse | Mesh-Sleeve Shirt",
     "collection": "Women Shirt Collection",
-    "image": "https://cdn.shopify.com/s/files/1/1017/0076/3970/files/Models_posing_near_large_rock_202607021745_Magracia_Eclipse_Mesh-Sleeve_Shirt_ed475d78e17229f7_Magracia_5c5101f6e400949b.webp?v=1784808352",
+    "images": [
+      "https://cdn.shopify.com/s/files/1/1017/0076/3970/files/Models_posing_near_large_rock_202607021745_Magracia_Eclipse_Mesh-Sleeve_Shirt_ed475d78e17229f7_Magracia_5c5101f6e400949b.webp?v=1784808352"
+    ],
+    "description": "The Eclipse takes the classic tailored shirt and adds sheer mesh sleeves for a contrast between structure and drama, buttoned-up confidence with a",
+    "styling": [],
+    "colours": [
+      "Navy",
+      "Black",
+      "White",
+      "Maroon"
+    ],
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "variants": [
+      {
+        "colour": "Navy",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Navy",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Navy",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Navy",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Navy",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Maroon",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Maroon",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Maroon",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Maroon",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Maroon",
+        "size": "XL",
+        "stock": null
+      }
+    ],
+    "badges": {
+      "made_with_care": true,
+      "great_value": true
+    },
+    "custom_sizing": "Custom sizing is offered. Please provide your measurements in inches, either at checkout or through an Etsy message. Shirt measurements: Bust, Chest, Waist/Hip. Pant measurements: Waist, Length, Inseam. Custom-sized items are final sale and cannot be returned or exchanged.",
+    "details": "Crafted with quality materials to ensure durability and performance.",
+    "shipping_returns": "Orders are processed and shipped promptly. Delivery times vary by location. If you wish to return an item, please reach out to our team and we will evaluate every return request with care.",
     "etsy_url": "https://www.etsy.com/listing/4594759909"
   },
   {
     "handle": "zaria-3-piece-satin-co-ord-set",
     "title": "Zaria 3-Piece Satin Co-ord Set",
     "collection": "Co-ord Sets",
-    "image": "https://cdn.shopify.com/s/files/1/1017/0076/3970/files/ChatGPTImageAug11_2026_05_59_46PM.webp?v=1786631958",
+    "images": [
+      "https://cdn.shopify.com/s/files/1/1017/0076/3970/files/ChatGPTImageAug11_2026_05_59_46PM.webp?v=1786631958"
+    ],
+    "description": "Effortless drape meets structured elegance. The Zaria Co-ord Set layers a sheer striped georgette shirt over a body-skimming satin camisole and fin",
+    "styling": [],
+    "colours": [
+      "Smoky Olive",
+      "Burgundy",
+      "Navy",
+      "Emerald Green",
+      "Beige"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "variants": [
+      {
+        "colour": "Smoky Olive",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Smoky Olive",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Smoky Olive",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Burgundy",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Burgundy",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Burgundy",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Navy",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Navy",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Navy",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Emerald Green",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Emerald Green",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Emerald Green",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "L",
+        "stock": null
+      }
+    ],
+    "badges": {
+      "made_with_care": true,
+      "great_value": true
+    },
+    "custom_sizing": "Custom sizing is offered. Please provide your measurements in inches, either at checkout or through an Etsy message. Shirt measurements: Bust, Chest, Waist/Hip. Pant measurements: Waist, Length, Inseam. Custom-sized items are final sale and cannot be returned or exchanged.",
+    "details": "Crafted with quality materials to ensure durability and performance.",
+    "shipping_returns": "Orders are processed and shipped promptly. Delivery times vary by location. If you wish to return an item, please reach out to our team and we will evaluate every return request with care.",
     "etsy_url": "https://www.etsy.com/listing/4594786415"
   },
   {
     "handle": "dorne-silk-co-ord-set",
     "title": "Dorne \u2013 Luxury Silk Co-Ord Set",
     "collection": "Co-ord Sets",
-    "image": "https://cdn.shopify.com/s/files/1/1017/0076/3970/files/ChatGPTImageJul30_2026_05_26_08PM.webp?v=1786632418",
+    "images": [
+      "https://cdn.shopify.com/s/files/1/1017/0076/3970/files/ChatGPTImageJul30_2026_05_26_08PM.webp?v=1786632418"
+    ],
+    "description": "Elevate your wardrobe with Dorne, a sophisticated silk co-ord set designed for effortless elegance. Crafted from premium silk with a naturally lumi",
+    "styling": [],
+    "colours": [
+      "Pink",
+      "Emerald Blue",
+      "Emerald Green",
+      "Black",
+      "Brown",
+      "Burgundy",
+      "Beige"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "variants": [
+      {
+        "colour": "Pink",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Pink",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Pink",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Pink",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Emerald Blue",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Emerald Blue",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Emerald Blue",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Emerald Blue",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Emerald Green",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Emerald Green",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Emerald Green",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Emerald Green",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Brown",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Brown",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Brown",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Brown",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Burgundy",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Burgundy",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Burgundy",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Burgundy",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "XL",
+        "stock": null
+      }
+    ],
+    "badges": {
+      "made_with_care": true,
+      "great_value": true
+    },
+    "custom_sizing": "Custom sizing is offered. Please provide your measurements in inches, either at checkout or through an Etsy message. Shirt measurements: Bust, Chest, Waist/Hip. Pant measurements: Waist, Length, Inseam. Custom-sized items are final sale and cannot be returned or exchanged.",
+    "details": "Crafted with quality materials to ensure durability and performance.",
+    "shipping_returns": "Orders are processed and shipped promptly. Delivery times vary by location. If you wish to return an item, please reach out to our team and we will evaluate every return request with care.",
     "etsy_url": "https://www.etsy.com/listing/4595579970"
   },
   {
     "handle": "engima-co-ord-set",
     "title": "Engima Co-Ord Set",
     "collection": "Co-ord Sets",
-    "image": "https://cdn.shopify.com/s/files/1/1017/0076/3970/files/ChatGPTImageJul30_2026_03_49_59PM.webp?v=1786799162",
+    "images": [
+      "https://cdn.shopify.com/s/files/1/1017/0076/3970/files/ChatGPTImageJul30_2026_03_49_59PM.webp?v=1786799162"
+    ],
+    "description": "Designed for women who appreciate refined minimalism, the Enigma Co-Ord Set is crafted from premium breathable cotton that offers exceptional comfo",
+    "styling": [],
+    "colours": [
+      "Navy",
+      "Pink",
+      "Beige",
+      "White",
+      "Burgundy"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "variants": [
+      {
+        "colour": "Navy",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Navy",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Navy",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Navy",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Pink",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Pink",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Pink",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Pink",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Burgundy",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Burgundy",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Burgundy",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Burgundy",
+        "size": "XL",
+        "stock": null
+      }
+    ],
+    "badges": {
+      "made_with_care": true,
+      "great_value": true
+    },
+    "custom_sizing": "Custom sizing is offered. Please provide your measurements in inches, either at checkout or through an Etsy message. Shirt measurements: Bust, Chest, Waist/Hip. Pant measurements: Waist, Length, Inseam. Custom-sized items are final sale and cannot be returned or exchanged.",
+    "details": "Crafted with quality materials to ensure durability and performance.",
+    "shipping_returns": "Orders are processed and shipped promptly. Delivery times vary by location. If you wish to return an item, please reach out to our team and we will evaluate every return request with care.",
     "etsy_url": "https://www.etsy.com/listing/4595585968"
   },
   {
     "handle": "aster-co-ord-set",
     "title": "Aster Co-ord Set",
     "collection": "Co-ord Sets",
-    "image": "https://cdn.shopify.com/s/files/1/1017/0076/3970/files/ChatGPTImageJul30_2026_02_37_37PM.webp?v=1786632300",
+    "images": [
+      "https://cdn.shopify.com/s/files/1/1017/0076/3970/files/ChatGPTImageJul30_2026_02_37_37PM.webp?v=1786632300"
+    ],
+    "description": "Effortless sophistication meets modern tailoring in the Aster Co-ord Set, designed for women who appreciate clean lines, premium craftsmanship, and",
+    "styling": [],
+    "colours": [
+      "Burgundy",
+      "Beige",
+      "Olive Green",
+      "White",
+      "Black"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "variants": [
+      {
+        "colour": "Burgundy",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Burgundy",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Burgundy",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Burgundy",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Olive Green",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Olive Green",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Olive Green",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Olive Green",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "XL",
+        "stock": null
+      }
+    ],
+    "badges": {
+      "made_with_care": true,
+      "great_value": true
+    },
+    "custom_sizing": "Custom sizing is offered. Please provide your measurements in inches, either at checkout or through an Etsy message. Shirt measurements: Bust, Chest, Waist/Hip. Pant measurements: Waist, Length, Inseam. Custom-sized items are final sale and cannot be returned or exchanged.",
+    "details": "Crafted with quality materials to ensure durability and performance.",
+    "shipping_returns": "Orders are processed and shipped promptly. Delivery times vary by location. If you wish to return an item, please reach out to our team and we will evaluate every return request with care.",
     "etsy_url": "https://www.etsy.com/shop/MagraciaOfficial"
   },
   {
     "handle": "shacket-co-ord-set",
     "title": "Shacket Co-ord Set",
     "collection": "Co-ord Sets",
-    "image": "https://cdn.shopify.com/s/files/1/1017/0076/3970/files/Whisk_652b79b2ca37453b3294731aa41bcdb1dr.png?v=1785163850",
+    "images": [
+      "https://cdn.shopify.com/s/files/1/1017/0076/3970/files/Whisk_652b79b2ca37453b3294731aa41bcdb1dr.png?v=1785163850"
+    ],
+    "description": "An oversized button-down Georgette shacket paired with matching straight-leg Cotton trousers \u2014 designed to layer over anything you already own. The",
+    "styling": [],
+    "colours": [
+      "Oceanic",
+      "Beige",
+      "Brown"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "variants": [
+      {
+        "colour": "Oceanic",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Oceanic",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Oceanic",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Oceanic",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Brown",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Brown",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Brown",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Brown",
+        "size": "XL",
+        "stock": null
+      }
+    ],
+    "badges": {
+      "made_with_care": true,
+      "great_value": true
+    },
+    "custom_sizing": "Custom sizing is offered. Please provide your measurements in inches, either at checkout or through an Etsy message. Shirt measurements: Bust, Chest, Waist/Hip. Pant measurements: Waist, Length, Inseam. Custom-sized items are final sale and cannot be returned or exchanged.",
+    "details": "Crafted with quality materials to ensure durability and performance.",
+    "shipping_returns": "Orders are processed and shipped promptly. Delivery times vary by location. If you wish to return an item, please reach out to our team and we will evaluate every return request with care.",
     "etsy_url": "https://www.etsy.com/listing/4596333846"
   },
   {
     "handle": "balloon-pants-for-women",
     "title": "Balloon Pants For Women",
     "collection": "Women Pants And Trousers",
-    "image": "https://cdn.shopify.com/s/files/1/1017/0076/3970/files/Gemini_Generated_Image_irxe59irxe59irxe.webp?v=1786794755",
+    "images": [
+      "https://cdn.shopify.com/s/files/1/1017/0076/3970/files/Gemini_Generated_Image_irxe59irxe59irxe.webp?v=1786794755"
+    ],
+    "description": "Full through the leg, cinched at the ankle, these balloon pants prove that comfortable and shapeless aren't the same thing. The high waist keeps th",
+    "styling": [],
+    "colours": [
+      "Black",
+      "Beige",
+      "Gray",
+      "Navy"
+    ],
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "variants": [
+      {
+        "colour": "Black",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Gray",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Gray",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Gray",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Gray",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Gray",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Navy",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Navy",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Navy",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Navy",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Navy",
+        "size": "XL",
+        "stock": null
+      }
+    ],
+    "badges": {
+      "made_with_care": true,
+      "great_value": true
+    },
+    "custom_sizing": "Custom sizing is offered. Please provide your measurements in inches, either at checkout or through an Etsy message. Shirt measurements: Bust, Chest, Waist/Hip. Pant measurements: Waist, Length, Inseam. Custom-sized items are final sale and cannot be returned or exchanged.",
+    "details": "Crafted with quality materials to ensure durability and performance.",
+    "shipping_returns": "Orders are processed and shipped promptly. Delivery times vary by location. If you wish to return an item, please reach out to our team and we will evaluate every return request with care.",
     "etsy_url": "https://www.etsy.com/listing/4602220912"
   },
   {
     "handle": "leaf-pants-for-women",
     "title": "Leaf Pants For Women",
     "collection": "Women Pants And Trousers",
-    "image": "https://cdn.shopify.com/s/files/1/1017/0076/3970/files/ChatGPTImageAug15_2026_05_53_57PM_1.webp?v=1786798562",
+    "images": [
+      "https://cdn.shopify.com/s/files/1/1017/0076/3970/files/ChatGPTImageAug15_2026_05_53_57PM_1.webp?v=1786798562"
+    ],
+    "description": "These Leaf Pants take a subtle botanical motif and put it on a wide-leg trouser that reads more quiet luxury than novelty print. Premium fabric, fl",
+    "styling": [],
+    "colours": [
+      "Beige",
+      "White",
+      "Black"
+    ],
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "variants": [
+      {
+        "colour": "Beige",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "XL",
+        "stock": null
+      }
+    ],
+    "badges": {
+      "made_with_care": true,
+      "great_value": true
+    },
+    "custom_sizing": "Custom sizing is offered. Please provide your measurements in inches, either at checkout or through an Etsy message. Shirt measurements: Bust, Chest, Waist/Hip. Pant measurements: Waist, Length, Inseam. Custom-sized items are final sale and cannot be returned or exchanged.",
+    "details": "Crafted with quality materials to ensure durability and performance.",
+    "shipping_returns": "Orders are processed and shipped promptly. Delivery times vary by location. If you wish to return an item, please reach out to our team and we will evaluate every return request with care.",
     "etsy_url": "https://www.etsy.com/shop/MagraciaOfficial"
   },
   {
     "handle": "cotton-fit-trouser",
     "title": "Cotton Fit Trouser",
     "collection": "Women Pants And Trousers",
-    "image": "https://cdn.shopify.com/s/files/1/1017/0076/3970/files/ChatGPTImageJul20_2026_04_04_57PM.webp?v=1786796182",
+    "images": [
+      "https://cdn.shopify.com/s/files/1/1017/0076/3970/files/ChatGPTImageJul20_2026_04_04_57PM.webp?v=1786796182"
+    ],
+    "description": "A Tailored Cotton Trouser built for the days you actually wear pants, not just the ones you photograph. Fitted through the hip, straight through th",
+    "styling": [],
+    "colours": [
+      "Pink",
+      "Beige",
+      "White",
+      "Navy",
+      "Black",
+      "Red",
+      "Maroon"
+    ],
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "variants": [
+      {
+        "colour": "Pink",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Pink",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Pink",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Pink",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Pink",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Navy",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Navy",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Navy",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Navy",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Navy",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Red",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Red",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Red",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Red",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Red",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Maroon",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Maroon",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Maroon",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Maroon",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Maroon",
+        "size": "XL",
+        "stock": null
+      }
+    ],
+    "badges": {
+      "made_with_care": true,
+      "great_value": true
+    },
+    "custom_sizing": "Custom sizing is offered. Please provide your measurements in inches, either at checkout or through an Etsy message. Shirt measurements: Bust, Chest, Waist/Hip. Pant measurements: Waist, Length, Inseam. Custom-sized items are final sale and cannot be returned or exchanged.",
+    "details": "Crafted with quality materials to ensure durability and performance.",
+    "shipping_returns": "Orders are processed and shipped promptly. Delivery times vary by location. If you wish to return an item, please reach out to our team and we will evaluate every return request with care.",
     "etsy_url": "https://www.etsy.com/listing/4597784023"
   },
   {
     "handle": "floaty-wide-leg-pants",
     "title": "Floaty Wide Leg Pants",
     "collection": "Women Pants And Trousers",
-    "image": "https://cdn.shopify.com/s/files/1/1017/0076/3970/files/ChatGPTImageJul20_2026_03_26_42PM.webp?v=1786797104",
+    "images": [
+      "https://cdn.shopify.com/s/files/1/1017/0076/3970/files/ChatGPTImageJul20_2026_03_26_42PM.webp?v=1786797104"
+    ],
+    "description": "Lightweight fabric with serious movement, these wide-leg pants don't just hang, they float. A high waist elongates the leg while the hem skims rath",
+    "styling": [],
+    "colours": [
+      "Beige",
+      "Brown",
+      "Black",
+      "White",
+      "Navy"
+    ],
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "variants": [
+      {
+        "colour": "Beige",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Brown",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Brown",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Brown",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Brown",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Brown",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Navy",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Navy",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Navy",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Navy",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Navy",
+        "size": "XL",
+        "stock": null
+      }
+    ],
+    "badges": {
+      "made_with_care": true,
+      "great_value": true
+    },
+    "custom_sizing": "Custom sizing is offered. Please provide your measurements in inches, either at checkout or through an Etsy message. Shirt measurements: Bust, Chest, Waist/Hip. Pant measurements: Waist, Length, Inseam. Custom-sized items are final sale and cannot be returned or exchanged.",
+    "details": "Crafted with quality materials to ensure durability and performance.",
+    "shipping_returns": "Orders are processed and shipped promptly. Delivery times vary by location. If you wish to return an item, please reach out to our team and we will evaluate every return request with care.",
     "etsy_url": "https://www.etsy.com/listing/4597786611"
   },
   {
     "handle": "rib-longline-shrug",
     "title": "Rib Longline Shrug",
     "collection": "Women Shrug Collection",
-    "image": "https://cdn.shopify.com/s/files/1/1017/0076/3970/files/ChatGPTImageAug15_2026_04_19_13PM.webp?v=1786793207",
+    "images": [
+      "https://cdn.shopify.com/s/files/1/1017/0076/3970/files/ChatGPTImageAug15_2026_04_19_13PM.webp?v=1786793207"
+    ],
+    "description": "This longline shrug in ribbed knit runs past the hip, with enough stretch to layer over anything without adding bulk. No closures, no fuss. Just th",
+    "styling": [],
+    "colours": [
+      "Maroon",
+      "Emerald Green",
+      "Purple",
+      "Black",
+      "White"
+    ],
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "variants": [
+      {
+        "colour": "Maroon",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Maroon",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Maroon",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Maroon",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Maroon",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Emerald Green",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Emerald Green",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Emerald Green",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Emerald Green",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Emerald Green",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Purple",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Purple",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Purple",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Purple",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Purple",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "XL",
+        "stock": null
+      }
+    ],
+    "badges": {
+      "made_with_care": true,
+      "great_value": true
+    },
+    "custom_sizing": "Custom sizing is offered. Please provide your measurements in inches, either at checkout or through an Etsy message. Shirt measurements: Bust, Chest, Waist/Hip. Pant measurements: Waist, Length, Inseam. Custom-sized items are final sale and cannot be returned or exchanged.",
+    "details": "Crafted with quality materials to ensure durability and performance.",
+    "shipping_returns": "Orders are processed and shipped promptly. Delivery times vary by location. If you wish to return an item, please reach out to our team and we will evaluate every return request with care.",
     "etsy_url": "https://www.etsy.com/shop/MagraciaOfficial"
   },
   {
     "handle": "vera-georgette-shrug",
     "title": "Vera Georgette Shrug",
     "collection": "Women Shrug Collection",
-    "image": "https://cdn.shopify.com/s/files/1/1017/0076/3970/files/ChatGPTImageJul30_2026_07_41_39PM.webp?v=1785423327",
+    "images": [
+      "https://cdn.shopify.com/s/files/1/1017/0076/3970/files/ChatGPTImageJul30_2026_07_41_39PM.webp?v=1785423327"
+    ],
+    "description": "Elevate your everyday style with our Flow Shrug, crafted in lightweight Georgette for an effortlessly elegant drape. Designed with a fluid open fro",
+    "styling": [],
+    "colours": [
+      "Black",
+      "Beige",
+      "Pink",
+      "White",
+      "Burgundy"
+    ],
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "variants": [
+      {
+        "colour": "Black",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Pink",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Pink",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Pink",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Pink",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Pink",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Burgundy",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Burgundy",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Burgundy",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Burgundy",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Burgundy",
+        "size": "XL",
+        "stock": null
+      }
+    ],
+    "badges": {
+      "made_with_care": true,
+      "great_value": true
+    },
+    "custom_sizing": "Custom sizing is offered. Please provide your measurements in inches, either at checkout or through an Etsy message. Shirt measurements: Bust, Chest, Waist/Hip. Pant measurements: Waist, Length, Inseam. Custom-sized items are final sale and cannot be returned or exchanged.",
+    "details": "Crafted with quality materials to ensure durability and performance.",
+    "shipping_returns": "Orders are processed and shipped promptly. Delivery times vary by location. If you wish to return an item, please reach out to our team and we will evaluate every return request with care.",
     "etsy_url": "https://www.etsy.com/shop/MagraciaOfficial"
   },
   {
     "handle": "georgette-long-shrug",
     "title": "Georgette Long Shrug",
     "collection": "Women Shrug Collection",
-    "image": "https://cdn.shopify.com/s/files/1/1017/0076/3970/files/ChatGPTImageJul14_2026_03_47_00PM.webp?v=1786793467",
+    "images": [
+      "https://cdn.shopify.com/s/files/1/1017/0076/3970/files/ChatGPTImageJul14_2026_03_47_00PM.webp?v=1786793467"
+    ],
+    "description": "Elegant Georgette Front Open, Loose Full Sleeves Long Shrug designed to layer effortlessly over dresses, tops, and traditional wear. The lightweigh",
+    "styling": [],
+    "colours": [
+      "Olive Green",
+      "Blue",
+      "Black",
+      "Beige",
+      "Pink",
+      "White",
+      "Red",
+      "Purple"
+    ],
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "variants": [
+      {
+        "colour": "Olive Green",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Olive Green",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Olive Green",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Olive Green",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Olive Green",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Blue",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Blue",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Blue",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Blue",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Blue",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Pink",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Pink",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Pink",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Pink",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Pink",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Red",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Red",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Red",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Red",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Red",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Purple",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Purple",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Purple",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Purple",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Purple",
+        "size": "XL",
+        "stock": null
+      }
+    ],
+    "badges": {
+      "made_with_care": true,
+      "great_value": true
+    },
+    "custom_sizing": "Custom sizing is offered. Please provide your measurements in inches, either at checkout or through an Etsy message. Shirt measurements: Bust, Chest, Waist/Hip. Pant measurements: Waist, Length, Inseam. Custom-sized items are final sale and cannot be returned or exchanged.",
+    "details": "Crafted with quality materials to ensure durability and performance.",
+    "shipping_returns": "Orders are processed and shipped promptly. Delivery times vary by location. If you wish to return an item, please reach out to our team and we will evaluate every return request with care.",
     "etsy_url": "https://www.etsy.com/listing/4600995788"
   },
   {
     "handle": "open-front-shrug",
     "title": "Open Front Linen Shrug",
     "collection": "Women Shrug Collection",
-    "image": "https://cdn.shopify.com/s/files/1/1017/0076/3970/files/ChatGPTImageJul14_2026_06_14_32PM.webp?v=1786793695",
+    "images": [
+      "https://cdn.shopify.com/s/files/1/1017/0076/3970/files/ChatGPTImageJul14_2026_06_14_32PM.webp?v=1786793695"
+    ],
+    "description": "This Open-Front Linen Shrug is built for warm-weather layering, coverage without the heat. The lightly textured linen weave drapes loose through th",
+    "styling": [],
+    "colours": [
+      "White",
+      "Pink",
+      "Black",
+      "Purple",
+      "Maroon",
+      "Beige"
+    ],
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "variants": [
+      {
+        "colour": "White",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Pink",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Pink",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Pink",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Pink",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Pink",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Purple",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Purple",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Purple",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Purple",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Purple",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Maroon",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Maroon",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Maroon",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Maroon",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Maroon",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "S",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "M",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "XL",
+        "stock": null
+      }
+    ],
+    "badges": {
+      "made_with_care": true,
+      "great_value": true
+    },
+    "custom_sizing": "Custom sizing is offered. Please provide your measurements in inches, either at checkout or through an Etsy message. Shirt measurements: Bust, Chest, Waist/Hip. Pant measurements: Waist, Length, Inseam. Custom-sized items are final sale and cannot be returned or exchanged.",
+    "details": "Crafted with quality materials to ensure durability and performance.",
+    "shipping_returns": "Orders are processed and shipped promptly. Delivery times vary by location. If you wish to return an item, please reach out to our team and we will evaluate every return request with care.",
     "etsy_url": "https://www.etsy.com/shop/MagraciaOfficial"
   }
 ]

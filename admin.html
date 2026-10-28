@@ -1,67 +1,90 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, nofollow">
-<title>Magracia Admin - Private</title>
-<link rel="stylesheet" href="styles.css">
-</head>
-<body>
-<header><h1>MAGRACIA ADMIN</h1></header>
-<main>
-<section>
-<p>This page is not linked from the shop. Do not share its address. Saving requires the admin password set in Vercel, which is checked on the server, not in this page.</p>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow"><title>Magracia Admin - Private</title><link rel="stylesheet" href="styles.css"></head>
+<body><header><h1>MAGRACIA ADMIN</h1></header><main class="wrap"><section>
+<p>This page is not linked from the shop. Do not share its address. Saving requires the admin password set in Vercel, checked on the server.</p>
 <label>Admin password <input type="password" id="pw"></label>
-<button class="btn" id="loadBtn">Load listings</button>
-<p id="status"></p>
-<div id="editor" style="display:none">
-<table id="tbl"><thead><tr><th>Title</th><th>Collection</th><th>Image URL</th><th>Etsy URL</th><th></th></tr></thead><tbody></tbody></table>
-<h3>Add a listing</h3>
-<label>Title <input id="newTitle"></label>
-<label>Collection <select id="newCollection"><option>Women Shirt Collection</option><option>Co-ord Sets</option><option>Women Pants And Trousers</option><option>Women Shrug Collection</option></select></label>
-<label>Image URL <input id="newImage" placeholder="Paste an image URL"></label>
-<label>Etsy URL <input id="newEtsy" placeholder="https://www.etsy.com/listing/..."></label>
-<button class="btn" id="addBtn">Add listing</button>
-<p><button class="btn" id="saveBtn">Save all changes to the live site</button> <button class="btn" id="downloadBtn">Download products.json instead</button></p>
-<p>Saving commits the updated products list to GitHub, and Vercel redeploys automatically. If the server save is not configured yet, use Download and commit products.json manually.</p>
+<button class="btn" id="loadBtn">Load listings</button><p id="status"></p>
+<div id="list"></div><div id="editor" style="display:none">
+<h2 id="editTitle">Edit listing</h2>
+<label>Title <input id="fTitle"></label>
+<label>Collection <select id="fCollection"><option>Women Shirt Collection</option><option>Co-ord Sets</option><option>Women Pants And Trousers</option><option>Women Shrug Collection</option></select></label>
+<label>Etsy URL <input id="fEtsy" placeholder="https://www.etsy.com/listing/..."></label>
+<label>Description <textarea id="fDesc" rows="5"></textarea></label>
+<label>Styling bullets, one per line <textarea id="fStyling" rows="4"></textarea></label>
+<label>Colours, comma separated <input id="fColours"></label>
+<label>Sizes <span id="fSizes"></span></label>
+<label>Custom Sizing <textarea id="fCustom" rows="4"></textarea></label>
+<label>Details <textarea id="fDetails" rows="3"></textarea></label>
+<label>Shipping &amp; Returns <textarea id="fShip" rows="3"></textarea></label>
+<h3>Images</h3><div id="imgs"></div>
+<p><input type="file" id="imgFile" accept="image/*"> <button class="btn" id="uploadBtn">Upload image</button> <input id="imgUrl" placeholder="Or paste an image URL"> <button class="btn" id="addUrlBtn">Add URL</button></p>
+<h3>Stock by variation</h3><p>Leave blank for “In stock” with no number. Enter 0 for out of stock for that colour/size.</p>
+<div id="variants"></div><p><label>Set all variant stock to <input id="setAll" type="number" min="0"></label> <button class="btn" id="setAllBtn">Apply to all</button></p>
+<p><button class="btn" id="saveBtn">Save this listing</button> <button class="btn" id="backBtn">Back to list</button></p>
 </div>
-</section>
-</main>
+<p><button class="btn" id="addBtn">+ Add new listing</button> <button class="btn" id="saveAllBtn">Save all changes to live site</button> <button class="btn" id="downloadBtn">Download products.json</button></p>
+<p>Saving commits products.json to GitHub and Vercel redeploys. Uploaded images are saved in the repo under /images/ and served from the live site.</p>
+</section></main>
 <script>
-let products=[];
-function render(){
-  const tb=document.querySelector('#tbl tbody'); tb.innerHTML='';
-  products.forEach((p,i)=>{
-    const tr=document.createElement('tr');
-    tr.innerHTML='<td><input data-f="title" data-i="'+i+'" value="'+p.title.replace(/"/g,'&quot;')+'"></td><td><input data-f="collection" data-i="'+i+'" value="'+p.collection.replace(/"/g,'&quot;')+'"></td><td><input data-f="image" data-i="'+i+'" value="'+p.image.replace(/"/g,'&quot;')+'"></td><td><input data-f="etsy_url" data-i="'+i+'" value="'+p.etsy_url.replace(/"/g,'&quot;')+'"></td><td><button data-del="'+i+'">Delete</button></td>';
-    tb.appendChild(tr);
-  });
-  tb.querySelectorAll('input').forEach(el=>el.addEventListener('input',e=>{products[+e.target.dataset.i][e.target.dataset.f]=e.target.value}));
-  tb.querySelectorAll('[data-del]').forEach(el=>el.addEventListener('click',e=>{products.splice(+e.target.dataset.del,1);render()}));
+let products=[], editIdx=-1; const SIZES=["XS","S","M","L","XL"];
+function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+function renderList(){
+  document.getElementById('list').innerHTML='<table><tr><th>Title</th><th>Collection</th><th>Images</th><th>Variants</th><th></th></tr>'+products.map((p,i)=>'<tr><td>'+esc(p.title)+'</td><td>'+esc(p.collection)+'</td><td>'+(p.images||[]).length+'</td><td>'+(p.variants||[]).length+'</td><td><button onclick="edit('+i+')">Edit</button> <button onclick="del('+i+')">Delete</button></td></tr>').join('')+'</table>';
 }
-document.getElementById('loadBtn').onclick=async()=>{
-  const r=await fetch('products.json'); products=await r.json(); render();
-  document.getElementById('editor').style.display='block';
-  document.getElementById('status').textContent=products.length+' listings loaded. Edit, add or delete, then Save.';
+function rebuildVariants(){
+  const cols=document.getElementById('fColours').value.split(',').map(s=>s.trim()).filter(Boolean);
+  const sizes=[...document.querySelectorAll('#fSizes input:checked')].map(e=>e.value);
+  const old={}; (products[editIdx].variants||[]).forEach(v=>old[v.colour+'|'+v.size]=v.stock);
+  const vars=[]; cols.forEach(c=>sizes.forEach(s=>vars.push({colour:c,size:s,stock:(old[c+'|'+s]!==undefined?old[c+'|'+s]:null)})));
+  products[editIdx].colours=cols; products[editIdx].sizes=sizes; products[editIdx].variants=vars;
+  document.getElementById('variants').innerHTML='<table><tr><th>Colour</th><th>Size</th><th>Stock</th></tr>'+vars.map((v,i)=>'<tr><td>'+esc(v.colour)+'</td><td>'+v.size+'</td><td><input type="number" min="0" data-vi="'+i+'" value="'+(v.stock===null||v.stock===undefined?'':v.stock)+'"></td></tr>').join('')+'</table>';
+  document.querySelectorAll('[data-vi]').forEach(el=>el.addEventListener('input',e=>{const v=vars[+e.target.dataset.vi]; v.stock=e.target.value==='' ? null : parseInt(e.target.value,10)}));
+}
+function renderImgs(){
+  const p=products[editIdx];
+  document.getElementById('imgs').innerHTML=(p.images||[]).map((im,i)=>'<div><img src="'+im+'" style="width:90px;height:110px;object-fit:cover"> <span>'+esc(im)+'</span> <button onclick="delImg('+i+')">Remove</button></div>').join('')||'<p>No images yet.</p>';
+}
+window.edit=i=>{editIdx=i; const p=products[i];
+  document.getElementById('editTitle').textContent='Edit: '+p.title;
+  document.getElementById('fTitle').value=p.title; document.getElementById('fCollection').value=p.collection; document.getElementById('fEtsy').value=p.etsy_url||'';
+  document.getElementById('fDesc').value=p.description||''; document.getElementById('fStyling').value=(p.styling||[]).join('\n'); document.getElementById('fColours').value=(p.colours||[]).join(', ');
+  document.getElementById('fSizes').innerHTML=SIZES.map(s=>'<label style="display:inline-block;margin-right:12px"><input type="checkbox" value="'+s+'" '+(p.sizes||[]).includes(s)?'checked':'')+'> '+s+'</label>').join('');
+  document.getElementById('fCustom').value=p.custom_sizing||''; document.getElementById('fDetails').value=p.details||''; document.getElementById('fShip').value=p.shipping_returns||'';
+  document.getElementById('editor').style.display='block'; renderImgs(); rebuildVariants();
+  document.querySelectorAll('#fSizes input').forEach(e=>e.addEventListener('change',rebuildVariants));
+  document.getElementById('fColours').onchange=rebuildVariants;
 };
-document.getElementById('addBtn').onclick=()=>{
-  const title=document.getElementById('newTitle').value.trim();
-  if(!title){alert('Title is required');return}
-  products.push({handle:title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''),title,collection:document.getElementById('newCollection').value,image:document.getElementById('newImage').value.trim(),etsy_url:document.getElementById('newEtsy').value.trim()});
-  render();
-};
-document.getElementById('downloadBtn').onclick=()=>{
-  const a=document.createElement('a'); a.href='data:application/json,'+encodeURIComponent(JSON.stringify(products,null,2)); a.download='products.json'; a.click();
-};
-document.getElementById('saveBtn').onclick=async()=>{
-  const pw=document.getElementById('pw').value;
-  if(!pw){alert('Enter the admin password');return}
-  document.getElementById('status').textContent='Saving...';
-  const r=await fetch('/api/admin',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:pw,products})});
+window.del=i=>{if(confirm('Delete this listing?')){products.splice(i,1);renderList()}};
+window.delImg=i=>{products[editIdx].images.splice(i,1);renderImgs()};
+function syncEdit(){
+  if(editIdx<0) return; const p=products[editIdx];
+  p.title=document.getElementById('fTitle').value.trim(); p.collection=document.getElementById('fCollection').value; p.etsy_url=document.getElementById('fEtsy').value.trim();
+  p.description=document.getElementById('fDesc').value; p.styling=document.getElementById('fStyling').value.split('\n').map(s=>s.trim()).filter(Boolean);
+  p.custom_sizing=document.getElementById('fCustom').value; p.details=document.getElementById('fDetails').value; p.shipping_returns=document.getElementById('fShip').value;
+  if(!p.handle) p.handle=p.title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+}
+document.getElementById('loadBtn').onclick=async()=>{const r=await fetch('products.json'); products=await r.json(); renderList(); document.getElementById('status').textContent=products.length+' listings loaded.'};
+document.getElementById('addBtn').onclick=()=>{products.push({handle:'',title:'New Piece',collection:'Women Shirt Collection',images:[],description:'',styling:[],colours:[],sizes:['XS','S','M','L','XL'],variants:[],badges:{made_with_care:true,great_value:true},custom_sizing:'',details:'',shipping_returns:'',etsy_url:'https://www.etsy.com/shop/MagraciaOfficial'}); renderList(); edit(products.length-1)};
+document.getElementById('backBtn').onclick=()=>{syncEdit(); renderList(); document.getElementById('editor').style.display='none'};
+document.getElementById('saveBtn').onclick=()=>{syncEdit(); renderList(); document.getElementById('status').textContent='Listing updated in this editor. Click “Save all changes to live site” to publish.'};
+document.getElementById('setAllBtn').onclick=()=>{const v=document.getElementById('setAll').value; if(v==='') return; products[editIdx].variants.forEach(x=>x.stock=parseInt(v,10)); rebuildVariants()};
+document.getElementById('addUrlBtn').onclick=()=>{const u=document.getElementById('imgUrl').value.trim(); if(u){products[editIdx].images.push(u); renderImgs()}};
+document.getElementById('uploadBtn').onclick=async()=>{
+  const f=document.getElementById('imgFile').files[0]; if(!f){alert('Choose an image file first');return}
+  const pw=document.getElementById('pw').value; if(!pw){alert('Enter the admin password');return}
+  document.getElementById('status').textContent='Uploading image…';
+  const data=await new Promise(res=>{const r=new FileReader(); r.onload=()=>res(r.result); r.readAsDataURL(f)});
+  const r=await fetch('/api/upload',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:pw,filename:f.name,data})});
   const j=await r.json().catch(()=>({}));
-  document.getElementById('status').textContent=r.ok?'Saved. Vercel will redeploy shortly.':('Save failed: '+(j.error||r.status));
+  if(!r.ok){document.getElementById('status').textContent='Upload failed: '+(j.error||r.status);return}
+  products[editIdx].images.push(j.url); renderImgs(); document.getElementById('status').textContent='Image uploaded: '+j.url;
 };
-</script>
-</body>
-</html>
+async function saveAll(){
+  const pw=document.getElementById('pw').value; if(!pw){alert('Enter the admin password');return}
+  syncEdit(); document.getElementById('status').textContent='Saving…';
+  const r=await fetch('/api/admin',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:pw,products})});
+  const j=await r.json().catch(()=>({})); document.getElementById('status').textContent=r.ok?'Saved. Vercel will redeploy shortly.':('Save failed: '+(j.error||r.status));
+}
+document.getElementById('saveAllBtn').onclick=saveAll;
+document.getElementById('downloadBtn').onclick=()=>{syncEdit(); const a=document.createElement('a'); a.href='data:application/json,'+encodeURIComponent(JSON.stringify(products,null,2)); a.download='products.json'; a.click()};
+</script></body></html>
