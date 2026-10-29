@@ -1,6 +1,12 @@
-// Vercel serverless function: sends a contact-form message to support@magracia.com via Brevo,
-// restoring the old flow: message -> support@magracia.com -> improvMX forward -> Hasan's Gmail,
-// where he replies from the Gmail alias.
+// Vercel serverless function: sends a contact-form message via Brevo DIRECTLY to
+// ujalawearables@gmail.com (not via support@magracia.com).
+// Reason, found 2026-10-29: Brevo's shared relay IP was on the SpamCop blacklist, so
+// improvMX (the MX for magracia.com) rejected every Brevo delivery to support@magracia.com
+// with "551-5.71 Your IP is black listed by SpamCop.org" — a soft bounce on every test.
+// Sending direct to Gmail skips that improvMX hop. The sender is still
+// support@magracia.com and reply-to is still the visitor, so Hasan replies from Gmail
+// exactly as before. Direct mail to support@magracia.com still forwards via improvMX
+// for anything else; only this form bypasses it.
 // Required Vercel environment variable (never commit this value):
 //   BREVO_API_KEY - Brevo API key (Brevo dashboard > SMTP & API > API Keys).
 // If the key is not set, this returns 503 and the contact form falls back to
@@ -19,7 +25,7 @@ export default async function handler(req, res) {
     headers: { 'api-key': process.env.BREVO_API_KEY, 'Content-Type': 'application/json', Accept: 'application/json' },
     body: JSON.stringify({
       sender: { name: 'Magracia Contact Form', email: 'support@magracia.com' },
-      to: [{ email: 'support@magracia.com' }],
+      to: [{ email: 'ujalawearables@gmail.com' }],
       replyTo: { email, name },
       subject: headline,
       textContent: text,
