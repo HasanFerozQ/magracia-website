@@ -89,3 +89,4 @@ header h1.logo{margin:0}header h1.logo img{height:64px;width:auto;display:block}
 .foot-logo img{width:160px;height:auto;display:block;margin-bottom:6px}
 @media (max-width:900px){.gallery img.main{height:480px}}
 @media (max-width:560px){.gallery img.main{height:420px}}
+.product>*{min-width:0}.gallery{min-width:0;overflow:hidden}.thumbs{max-width:100%}
