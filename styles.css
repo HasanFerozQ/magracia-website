@@ -86,3 +86,4 @@ html,body{overflow-x:hidden}img,video,iframe{max-width:100%}
 
 header h1.logo{margin:0}header h1.logo img{height:48px;width:auto;display:block}
 @media (max-width:900px){header h1.logo img{height:38px;margin:0 auto}}
+.foot-logo img{width:160px;height:auto;display:block;margin-bottom:6px}
