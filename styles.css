@@ -90,3 +90,4 @@ header h1.logo{margin:0}header h1.logo img{height:64px;width:auto;display:block}
 @media (max-width:900px){.gallery img.main{height:480px}}
 @media (max-width:560px){.gallery img.main{height:420px}}
 .product>*{min-width:0}.gallery{min-width:0;overflow:hidden}.thumbs{max-width:100%}
+.product{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr)}.gallery{min-width:0;overflow:hidden}.thumbs{overflow-x:auto;max-width:100%}
