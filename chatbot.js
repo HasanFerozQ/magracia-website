@@ -127,17 +127,99 @@ function stockText(p, colour, size){
   }
   return esc(p.title)+" is listed with colours "+esc((p.colours||[]).join(", "))+" and sizes "+esc((p.sizes||[]).join(", "))+". Stock is shown per colour and size on the product page — tell me a colour and a size and I can check that exact combination.";
 }
+var lastProd=null;
+function allColours(){ var s={}; products.forEach(function(x){ (x.colours||[]).forEach(function(c){ s[c]=1; }); }); return Object.keys(s); }
+function countColour(prod, colour){ var n=0; (prod.image_colours||[]).forEach(function(c){ if(c===colour) n++; }); return n; }
+function listByColour(colour){
+  var hits=products.filter(function(x){ return (x.colours||[]).indexOf(colour)!==-1; });
+  if(!hits.length) return "No Magracia piece is listed in "+colour+".";
+  return "Pieces listed in "+colour+" ("+hits.length+"):\n"+hits.map(function(x){ return "\u2022 "+x.title+" ("+x.collection+")"; }).join("\n")+"\nAsk me about any of these by name for its full details.";
+}
+function listBySize(sz){
+  var hits=products.filter(function(x){ return (x.sizes||[]).indexOf(sz)!==-1; });
+  return "Pieces listed in size "+sz+" ("+hits.length+"):\n"+hits.map(function(x){ return "\u2022 "+x.title+" ("+x.collection+")"; }).join("\n");
+}
+function listByCollection(col){
+  var hits=products.filter(function(x){ return x.collection===col; });
+  return col+" ("+hits.length+"):\n"+hits.map(function(x){ return "\u2022 "+x.title+" \u2014 colours "+(x.colours||[]).join(", ")+", sizes "+(x.sizes||[]).join(", "); }).join("\n");
+}
 function answer(qRaw){
   var q=" "+qRaw.toLowerCase().replace(/[^a-z0-9\s]/g," ")+" ";
+  q=q.replace(/\bprcing\b/g,"price").replace(/\bcolur\b/g,"colour").replace(/\bcolours\b/g,"colours").replace(/\bcolor\b/g,"colour").replace(/\bcolors\b/g,"colours").replace(/\bdelivary\b/g,"delivery").replace(/\bshiping\b/g,"shipping").replace(/\bretun\b/g,"return").replace(/\brefnd\b/g,"refund").replace(/\bsiz\b/g,"size").replace(/\bwhats\b/g,"what is").replace(/\bwhats\b/g,"what is");
+
   var prods=findProducts(q);
-  var p = prods.length===1 ? prods[0] : (prods.length>1 ? null : currentProduct());
+  if(prods.length===1) lastProd=prods[0];
+  var p = prods.length===1 ? prods[0] : (prods.length>1 ? null : (currentProduct() || lastProd));
   var has = function(){ for(var i=0;i<arguments.length;i++) if(q.indexOf(" "+arguments[i]+" ")!==-1 || q.indexOf(arguments[i])!==-1) return true; return false; };
   var isGreet = /(^|\s)(hi|hello|hey|salam|assalam)\s/.test(q) || q.trim()==="hi" || q.trim()==="hello";
   if(isGreet) return "Hi, I am Magracia\u2019s helper. Ask me about a piece — its colours, sizes, fabric, delivery, returns or duties — or tap a suggestion below. What are you looking for?";
   if(q.indexOf("thank")!==-1) return "You are welcome. If you need anything else about a Magracia piece, delivery or returns, just ask.";
   if(q.indexOf("bye")!==-1 || q.indexOf("goodbye")!==-1) return "Take care, and thank you for visiting Magracia. You can find us again here, or email support@magracia.com.";
-  if(has("help","what can you","menu","options")) return "I can help with:\n• A piece — colours, sizes, fabric, what is included, size chart\n• How to buy on Etsy (there are no prices or checkout on this site)\n• Delivery times, shipping costs and tracking\n• Taxes, duties and DDP for the UK, EU, USA and other countries\n• Returns, exchanges and damaged items\n• Custom sizing and contact details\nTry: \u201cWhat colours does Sable come in?\u201d or \u201cHow long is delivery to the UK?\u201d";
-  if(prods.length>1 && (has("colour","color","size","fabric","material","stock","available") || q.trim().split(/\s+/).length<=3)){
+  if(has("help","what can you","menu","options")) return "I can help with, all from Magracia\u2019s own listings and policies, free, no sign-up:\n• A piece — colours, sizes, fabric, what is included, size chart, how to style it\n• Compare two pieces, or shop by colour, size or collection\n• How to buy on Etsy (no prices or checkout on this site)\n• Delivery times, costs, tracking, and delivery to a specific country\n• Taxes, duties and DDP for the UK, EU, USA and other countries\n• Returns, exchanges, damaged items, and custom sizing\n• Care, privacy, terms, socials, and contact by email or contact form\nTry: \u201cCompare Sable and Silk\u201d, \u201cShow me navy pieces\u201d, \u201cDelivery to the UK\u201d, or \u201cHow do I wash it?\u201d (I will not invent care instructions).";
+  /* ---- Free training expansion: compare, search, country, care, about, privacy, terms, payment, tracking, size help, styling ---- */
+  if((q.indexOf("compare")!==-1 || q.indexOf(" versus ")!==-1 || q.indexOf(" vs ")!==-1) && prods.length>=2){
+    var a=prods[0], b=prods[1];
+    return "Comparing, side by side (I will not say one is better — that is your choice):\n\n"+a.title+" ("+a.collection+")\nColours: "+(a.colours||[]).join(", ")+"\nSizes: "+(a.sizes||[]).join(", ")+"\nFabric: "+(FABRIC[a.handle]||"Not named in the listing.")+"\nSize chart: "+(a.size_chart?"Yes, on its product page.":"No, not yet.")+"\n\n"+b.title+" ("+b.collection+")\nColours: "+(b.colours||[]).join(", ")+"\nSizes: "+(b.sizes||[]).join(", ")+"\nFabric: "+(FABRIC[b.handle]||"Not named in the listing.")+"\nSize chart: "+(b.size_chart?"Yes, on its product page.":"No, not yet.")+"\n\n"+prodLink(a)+" · "+prodLink(b);
+  }
+  if(has("which","show","list","all") && !prods.length){
+    var cols=allColours(); var foundCol=null; cols.forEach(function(c){ if(q.indexOf(c.toLowerCase())!==-1) foundCol=c; });
+    if(foundCol) return listByColour(foundCol);
+    var szm=q.match(/\b(xs|s|m|l|xl)\b/); if(szm && has("size")) return listBySize(szm[1].toUpperCase());
+  }
+  if(has("shrug") && !prods.length && has("show","list","which","all","browse","shop")) return listByCollection("Women Shrug Collection");
+  if((has("pant")||has("trouser")) && !prods.length && has("show","list","which","all","browse","shop")) return listByCollection("Women Pants And Trousers");
+  if((has("co-ord")||has("coord")||has("set")) && !prods.length && has("show","list","which","all","browse","shop")) return listByCollection("Co-ord Sets");
+  if(has("shirt") && !prods.length && has("show","list","which","all","browse","shop")) return listByCollection("Women Shirt Collection");
+  if(has("wash","care","clean","iron","dry")){
+    return "Care: Magracia\u2019s listings on this site do not give washing or ironing instructions, so I will not invent them. The only care note in the policies is that damage from improper washing or ironing, misuse, or normal wear and tear may not qualify for a return. Follow the care label on the garment itself, or ask Magracia via support@magracia.com or the "+link("contact.html","Contact page")+" before washing a piece you are unsure about.";
+  }
+  if(has("privacy","data","cookie","personal information","gdpr")){
+    return "Privacy: Magracia\u2019s Privacy Policy covers what personal information is collected or processed, its sources, how it is used and disclosed, third-party websites and links, children\u2019s data, security and retention, your rights and choices, complaints, international transfers, and changes to the policy. Full text: "+link("privacy.html","Privacy Policy")+". For a privacy question about your own details, contact support@magracia.com or use the "+link("contact.html","Contact page")+".";
+  }
+  if(has("terms","conditions","legal")){
+    return "Terms: Magracia\u2019s Terms of Service cover access and accounts, products, orders, prices and billing, shipping and delivery, intellectual property, optional tools, third-party links, privacy, feedback, errors, prohibited uses, termination, warranties, liability, indemnification, governing law and changes. Full text: "+link("terms.html","Terms of Service")+". Purchases themselves are completed on Etsy, where Etsy\u2019s checkout terms also apply.";
+  }
+  if(has("track","tracking","where is my order","order status") && !has("delivery","shipping")){
+    return "Order tracking: I cannot look up an individual order — I have no order data and no backend. Orders bought on Etsy are tracked through Etsy, and Magracia\u2019s shipping information says a tracking number is provided and delivery times may vary by destination and customs clearance. For a specific order, message Magracia on Etsy or email support@magracia.com with your order details.";
+  }
+  if(has("pay","payment","cod","cash on delivery","discount","sale","offer","coupon","gift")){
+    return "Payment and offers: there are no prices, checkout, discounts, sales, cash-on-delivery or gift options stated on this site, so I will not invent any. Payment is through Etsy checkout when you buy a piece there. If a listing shows an offer or a gift option, it will be on that Etsy listing itself — otherwise, ask Magracia via support@magracia.com or the "+link("contact.html","Contact page")+".";
+  }
+  if(has("about","who are you","who is magracia","slogan","chosen")){
+    return "Magracia — \u201cChosen, Not Chased.\u201d Women\u2019s silk shirts, satin co-ord sets, pants and shrugs, made in Pakistan and sold through Etsy. Find Magracia on "+link("https://www.etsy.com/shop/MagraciaOfficial","Etsy")+", "+link("https://www.instagram.com/shopmagracia","Instagram")+" and "+link("https://www.facebook.com/profile.php?id=61591413465941","Facebook")+". Contact is by email (support@magracia.com) or the "+link("contact.html","Contact page")+".";
+  }
+  if(has("instagram","facebook","social")){
+    return "Magracia on socials: "+link("https://www.instagram.com/shopmagracia","Instagram")+", "+link("https://www.facebook.com/profile.php?id=61591413465941","Facebook")+", and the "+link("https://www.etsy.com/shop/MagraciaOfficial","Etsy shop")+".";
+  }
+  if(has("what size","which size","size should","between sizes","fit me","choose a size","sizing help")){
+    var pp=p; if(!pp) return "For size help, tell me which piece you mean. If it has a size chart, use the measurements on its product page; otherwise custom sizing is offered (measurements in inches). I will not recommend a size without your measurements — email support@magracia.com with them if you want advice.";
+    return "For "+esc(pp.title)+", sizes are: "+esc((pp.sizes||[]).join(", "))+". "+(pp.size_chart?"Use the size chart on its product page and compare it with your own measurements. ":"It does not have a size chart on its product page yet. ")+"Custom sizing is also offered — ask me about custom sizing for the measurements needed. I will not pick a size for you without your measurements; if you are between sizes, ask Magracia via support@magracia.com.";
+  }
+  if(has("style","wear it","occasion","pair","how to wear","styling")){
+    if(p) return esc(p.title)+" — from its listing:\n"+esc(p.description||"No description available.")+"\n\n"+prodLink(p)+" · "+etsyLink(p);
+    return "Tell me which piece you mean and I will share how its listing describes wearing it. For example: \u201cHow do I style Zaria?\u201d";
+  }
+  if(has("pakistan") && has("delivery","shipping","ship","arrive","how long")){
+    return "Delivery to Pakistan: 5–7 business days on the Shipping Policy page, with free shipping for domestic orders in Pakistan. Orders are processed within 1–2 business days before dispatch on that page (listing text mentions 1–4 business days, made on a fresh order), and tracking is provided. Full details: "+link("shipping.html","Shipping Policy")+".";
+  }
+  if((has("usa")||has("united states")||has("america")) && has("delivery","shipping","ship","arrive","how long","tax","duty","tariff")){
+    return "Delivery and duties to the USA: typically 7–14 business days on the Shipping Policy page, depending on customs and location, with paid international shipping. Buyers are responsible for any applicable DDP-related import duties, tariffs and customs charges; any VAT / sales tax collected by Etsy is charged at checkout. Tracking is provided. Full details: "+link("shipping.html","Shipping Policy")+".";
+  }
+  if((has("uae")||has("dubai")||has("emirates")) && has("delivery","shipping","ship","arrive","how long")){
+    return "Delivery to the UAE: typically 7–14 business days on the Shipping Policy page, depending on customs and location, with paid international shipping and tracking provided. Full details: "+link("shipping.html","Shipping Policy")+".";
+  }
+  if((has("uk")||has("united kingdom")||has("england")||has("eu")||has("europe")) && has("delivery","shipping","ship","arrive","how long","tax","duty","tariff")){
+    return "Delivery and duties to the UK / EU: the seller covers applicable Delivered Duty Paid (DDP) charges, including import duties and customs fees where applicable. Buyers are responsible for VAT / sales tax collected by Etsy at checkout. For delivery time, use the standard listing window of 5–14 business days, varying by destination and customs clearance — the Shipping Policy page does not give a separate UK / EU day count. Full details: "+link("shipping.html","Shipping Policy")+".";
+  }
+  if(has("canada","australia","india","germany","france","italy","spain","netherlands","saudi","qatar","kuwait","oman","bahrain") && has("delivery","shipping","ship","arrive")){
+    return "Delivery to that country: Magracia\u2019s Shipping Policy page lists Pakistan (domestic), the US and the UAE, while its DDP section also covers the UK, EU, USA and other international destinations (buyers responsible for customs duties, import taxes, VAT and sales taxes unless otherwise stated). The page does not give a separate day count for your country, so use the standard 5–14 business days as a guide and confirm before ordering via support@magracia.com or the "+link("contact.html","Contact page")+".";
+  }
+  /* colour-count follow-up: e.g. after Sable, "in navy?" */
+  if(p && !has("colour","color") && q.indexOf(" in ")!==-1){
+    var cc=null; (p.colours||[]).forEach(function(c){ if(q.indexOf(c.toLowerCase())!==-1) cc=c; });
+    if(cc){ var n=countColour(p, cc); return "In "+esc(cc)+", "+esc(p.title)+" has "+n+" photo"+(n===1?"":"s")+" in its gallery"+(n===0?" (plus any photos marked for all colours).":".")+" Picking "+esc(cc)+" on the product page will show exactly those photos."; }
+  }
+if(prods.length>1 && (has("colour","color","size","fabric","material","stock","available") || q.trim().split(/\s+/).length<=3)){
     return "That could be more than one piece: "+prods.map(function(x){return esc(x.title);}).join(", ")+". Which one did you mean?";
   }
   if(has("contact","email","phone","call","human","talk to","support")){
@@ -166,7 +248,7 @@ function answer(qRaw){
     return "Delivery, as stated on Magracia\u2019s site:\n• Standard shipping on listings: 5–14 business days, with a tracking number. Delivery times may vary by destination and customs clearance.\n• Shipping Policy page: Pakistan 5–7 business days; US & UAE 7–14 business days, depending on customs and location. Orders are processed within 1–2 business days before dispatch on that page, and you receive tracking details once it ships.\n• Listing shipping text also mentions processing of 1–4 business days, made on a fresh order.\n• Costs on the policy page: free shipping for domestic orders in Pakistan; paid shipping for international orders (UAE / USA).\n• Delays can happen because of customs, weather or courier issues beyond Magracia\u2019s control.\nFull details: "+link("shipping.html","Shipping Policy")+".";
   }
   if(has("colour","color","colours","colors")){
-    if(p) return esc(p.title)+" comes in: "+esc((p.colours||[]).join(", "))+"."+(p.handle==="sable-stripe-shirt"?" On this site, picking a colour on the Sable page filters the gallery to that colour\u2019s photos.":" On this site, picking a colour shows that colour\u2019s availability; photo filtering by colour is live for Sable so far and is being rolled out to other listings.");
+    if(p) return esc(p.title)+" comes in: "+esc((p.colours||[]).join(", "))+"."+(p.handle==="sable-stripe-shirt"?" On this site, picking a colour on the Sable page filters the gallery to that colour\u2019s photos.":" On this site, picking a colour filters the gallery to that colour\u2019s photos on every listing.");
     return "Tell me which piece you mean and I will list its colours. For example: \u201cWhat colours does Zaria come in?\u201d";
   }
   if(has("size","sizes","xs","xl","small","large","fit")){
@@ -194,10 +276,10 @@ function answer(qRaw){
   }
   if(p) return summary(p);
   if(q.trim().length<3) return "Could you say a little more? For example: \u201cWhat colours does Sable come in?\u201d, \u201cHow long is delivery?\u201d or \u201cWhat is your refund policy?\u201d";
-  return "I do not have that in Magracia\u2019s listings or policies, so I will not guess. I can answer about a specific piece (colours, sizes, fabric, size chart, what is included), how to buy on Etsy, delivery times, shipping costs, taxes and duties (DDP), returns and exchanges, custom sizing, and contact details. Or email support@magracia.com for anything else.";
+  return "I do not have that in Magracia\u2019s listings or policies, so I will not guess. I can answer about a specific piece (colours, sizes, fabric, size chart, what is included, styling), compare two pieces, shop by colour / size / collection, how to buy on Etsy, delivery times and delivery to a specific country, shipping costs, taxes and duties (DDP), returns and exchanges, custom sizing, care, privacy and terms, and contact details. Or email support@magracia.com for anything else.";
 }
 function setChips(){
-  var labels=["Colours & sizes","Delivery time","Returns","Taxes & duties","How to buy","Contact us"];
+  var labels=["Colours & sizes","Delivery time","Returns","Taxes & duties","How to buy","Compare pieces","Shop by colour","Contact us"];
   chipsEl.innerHTML="";
   labels.forEach(function(l){ var b=document.createElement("button"); b.className="mg-chip"; b.type="button"; b.textContent=l; b.addEventListener("click",function(){ handle(l); }); chipsEl.appendChild(b); });
 }
