@@ -143,9 +143,34 @@ function listByCollection(col){
   var hits=products.filter(function(x){ return x.collection===col; });
   return col+" ("+hits.length+"):\n"+hits.map(function(x){ return "\u2022 "+x.title+" \u2014 colours "+(x.colours||[]).join(", ")+", sizes "+(x.sizes||[]).join(", "); }).join("\n");
 }
+var SIZECHARTS={
+"sable-stripe-shirt":{cols:["BUST","WAIST","HIPS"],rows:{XS:["34","28","38"],S:["36","30","40"],M:["38","32","42"],L:["40","34","44"],XL:["42","36","46"]},note:"Note: Sable is listed in S, M, L only, so the chart XS and XL rows are not listed sizes for this piece."},
+"silk-shirts-for-women":{cols:["BUST","WAIST","HIPS"],rows:{XS:["34 (86 cm)","28 (71 cm)","38 (96 cm)"],S:["36 (92 cm)","30 (76 cm)","40 (100 cm)"],M:["38 (96 cm)","32 (82 cm)","42 (107 cm)"],L:["40 (100 cm)","34 (86 cm)","44 (112 cm)"],XL:["42 (107 cm)","36 (92 cm)","46 (117 cm)"]},note:"All measurements in inches (cm in brackets, as printed). The chart diagram also marks LENGTH, but gives no length numbers."},
+"mesh-sleeve-button-up-shirt":{cols:["BUST","WAIST","HIP"],rows:{XS:["32.5-33.5","25.5-26.5","35.5-36.5"],S:["34.5-35.5","27.5-28.5","37.5-38.5"],M:["36.5-37.5","29.5-30.5","39.5-40.5"],L:["39-40.5","32-33.5","42-43.5"]},note:"Two US sizes per letter size, so each figure is a range. Note: the chart has no XL row, though XL is a listed size for this piece."},
+"eclipse-mesh-sleeve-tailored-shirt":{cols:["BUST","WAIST","HIP"],rows:{XS:["32.5-33.5","25.5-26.5","35.5-36.5"],S:["34.5-35.5","27.5-28.5","37.5-38.5"],M:["36.5-37.5","29.5-30.5","39.5-40.5"],L:["39-40.5","32-33.5","42-43.5"]},note:"Two US sizes per letter size, so each figure is a range. Note: the chart has no XL row, though XL is a listed size for this piece."},
+"rib-longline-shrug":{cols:["BUST","WAIST","HIPS"],rows:{XS:["34 (86 cm)","28 (71 cm)","36 (92 cm)"],S:["36 (92 cm)","30 (76 cm)","38 (97 cm)"],M:["38 (96 cm)","32 (82 cm)","40 (102 cm)"],L:["40 (100 cm)","34 (86 cm)","42 (107 cm)"],XL:["42 (107 cm)","36 (92 cm)","44 (112 cm)"],XXL:["46 (117 cm)","42 (107 cm)","50 (127 cm)"]},note:"Note: Rib is listed in XS-XL only, so the chart XXL row is not a listed size for this piece. Chart note: if in doubt, order one size larger; a 1 inch or lower difference does not qualify for a return."},
+"vera-georgette-shrug":{cols:["LENGTH (FRONT)","LENGTH (BACK)","ACROSS BACK","SLEEVE LENGTH","SLEEVE OPENING"],rows:{XS:["32","48","13.5","26","24"],S:["32","48","14","26.5","24.5"],M:["33","49","14.5","27","25"],L:["33","49","15","27.5","25.5"],XL:["34","50","15.5","28","26"]},note:"All measurements in inches, tolerance +/- 0.5 inch."},
+"georgette-long-shrug":{cols:["CHEST/WAIST","SLEEVES (SHOULDER TO CUFF)","LENGTH (SHOULDER TO HEM)"],rows:{XS:["Free Size","20","40"],S:["Free Size","21","41"],M:["Free Size","22","42"],L:["Free Size","23","43"],XL:["Free Size","24","44"]},note:"All measurements in inches. Chart note: allow 1-2 inch variation due to manual measurement."},
+"open-front-shrug":{cols:["BACK LENGTH","SLEEVE LENGTH","CHEST","BOTTOM HEM (TIE NOT INCLUDED)"],rows:{"2XS":["17.5","20.5","26","32"],XS:["18","21","28","34"],S:["18.5","21.5","30","36"],M:["19","22","32","38"],L:["19.5","22.5","34","40"],XL:["20","23","36","42"]},note:"All measurements in inches. Chart note: there might be a 1/2 to 1-inch difference; if in doubt, order one size larger; a 1 inch or lower difference does not qualify for a return. Note: Open Front is listed in XS-XL only, so the chart 2XS row is not a listed size for this piece."}
+};
+function chartText(p, sz){
+  var c=SIZECHARTS[p.handle]; if(!c) return null;
+  var lines=[];
+  if(sz && c.rows[sz]){
+    lines.push(esc(p.title)+" size "+sz+", in inches:");
+    c.cols.forEach(function(col,i){ lines.push(col+": "+c.rows[sz][i]); });
+    if(c.note) lines.push(c.note);
+    return lines.join("\n");
+  }
+  if(sz) return "The "+esc(p.title)+" size chart does not include size "+sz+". Its chart sizes are: "+Object.keys(c.rows).join(", ")+". "+(c.note||"");
+  lines.push(esc(p.title)+" size chart, in inches:");
+  Object.keys(c.rows).forEach(function(s){ lines.push(s+": "+c.cols.map(function(col,i){ return col+" "+c.rows[s][i]; }).join(", ")); });
+  if(c.note) lines.push(c.note);
+  return lines.join("\n");
+}
 function answer(qRaw){
   var q=" "+qRaw.toLowerCase().replace(/[^a-z0-9\s]/g," ")+" ";
-  q=q.replace(/\bprcing\b/g,"price").replace(/\bcolur\b/g,"colour").replace(/\bcolours\b/g,"colours").replace(/\bcolor\b/g,"colour").replace(/\bcolors\b/g,"colours").replace(/\bdelivary\b/g,"delivery").replace(/\bshiping\b/g,"shipping").replace(/\bretun\b/g,"return").replace(/\brefnd\b/g,"refund").replace(/\bsiz\b/g,"size").replace(/\bwhats\b/g,"what is").replace(/\bwhats\b/g,"what is");
+  q=q.replace(/\bsabal\b/g,"sable").replace(/\bzarya\b/g,"zaria").replace(/\bdorn\b/g,"dorne").replace(/\bshaket\b/g,"shacket").replace(/\bballon\b/g,"balloon").replace(/\bburgandy\b/g,"burgundy").replace(/\bbeig\b/g,"beige").replace(/\bprcing\b/g,"price").replace(/\bcolur\b/g,"colour").replace(/\bcolours\b/g,"colours").replace(/\bcolor\b/g,"colour").replace(/\bcolors\b/g,"colours").replace(/\bdelivary\b/g,"delivery").replace(/\bshiping\b/g,"shipping").replace(/\bretun\b/g,"return").replace(/\brefnd\b/g,"refund").replace(/\bsiz\b/g,"size").replace(/\bwhats\b/g,"what is").replace(/\bwhats\b/g,"what is");
 
   var prods=findProducts(q);
   if(prods.length===1) lastProd=prods[0];
@@ -156,6 +181,82 @@ function answer(qRaw){
   if(q.indexOf("thank")!==-1) return "You are welcome. If you need anything else about a Magracia piece, delivery or returns, just ask.";
   if(q.indexOf("bye")!==-1 || q.indexOf("goodbye")!==-1) return "Take care, and thank you for visiting Magracia. You can find us again here, or email support@magracia.com.";
   if(has("help","what can you","menu","options")) return "I can help with, all from Magracia\u2019s own listings and policies, free, no sign-up:\n• A piece — colours, sizes, fabric, what is included, size chart, how to style it\n• Compare two pieces, or shop by colour, size or collection\n• How to buy on Etsy (no prices or checkout on this site)\n• Delivery times, costs, tracking, and delivery to a specific country\n• Taxes, duties and DDP for the UK, EU, USA and other countries\n• Returns, exchanges, damaged items, and custom sizing\n• Care, privacy, terms, socials, and contact by email or contact form\nTry: \u201cCompare Sable and Silk\u201d, \u201cShow me navy pieces\u201d, \u201cDelivery to the UK\u201d, or \u201cHow do I wash it?\u201d (I will not invent care instructions).";
+  /* ---- Extra room: details, counts, fabric/occasion search, combined filters, order steps, misc ---- */
+  if(has("details","tell me more","full description","describe")){
+    if(p) return esc(p.title)+" — full listing description:\n"+esc(p.description||"No description available.")+"\nColours: "+esc((p.colours||[]).join(", "))+". Sizes: "+esc((p.sizes||[]).join(", "))+".\n"+prodLink(p)+" · "+etsyLink(p);
+  }
+  if(has("how many photos","photo count","how many pictures","number of photos")){
+    if(p) return esc(p.title)+" has "+(p.images||[]).length+" photos in its gallery."+(p.image_colours?("\nPer colour: "+(p.colours||[]).map(function(c){ return c+" "+countColour(p,c); }).join(", ")+"."):"");
+    return "Tell me which piece you mean and I will count its gallery photos. For example: “How many photos does Zaria have?”";
+  }
+  if(has("silk pieces","cotton pieces","georgette pieces","linen pieces","satin pieces","show me silk","show me cotton","show me georgette","show me linen","show me satin") && !prods.length){
+    var fw = has("silk")?"silk":has("cotton")?"cotton":has("georgette")?"georgette":has("linen")?"linen":"satin";
+    var fh=products.filter(function(x){ var d=(x.description||"").toLowerCase(); var f=(FABRIC[x.handle]||"").toLowerCase(); return d.indexOf(fw)!==-1 || f.indexOf(fw)!==-1; });
+    if(!fh.length) return "No piece on this site is described as "+fw+" in its listing text.";
+    return "Pieces described with "+fw+" ("+fh.length+"):\n"+fh.map(function(x){ return "• "+x.title; }).join("\n")+"\nAsk me about any of these by name.";
+  }
+  if(has("evening","work","office","casual","party","summer","warm weather","winter","wedding","formal","dinner") && !prods.length && has("show","pieces","for","suggest","recommend","looking")){
+    var kw = has("evening")?"evening":has("work")||has("office")?"work":has("casual")?"casual":has("party")?"party":has("summer")||has("warm weather")?"warm":has("winter")?"winter":has("wedding")?"wedding":has("formal")?"formal":"dinner";
+    var oh=products.filter(function(x){ return (x.description||"").toLowerCase().indexOf(kw)!==-1; });
+    if(!oh.length) return "No listing description on this site mentions “"+kw+"” directly, so I will not guess a match. Tell me a collection or a colour you like and I will list those pieces instead.";
+    return "Pieces whose own listing description mentions “"+kw+"” ("+oh.length+"):\n"+oh.map(function(x){ return "• "+x.title; }).join("\n")+"\nAsk me about any of these by name for colours and sizes.";
+  }
+  if(has("how do i order","how to order","order steps","place an order","steps to buy")){
+    return "How to order, step by step:\n1. Browse a piece here and check its colours, sizes and size chart.\n2. Click “Buy Now on Etsy” on that product page — there is no checkout on this site.\n3. Complete checkout on Etsy, where Etsy’s checkout terms apply.\n4. You receive tracking details once your order ships (standard shipping 5–14 business days, varying by destination and customs).\nFor help with an order you already placed, message Magracia on Etsy or email support@magracia.com.";
+  }
+  if(has("cancel","change my order","change order","cancel my order")){
+    return "Cancel or change an order: Magracia’s site policies do not state a separate cancel/change window, so I will not invent one. Contact Magracia as soon as possible — via Etsy Messages for an Etsy order, or support@magracia.com / the Contact page — before the order is dispatched, and ask whether it can still be changed or cancelled.";
+  }
+  if(has("ship internationally","ship worldwide","worldwide shipping","international shipping","do you ship to")){
+    return "International shipping: the Shipping Policy page lists domestic Pakistan, plus the US and the UAE internationally (7–14 business days, paid international shipping). Its DDP section also covers the UK, EU, USA and other international destinations for duties and taxes. If your country is not listed, confirm before ordering via support@magracia.com or the Contact page. Full details: Shipping Policy page.";
+  }
+  if(has("visit","store","shop location","physical shop","where are you","based")){
+    return "Magracia is Pakistan-based and sells online through Etsy — the site does not list a physical shop to visit, and I do not give a street address here. Contact is by email (support@magracia.com) or the Contact page.";
+  }
+  if(has("opening hours","open hours","when are you open","hours")){
+    return "No opening hours are listed on this site, and I am an automated helper, not a live person. You can email support@magracia.com or use the Contact page at any time; messages from that form are sent to Magracia’s email.";
+  }
+  if(has("men","mens","kids","children","boys","girls")){
+    return "Magracia’s listings on this site are women’s clothing only — shirts, co-ord sets, pants and shrugs for women. No men’s or children’s pieces are listed.";
+  }
+  if(has("wholesale","bulk","resell","retailer")){
+    return "Wholesale and bulk orders are not mentioned on this site, so I will not invent terms for them. Ask Magracia via support@magracia.com or the Contact page.";
+  }
+  if(has("new arrival","new arrivals","latest","newest","just launched")){
+    return "The site does not label any piece as a new arrival and its product data carries no launch dates, so I cannot say which piece is newest. The full range is 18 pieces in 4 collections — ask me to list a collection.";
+  }
+  if(has("handmade","made in","origin","where is it made")){
+    return "The listings on this site do not state handmade status or a country of manufacture for individual pieces, so I will not claim either. Magracia is Pakistan-based and sells through Etsy. For origin or making details on a specific piece, email support@magracia.com.";
+  }
+  if(has("what is a shacket","what is shacket","what is a co-ord","what is coord","what is a shrug","what is shrug")){
+    if(has("shacket")) return "A shacket, as Magracia describes it: an oversized button-down Georgette shacket paired with matching straight-leg Cotton trousers — designed to layer over anything you already own.";
+    if(has("co-ord")||has("coord")) return "A co-ord set, as Magracia lists them: matching top and bottom pieces designed to be worn together as one finished look — for example Zaria is a 3-piece set, Dorne, Engima and Aster are shirt-and-trouser sets, and Shacket is a shacket-and-trouser set.";
+    return "A shrug, as Magracia lists them: an open-front layering piece worn over a top, dress or co-ord set — for example the Open Front Linen Shrug is built for warm-weather layering, coverage without the heat.";
+  }
+  if(has("how many products","how many pieces","how many items","how many colours","how many colors")){
+    var allc=allColours();
+    return "Magracia has 18 pieces in 4 collections, with "+allc.length+" distinct colour names across the listings. Ask me to list a collection, or to show pieces in a specific colour.";
+  }
+  if(p && has("have","available","get") && !has("stock")){
+    var sz2=null; ["xs","s","m","l","xl"].forEach(function(s){ if(q.indexOf(" "+s+" ")!==-1) sz2=s.toUpperCase(); });
+    var col2=null; (p.colours||[]).forEach(function(c){ if(q.indexOf(c.toLowerCase())!==-1) col2=c; });
+    if(sz2||col2) return stockText(p,col2,sz2);
+  }
+  if(has("custom") && has("return","refund")){
+    return "Custom sizes and returns: custom-sized items are final sale on the listing text — they are not eligible for refunds or exchanges. For anything else, see the Refund Policy page, and contact support@magracia.com before returning anything.";
+  }
+  if(has("made to order","made on order","fresh order","processing time")){
+    return "Made on a fresh order: the listing shipping text says processing time is 1–4 business days, made on a fresh order, then standard shipping 5–14 business days with tracking. The Shipping Policy page separately says orders are processed within 1–2 business days before dispatch. Delivery times may vary by destination and customs clearance.";
+  }
+
+  if(p && SIZECHARTS[p.handle] && has("measurement","bust","waist","hip","chest","sleeve","length","size chart measurements")){
+    var szm2=q.match(/\b(2xs|xxl|xs|s|m|l|xl)\b/); var sz2=szm2?szm2[1].toUpperCase():null;
+    return chartText(p, sz2);
+  }
+  if(p && !SIZECHARTS[p.handle] && has("measurement","bust","waist","hip") && has("size")){
+    return esc(p.title)+" does not have a size chart on its product page yet, so I cannot quote chart measurements for it. Custom sizing is offered instead — ask me about custom sizing for the measurements needed, or email support@magracia.com.";
+  }
+
   /* ---- Free training expansion: compare, search, country, care, about, privacy, terms, payment, tracking, size help, styling ---- */
   if((q.indexOf("compare")!==-1 || q.indexOf(" versus ")!==-1 || q.indexOf(" vs ")!==-1) && prods.length>=2){
     var a=prods[0], b=prods[1];
