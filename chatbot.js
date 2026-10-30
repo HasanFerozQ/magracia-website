@@ -144,11 +144,11 @@ function listByCollection(col){
   return col+" ("+hits.length+"):\n"+hits.map(function(x){ return "\u2022 "+x.title+" \u2014 colours "+(x.colours||[]).join(", ")+", sizes "+(x.sizes||[]).join(", "); }).join("\n");
 }
 var SIZECHARTS={
-"sable-stripe-shirt":{cols:["BUST","WAIST","HIPS"],rows:{XS:["34","28","38"],S:["36","30","40"],M:["38","32","42"],L:["40","34","44"],XL:["42","36","46"]},note:"Note: Sable is listed in S, M, L only, so the chart XS and XL rows are not listed sizes for this piece."},
+"sable-stripe-shirt":{cols:["BUST","WAIST","HIPS"],rows:{XS:["34","28","38"],S:["36","30","40"],M:["38","32","42"],L:["40","34","44"],XL:["42","36","46"]},note:""},
 "silk-shirts-for-women":{cols:["BUST","WAIST","HIPS"],rows:{XS:["34 (86 cm)","28 (71 cm)","38 (96 cm)"],S:["36 (92 cm)","30 (76 cm)","40 (100 cm)"],M:["38 (96 cm)","32 (82 cm)","42 (107 cm)"],L:["40 (100 cm)","34 (86 cm)","44 (112 cm)"],XL:["42 (107 cm)","36 (92 cm)","46 (117 cm)"]},note:"All measurements in inches (cm in brackets, as printed). The chart diagram also marks LENGTH, but gives no length numbers."},
-"mesh-sleeve-button-up-shirt":{cols:["BUST","WAIST","HIP"],rows:{XS:["32.5-33.5","25.5-26.5","35.5-36.5"],S:["34.5-35.5","27.5-28.5","37.5-38.5"],M:["36.5-37.5","29.5-30.5","39.5-40.5"],L:["39-40.5","32-33.5","42-43.5"]},note:"Two US sizes per letter size, so each figure is a range. Note: the chart has no XL row, though XL is a listed size for this piece."},
-"eclipse-mesh-sleeve-tailored-shirt":{cols:["BUST","WAIST","HIP"],rows:{XS:["32.5-33.5","25.5-26.5","35.5-36.5"],S:["34.5-35.5","27.5-28.5","37.5-38.5"],M:["36.5-37.5","29.5-30.5","39.5-40.5"],L:["39-40.5","32-33.5","42-43.5"]},note:"Two US sizes per letter size, so each figure is a range. Note: the chart has no XL row, though XL is a listed size for this piece."},
-"rib-longline-shrug":{cols:["BUST","WAIST","HIPS"],rows:{XS:["34 (86 cm)","28 (71 cm)","36 (92 cm)"],S:["36 (92 cm)","30 (76 cm)","38 (97 cm)"],M:["38 (96 cm)","32 (82 cm)","40 (102 cm)"],L:["40 (100 cm)","34 (86 cm)","42 (107 cm)"],XL:["42 (107 cm)","36 (92 cm)","44 (112 cm)"],XXL:["46 (117 cm)","42 (107 cm)","50 (127 cm)"]},note:"Note: Rib is listed in XS-XL only, so the chart XXL row is not a listed size for this piece. Chart note: if in doubt, order one size larger; a 1 inch or lower difference does not qualify for a return."},
+"mesh-sleeve-button-up-shirt":{cols:["BUST","WAIST","HIP"],rows:{XS:["32.5-33.5","25.5-26.5","35.5-36.5"],S:["34.5-35.5","27.5-28.5","37.5-38.5"],M:["36.5-37.5","29.5-30.5","39.5-40.5"],L:["39-40.5","32-33.5","42-43.5"]},note:"Two US sizes per letter size, so each figure is a range."},
+"eclipse-mesh-sleeve-tailored-shirt":{cols:["BUST","WAIST","HIP"],rows:{XS:["32.5-33.5","25.5-26.5","35.5-36.5"],S:["34.5-35.5","27.5-28.5","37.5-38.5"],M:["36.5-37.5","29.5-30.5","39.5-40.5"],L:["39-40.5","32-33.5","42-43.5"]},note:"Two US sizes per letter size, so each figure is a range."},
+"rib-longline-shrug":{cols:["BUST","WAIST","HIPS"],rows:{XS:["34 (86 cm)","28 (71 cm)","36 (92 cm)"],S:["36 (92 cm)","30 (76 cm)","38 (97 cm)"],M:["38 (96 cm)","32 (82 cm)","40 (102 cm)"],L:["40 (100 cm)","34 (86 cm)","42 (107 cm)"],XL:["42 (107 cm)","36 (92 cm)","44 (112 cm)"],XXL:["46 (117 cm)","42 (107 cm)","50 (127 cm)"]},note:"Chart note: if in doubt, order one size larger; a 1 inch or lower difference does not qualify for a return."},
 "vera-georgette-shrug":{cols:["LENGTH (FRONT)","LENGTH (BACK)","ACROSS BACK","SLEEVE LENGTH","SLEEVE OPENING"],rows:{XS:["32","48","13.5","26","24"],S:["32","48","14","26.5","24.5"],M:["33","49","14.5","27","25"],L:["33","49","15","27.5","25.5"],XL:["34","50","15.5","28","26"]},note:"All measurements in inches, tolerance +/- 0.5 inch."},
 "georgette-long-shrug":{cols:["CHEST/WAIST","SLEEVES (SHOULDER TO CUFF)","LENGTH (SHOULDER TO HEM)"],rows:{XS:["Free Size","20","40"],S:["Free Size","21","41"],M:["Free Size","22","42"],L:["Free Size","23","43"],XL:["Free Size","24","44"]},note:"All measurements in inches. Chart note: allow 1-2 inch variation due to manual measurement."},
 "open-front-shrug":{cols:["BACK LENGTH","SLEEVE LENGTH","CHEST","BOTTOM HEM (TIE NOT INCLUDED)"],rows:{"2XS":["17.5","20.5","26","32"],XS:["18","21","28","34"],S:["18.5","21.5","30","36"],M:["19","22","32","38"],L:["19.5","22.5","34","40"],XL:["20","23","36","42"]},note:"All measurements in inches. Chart note: there might be a 1/2 to 1-inch difference; if in doubt, order one size larger; a 1 inch or lower difference does not qualify for a return. Note: Open Front is listed in XS-XL only, so the chart 2XS row is not a listed size for this piece."}
@@ -238,7 +238,7 @@ function answer(qRaw){
     return "Magracia has 18 pieces in 4 collections, with "+allc.length+" distinct colour names across the listings. Ask me to list a collection, or to show pieces in a specific colour.";
   }
   if(p && has("have","available","get") && !has("stock")){
-    var sz2=null; ["xs","s","m","l","xl"].forEach(function(s){ if(q.indexOf(" "+s+" ")!==-1) sz2=s.toUpperCase(); });
+    var sz2=null; ["2xs","xxl","xs","s","m","l","xl"].forEach(function(s){ if(q.indexOf(" "+s+" ")!==-1) sz2=s.toUpperCase(); });
     var col2=null; (p.colours||[]).forEach(function(c){ if(q.indexOf(c.toLowerCase())!==-1) col2=c; });
     if(sz2||col2) return stockText(p,col2,sz2);
   }
@@ -265,7 +265,7 @@ function answer(qRaw){
   if(has("which","show","list","all") && !prods.length){
     var cols=allColours(); var foundCol=null; cols.forEach(function(c){ if(q.indexOf(c.toLowerCase())!==-1) foundCol=c; });
     if(foundCol) return listByColour(foundCol);
-    var szm=q.match(/\b(xs|s|m|l|xl)\b/); if(szm && has("size")) return listBySize(szm[1].toUpperCase());
+    var szm=q.match(/\b(2xs|xxl|xs|s|m|l|xl)\b/); if(szm && has("size")) return listBySize(szm[1].toUpperCase());
   }
   if(has("shrug") && !prods.length && has("show","list","which","all","browse","shop")) return listByCollection("Women Shrug Collection");
   if((has("pant")||has("trouser")) && !prods.length && has("show","list","which","all","browse","shop")) return listByCollection("Women Pants And Trousers");
@@ -358,7 +358,7 @@ if(prods.length>1 && (has("colour","color","size","fabric","material","stock","a
   }
   if(has("stock","available","availability","in stock","out of stock")){
     if(p){
-      var col=null, sz=null; (p.colours||[]).forEach(function(c){ if(q.indexOf(c.toLowerCase())!==-1) col=c; }); ["xs","s","m","l","xl"].forEach(function(s){ if(q.indexOf(" "+s+" ")!==-1) sz=s.toUpperCase(); });
+      var col=null, sz=null; (p.colours||[]).forEach(function(c){ if(q.indexOf(c.toLowerCase())!==-1) col=c; }); ["2xs","xxl","xs","s","m","l","xl"].forEach(function(s){ if(q.indexOf(" "+s+" ")!==-1) sz=s.toUpperCase(); });
       return stockText(p,col,sz);
     }
     return "Tell me the piece, and ideally a colour and a size, and I will check that exact combination. For example: \u201cIs Sable in Navy, size M, in stock?\u201d";

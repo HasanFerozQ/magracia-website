@@ -41,13 +41,20 @@
       "Black"
     ],
     "sizes": [
+      "XS",
       "S",
       "M",
-      "L"
+      "L",
+      "XL"
     ],
     "variants": [
       {
         "colour": "Smoky Olive",
+        "size": "XS",
+        "stock": null
+      },
+      {
+        "colour": "Smoky Olive",
         "size": "S",
         "stock": null
       },
@@ -62,6 +69,16 @@
         "stock": null
       },
       {
+        "colour": "Smoky Olive",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Emerald Green",
+        "size": "XS",
+        "stock": null
+      },
+      {
         "colour": "Emerald Green",
         "size": "S",
         "stock": null
@@ -74,6 +91,16 @@
       {
         "colour": "Emerald Green",
         "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Emerald Green",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Burgundy",
+        "size": "XS",
         "stock": null
       },
       {
@@ -92,6 +119,16 @@
         "stock": null
       },
       {
+        "colour": "Burgundy",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "XS",
+        "stock": null
+      },
+      {
         "colour": "Beige",
         "size": "S",
         "stock": null
@@ -104,6 +141,16 @@
       {
         "colour": "Beige",
         "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Beige",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Navy",
+        "size": "XS",
         "stock": null
       },
       {
@@ -122,6 +169,16 @@
         "stock": null
       },
       {
+        "colour": "Navy",
+        "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "XS",
+        "stock": null
+      },
+      {
         "colour": "Black",
         "size": "S",
         "stock": null
@@ -134,6 +191,11 @@
       {
         "colour": "Black",
         "size": "L",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "XL",
         "stock": null
       }
     ],
@@ -669,8 +731,7 @@
       "XS",
       "S",
       "M",
-      "L",
-      "XL"
+      "L"
     ],
     "variants": [
       {
@@ -694,11 +755,6 @@
         "stock": null
       },
       {
-        "colour": "Black",
-        "size": "XL",
-        "stock": null
-      },
-      {
         "colour": "Maroon",
         "size": "XS",
         "stock": null
@@ -716,11 +772,6 @@
       {
         "colour": "Maroon",
         "size": "L",
-        "stock": null
-      },
-      {
-        "colour": "Maroon",
-        "size": "XL",
         "stock": null
       },
       {
@@ -744,11 +795,6 @@
         "stock": null
       },
       {
-        "colour": "Navy",
-        "size": "XL",
-        "stock": null
-      },
-      {
         "colour": "White",
         "size": "XS",
         "stock": null
@@ -766,11 +812,6 @@
       {
         "colour": "White",
         "size": "L",
-        "stock": null
-      },
-      {
-        "colour": "White",
-        "size": "XL",
         "stock": null
       }
     ],
@@ -835,8 +876,7 @@
       "XS",
       "S",
       "M",
-      "L",
-      "XL"
+      "L"
     ],
     "variants": [
       {
@@ -860,11 +900,6 @@
         "stock": null
       },
       {
-        "colour": "Navy",
-        "size": "XL",
-        "stock": null
-      },
-      {
         "colour": "Black",
         "size": "XS",
         "stock": null
@@ -882,11 +917,6 @@
       {
         "colour": "Black",
         "size": "L",
-        "stock": null
-      },
-      {
-        "colour": "Black",
-        "size": "XL",
         "stock": null
       },
       {
@@ -910,11 +940,6 @@
         "stock": null
       },
       {
-        "colour": "White",
-        "size": "XL",
-        "stock": null
-      },
-      {
         "colour": "Maroon",
         "size": "XS",
         "stock": null
@@ -932,11 +957,6 @@
       {
         "colour": "Maroon",
         "size": "L",
-        "stock": null
-      },
-      {
-        "colour": "Maroon",
-        "size": "XL",
         "stock": null
       }
     ],
@@ -2549,7 +2569,8 @@
       "S",
       "M",
       "L",
-      "XL"
+      "XL",
+      "XXL"
     ],
     "variants": [
       {
@@ -2578,6 +2599,11 @@
         "stock": null
       },
       {
+        "colour": "Maroon",
+        "size": "XXL",
+        "stock": null
+      },
+      {
         "colour": "Emerald Green",
         "size": "XS",
         "stock": null
@@ -2603,6 +2629,11 @@
         "stock": null
       },
       {
+        "colour": "Emerald Green",
+        "size": "XXL",
+        "stock": null
+      },
+      {
         "colour": "Purple",
         "size": "XS",
         "stock": null
@@ -2628,6 +2659,11 @@
         "stock": null
       },
       {
+        "colour": "Purple",
+        "size": "XXL",
+        "stock": null
+      },
+      {
         "colour": "Black",
         "size": "XS",
         "stock": null
@@ -2653,6 +2689,11 @@
         "stock": null
       },
       {
+        "colour": "Black",
+        "size": "XXL",
+        "stock": null
+      },
+      {
         "colour": "White",
         "size": "XS",
         "stock": null
@@ -2675,6 +2716,11 @@
       {
         "colour": "White",
         "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "White",
+        "size": "XXL",
         "stock": null
       }
     ],
