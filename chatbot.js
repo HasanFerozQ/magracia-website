@@ -189,7 +189,7 @@ function answer(qRaw){
     if(p) return esc(p.title)+" has "+(p.images||[]).length+" photos in its gallery."+(p.image_colours?("\nPer colour: "+(p.colours||[]).map(function(c){ return c+" "+countColour(p,c); }).join(", ")+"."):"");
     return "Tell me which piece you mean and I will count its gallery photos. For example: “How many photos does Zaria have?”";
   }
-  if(has("silk pieces","cotton pieces","georgette pieces","linen pieces","satin pieces","show me silk","show me cotton","show me georgette","show me linen","show me satin") && !prods.length){
+  if(has("silk pieces","cotton pieces","georgette pieces","linen pieces","satin pieces","show me silk","show me cotton","show me georgette","show me linen","show me satin")){
     var fw = has("silk")?"silk":has("cotton")?"cotton":has("georgette")?"georgette":has("linen")?"linen":"satin";
     var fh=products.filter(function(x){ var d=(x.description||"").toLowerCase(); var f=(FABRIC[x.handle]||"").toLowerCase(); return d.indexOf(fw)!==-1 || f.indexOf(fw)!==-1; });
     if(!fh.length) return "No piece on this site is described as "+fw+" in its listing text.";
