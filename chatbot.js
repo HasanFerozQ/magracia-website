@@ -141,7 +141,7 @@ function answer(qRaw){
     return "That could be more than one piece: "+prods.map(function(x){return esc(x.title);}).join(", ")+". Which one did you mean?";
   }
   if(has("contact","email","phone","call","human","talk to","support")){
-    return "You can reach Magracia at support@magracia.com or +92-331-8035-398, Block 13, Gulistan-e-Johar, Karachi, 75400, Pakistan. There is also a contact form on the "+link("contact.html","Contact page")+" — messages from that form are sent to Magracia\u2019s email. I am an automated helper on this site, not a live person.";
+    return "You can reach Magracia at support@magracia.com, or through the contact form on the "+link("contact.html","Contact page")+" — messages from that form are sent to Magracia\u2019s email. I am an automated helper on this site, not a live person.";
   }
   if(has("price","cost","how much","checkout","buy","order","purchase","etsy")){
     if(p) return "There are no prices and no checkout on this site. "+esc(p.title)+" is bought on Etsy: "+etsyLink(p)+". You can also browse it here first: "+prodLink(p)+".";
