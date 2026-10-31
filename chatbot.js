@@ -125,6 +125,20 @@ function stockText(p, colour, size){
     if(v.stock===0) return "That combination is shown as out of stock for "+esc(p.title)+".";
     return "That combination is shown as in stock for "+esc(p.title)+" (the listing does not show a quantity, so I will not invent one).";
   }
+  if(colour && !size){
+    var cols=vars.filter(function(x){ return x.colour===colour; });
+    if(!cols.length) return "That colour is not listed for "+esc(p.title)+". Available colours are "+esc((p.colours||[]).join(", "))+".";
+    var inSizes=cols.filter(function(x){ return x.stock!==0; }).map(function(x){ return x.size; });
+    if(!inSizes.length) return "Colour "+esc(colour)+" is shown as out of stock for "+esc(p.title)+".";
+    return "Colour "+esc(colour)+" is shown as in stock for "+esc(p.title)+" in sizes: "+esc(inSizes.join(", "))+" (the listing does not show a quantity, so I will not invent one).";
+  }
+  if(size && !colour){
+    var rows=vars.filter(function(x){ return x.size===size; });
+    if(!rows.length) return "Size "+esc(size)+" is not listed for "+esc(p.title)+". Available sizes are "+esc((p.sizes||[]).join(", "))+".";
+    var inCols=rows.filter(function(x){ return x.stock!==0; }).map(function(x){ return x.colour; });
+    if(!inCols.length) return "Size "+esc(size)+" is shown as out of stock for "+esc(p.title)+".";
+    return "Size "+esc(size)+" is shown as in stock for "+esc(p.title)+" in colours: "+esc(inCols.join(", "))+" (the listing does not show a quantity, so I will not invent one).";
+  }
   return esc(p.title)+" is listed with colours "+esc((p.colours||[]).join(", "))+" and sizes "+esc((p.sizes||[]).join(", "))+". Stock is shown per colour and size on the product page — tell me a colour and a size and I can check that exact combination.";
 }
 var lastProd=null;
