@@ -36,7 +36,7 @@
 </main>
 <footer><div class="foot"><div><p class="foot-logo"><img src="/images/1793279692618-magracia-logo.png" alt="Magracia"></p><p>Silk shirts, pants and shrugs for women.</p><p><a href="mailto:support@magracia.com">support@magracia.com</a><br>+92-331-8035-398<br>Block 13, Gulistan-e-Johar,<br>Karachi, 75400, Pakistan</p></div><div><h4>Collections</h4><p><a href="/#col-Women%20Shirt%20Collection">Women Shirt Collection</a><br><a href="/#col-Co-ord%20Sets">Co-ord Sets</a><br><a href="/#col-Women%20Pants%20And%20Trousers">Women Pants And Trousers</a><br><a href="/#col-Women%20Shrug%20Collection">Women Shrug Collection</a><br><a href="/#col-Jackets">Jackets</a></p></div><div><h4>Navigate</h4><p><a href="/">Home</a><br><a href="/#collection">Shop</a><br><a href="contact.html">Contact</a><br><a href="https://www.etsy.com/shop/MagraciaOfficial">Etsy Shop</a></p></div><div><h4>Policies &amp; Social</h4><p><a href="privacy.html">Privacy Policy</a><br><a href="refund.html">Refund Policy</a><br><a href="shipping.html">Shipping Policy</a><br><a href="terms.html">Terms of Service</a></p><p><a href="https://www.facebook.com/profile.php?id=61591413465941">Facebook</a><br><a href="https://www.instagram.com/shopmagracia">Instagram</a></p></div></div><p class="foot-bottom">© 2026 MAGRACIA · Buy Now On ETSY</p></footer>
 <script>
-fetch('products.json?v=8').then(r=>r.json()).then(products=>{
+fetch('products.json?v=9').then(r=>r.json()).then(products=>{
   const tiles=document.getElementById('tiles'); const groups={};
   products.forEach(p=>{(groups[p.collection]=groups[p.collection]||[]).push(p)});
   document.getElementById('colCount').textContent=Object.keys(groups).length+' collections · '+products.length+' pieces';
