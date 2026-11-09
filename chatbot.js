@@ -80,7 +80,8 @@ var FABRIC={
 "rib-longline-shrug":"Ribbed knit, longline, past the hip, with stretch and no closures.",
 "vera-georgette-shrug":"Lightweight georgette, fluid open front.",
 "georgette-long-shrug":"Georgette, front open, with loose full sleeves.",
-"open-front-shrug":"Linen — a lightly textured linen weave, built for warm-weather layering."
+"open-front-shrug":"Linen — a lightly textured linen weave, built for warm-weather layering.",
+"vesper":"Premium lambskin leather (0.7-0.9 mm) in Camel Brown, Black or Burgundy, with heavy black fishnet sleeves, large mesh."
 };
 var SHORT={
 "sable":["sable-stripe-shirt"],"silk":["silk-shirts-for-women"],"nyx":["nyx-half-net-shirt"],
@@ -91,7 +92,8 @@ var SHORT={
 "shacket":["shacket-co-ord-set"],"balloon":["balloon-pants-for-women"],"leaf":["leaf-pants-for-women"],
 "cotton":["cotton-fit-trouser"],"floaty":["floaty-wide-leg-pants"],"rib":["rib-longline-shrug"],
 "vera":["vera-georgette-shrug"],"georgette":["georgette-long-shrug","vera-georgette-shrug"],
-"open front":["open-front-shrug"],"linen":["open-front-shrug"],"linen shrug":["open-front-shrug"]
+"open front":["open-front-shrug"],"linen":["open-front-shrug"],"linen shrug":["open-front-shrug"],
+"vesper":["vesper"],"jacket":["vesper"],"lambskin":["vesper"],"lamb skin":["vesper"]
 };
 function byHandle(h){ for(var i=0;i<products.length;i++) if(products[i].handle===h) return products[i]; return null; }
 function prodLink(p){ return link("/product.html?handle="+encodeURIComponent(p.handle), p.title); }
@@ -165,7 +167,8 @@ var SIZECHARTS={
 "rib-longline-shrug":{cols:["BUST","WAIST","HIPS"],rows:{XS:["34 (86 cm)","28 (71 cm)","36 (92 cm)"],S:["36 (92 cm)","30 (76 cm)","38 (97 cm)"],M:["38 (96 cm)","32 (82 cm)","40 (102 cm)"],L:["40 (100 cm)","34 (86 cm)","42 (107 cm)"],XL:["42 (107 cm)","36 (92 cm)","44 (112 cm)"],XXL:["46 (117 cm)","42 (107 cm)","50 (127 cm)"]},note:"Chart note: if in doubt, order one size larger; a 1 inch or lower difference does not qualify for a return."},
 "vera-georgette-shrug":{cols:["LENGTH (FRONT)","LENGTH (BACK)","ACROSS BACK","SLEEVE LENGTH","SLEEVE OPENING"],rows:{XS:["32","48","13.5","26","24"],S:["32","48","14","26.5","24.5"],M:["33","49","14.5","27","25"],L:["33","49","15","27.5","25.5"],XL:["34","50","15.5","28","26"]},note:"All measurements in inches, tolerance +/- 0.5 inch."},
 "georgette-long-shrug":{cols:["CHEST/WAIST","SLEEVES (SHOULDER TO CUFF)","LENGTH (SHOULDER TO HEM)"],rows:{XS:["Free Size","20","40"],S:["Free Size","21","41"],M:["Free Size","22","42"],L:["Free Size","23","43"],XL:["Free Size","24","44"]},note:"All measurements in inches. Chart note: allow 1-2 inch variation due to manual measurement."},
-"open-front-shrug":{cols:["BACK LENGTH","SLEEVE LENGTH","CHEST","BOTTOM HEM (TIE NOT INCLUDED)"],rows:{"2XS":["17.5","20.5","26","32"],XS:["18","21","28","34"],S:["18.5","21.5","30","36"],M:["19","22","32","38"],L:["19.5","22.5","34","40"],XL:["20","23","36","42"]},note:"All measurements in inches. Chart note: there might be a 1/2 to 1-inch difference; if in doubt, order one size larger; a 1 inch or lower difference does not qualify for a return. Note: Open Front is listed in XS-XL only, so the chart 2XS row is not a listed size for this piece."}
+"open-front-shrug":{cols:["BACK LENGTH","SLEEVE LENGTH","CHEST","BOTTOM HEM (TIE NOT INCLUDED)"],rows:{"2XS":["17.5","20.5","26","32"],XS:["18","21","28","34"],S:["18.5","21.5","30","36"],M:["19","22","32","38"],L:["19.5","22.5","34","40"],XL:["20","23","36","42"]},note:"All measurements in inches. Chart note: there might be a 1/2 to 1-inch difference; if in doubt, order one size larger; a 1 inch or lower difference does not qualify for a return. Note: Open Front is listed in XS-XL only, so the chart 2XS row is not a listed size for this piece."},
+"vesper":{cols:["SUITABLE CHEST SIZE","BUST","SLEEVES","SHOULDERS","WAIST"],rows:{XXS:["30\"-31\" (76-79 cm)","34\"","23.5\"","14\"","28-29\""],XS:["31\"-32\" (79-82 cm)","36\"","24\"","14.5\"","30-31\""],S:["33\"-34\" (82-87 cm)","38\"","24.5\"","15\"","32-33\""],M:["35\"-36\" (89-92 cm)","40\"","24.5\"","15.5\"","34-35\""],L:["36\"-38\" (92-97 cm)","42\"","25\"","16\"","36-37\""],XL:["38\"-40\" (97-102 cm)","46\"","25\"","16.5\"","38-39\""],"2XL":["40\"-42\" (102-107 cm)","48\"","25.5\"","17\"","40-41\""],"3XL":["42\"-44\" (107-112 cm)","50\"","26\"","17.5\"","42-43\""],"4XL":["45\"-46\" (114-117 cm)","52\"","26\"","18\"","44-45\""]},note:"All measurements in inches (cm in brackets, as printed)."},
 };
 function chartText(p, sz){
   var c=SIZECHARTS[p.handle]; if(!c) return null;
@@ -252,7 +255,7 @@ function answer(qRaw){
     return "Magracia has 18 pieces in 4 collections, with "+allc.length+" distinct colour names across the listings. Ask me to list a collection, or to show pieces in a specific colour.";
   }
   if(p && has("have","available","get") && !has("stock")){
-    var sz2=null; ["2xs","xxl","xs","s","m","l","xl"].forEach(function(s){ if(q.indexOf(" "+s+" ")!==-1) sz2=s.toUpperCase(); });
+    var sz2=null; ["2xs","xxs","2xl","3xl","4xl","xxl","xs","s","m","l","xl"].forEach(function(s){ if(q.indexOf(" "+s+" ")!==-1) sz2=s.toUpperCase(); });
     var col2=null; (p.colours||[]).forEach(function(c){ if(q.indexOf(c.toLowerCase())!==-1) col2=c; });
     if(sz2||col2) return stockText(p,col2,sz2);
   }
@@ -264,7 +267,7 @@ function answer(qRaw){
   }
 
   if(p && SIZECHARTS[p.handle] && has("measurement","bust","waist","hip","chest","sleeve","length","size chart measurements")){
-    var szm2=q.match(/\b(2xs|xxl|xs|s|m|l|xl)\b/); var sz2=szm2?szm2[1].toUpperCase():null;
+    var szm2=q.match(/\b(2xs|xxs|2xl|3xl|4xl|xxl|xs|s|m|l|xl)\b/); var sz2=szm2?szm2[1].toUpperCase():null;
     return chartText(p, sz2);
   }
   if(p && !SIZECHARTS[p.handle] && has("measurement","bust","waist","hip") && has("size")){
@@ -279,7 +282,7 @@ function answer(qRaw){
   if(has("which","show","list","all") && !prods.length){
     var cols=allColours(); var foundCol=null; cols.forEach(function(c){ if(q.indexOf(c.toLowerCase())!==-1) foundCol=c; });
     if(foundCol) return listByColour(foundCol);
-    var szm=q.match(/\b(2xs|xxl|xs|s|m|l|xl)\b/); if(szm && has("size")) return listBySize(szm[1].toUpperCase());
+    var szm=q.match(/\b(2xs|xxs|2xl|3xl|4xl|xxl|xs|s|m|l|xl)\b/); if(szm && has("size")) return listBySize(szm[1].toUpperCase());
   }
   if(has("shrug") && !prods.length && has("show","list","which","all","browse","shop")) return listByCollection("Women Shrug Collection");
   if((has("pant")||has("trouser")) && !prods.length && has("show","list","which","all","browse","shop")) return listByCollection("Women Pants And Trousers");
@@ -372,7 +375,7 @@ if(prods.length>1 && (has("colour","color","size","fabric","material","stock","a
   }
   if(has("stock","available","availability","in stock","out of stock")){
     if(p){
-      var col=null, sz=null; (p.colours||[]).forEach(function(c){ if(q.indexOf(c.toLowerCase())!==-1) col=c; }); ["2xs","xxl","xs","s","m","l","xl"].forEach(function(s){ if(q.indexOf(" "+s+" ")!==-1) sz=s.toUpperCase(); });
+      var col=null, sz=null; (p.colours||[]).forEach(function(c){ if(q.indexOf(c.toLowerCase())!==-1) col=c; }); ["2xs","xxs","2xl","3xl","4xl","xxl","xs","s","m","l","xl"].forEach(function(s){ if(q.indexOf(" "+s+" ")!==-1) sz=s.toUpperCase(); });
       return stockText(p,col,sz);
     }
     return "Tell me the piece, and ideally a colour and a size, and I will check that exact combination. For example: \u201cIs Sable in Navy, size M, in stock?\u201d";
