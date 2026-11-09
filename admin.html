@@ -10,14 +10,14 @@
 .admin .counter{font-size:13px;color:#777}
 </style></head>
 <body><header><h1>MAGRACIA ADMIN</h1></header><main class="wrap admin"><section>
-<p>This page is not linked from the shop. Do not share its address. Saving requires the admin password set in Vercel, checked on the server.</p>
-<div class="card"><label>Admin password <input type="password" id="pw" autocomplete="current-password"></label>
-<button class="btn" id="loadBtn">Load listings</button> <span id="status"></span></div>
-<div id="dashboard"></div>
-<div class="card"><h2>Collections</h2><p id="collections"></p>
+<p>This page is not linked from the shop. Do not share its address. Nothing on this page works until the admin password is entered and verified — the password is checked on the server.</p>
+<div class="card"><label>Admin password <input type="password" id="pw" autocomplete="current-password"> <button class="btn" id="pwEye" type="button" aria-label="Show password" title="Show password">&#128065;</button></label>
+<button class="btn" id="loadBtn">Load listings</button> <span id="status">Enter the admin password to unlock this page.</span></div>
+<div id="dashboard" style="display:none"></div>
+<div class="card" id="collectionsCard" style="display:none"><h2>Collections</h2><p id="collections"></p>
 <p><input id="newCollection" placeholder="New collection name, e.g. Evening Wear"> <button class="btn" id="createCollectionBtn">Create collection + new listing</button></p>
 <p><small>A collection appears on the homepage once a listing is assigned to it. The footer collection links are fixed in the page header, so a brand-new collection will show in the homepage tiles and sections, not in the footer, until the footer is updated.</small></p></div>
-<div class="card"><h2>Listings</h2>
+<div class="card" id="listingsCard" style="display:none"><h2>Listings</h2>
 <p><input id="search" placeholder="Search by title or collection…"> <select id="filterCollection"><option value="">All collections</option></select></p>
 <div id="list"></div></div>
 <div id="editor" style="display:none" class="card">
@@ -62,11 +62,19 @@
 </details>
 <p><button class="btn" id="saveBtn">Save this listing</button> <button class="btn" id="backBtn">Back to list</button></p>
 </div>
-<p><button class="btn" id="addBtn">+ Add new listing</button> <button class="btn" id="saveAllBtn">Save all changes to live site</button> <button class="btn" id="downloadBtn">Download products.json</button></p>
+<p id="adminActions" style="display:none"><button class="btn" id="addBtn">+ Add new listing</button> <button class="btn" id="saveAllBtn">Save all changes to live site</button> <button class="btn" id="downloadBtn">Download products.json</button></p>
 <p>Saving commits products.json to GitHub and Vercel redeploys. Uploaded images and videos are saved in the repo under /images/ and served from the live site.</p>
 </section></main>
 <script>
 let products=[], editIdx=-1, stdShip='', customTpl={}; const SIZES=["XS","S","M","L","XL"];
+// Password gate: nothing on this page works until the password has been
+// verified against the server. LOAD LISTINGS is the only way to unlock it.
+let verified=false;
+function lockPage(){ verified=false; document.getElementById('dashboard').style.display='none'; document.getElementById('collectionsCard').style.display='none'; document.getElementById('listingsCard').style.display='none'; document.getElementById('adminActions').style.display='none'; document.getElementById('editor').style.display='none'; }
+function unlockPage(){ verified=true; document.getElementById('dashboard').style.display=''; document.getElementById('collectionsCard').style.display=''; document.getElementById('listingsCard').style.display=''; document.getElementById('adminActions').style.display=''; }
+function requireVerified(){ if(!verified){ alert('Enter the correct admin password and click Load listings first.'); return false; } return true; }
+document.getElementById('pwEye').onclick=()=>{ const pw=document.getElementById('pw'); const eye=document.getElementById('pwEye'); if(pw.type==='password'){ pw.type='text'; eye.textContent='\u{1F648}'; eye.setAttribute('aria-label','Hide password'); eye.title='Hide password'; } else { pw.type='password'; eye.textContent='\u{1F441}'; eye.setAttribute('aria-label','Show password'); eye.title='Show password'; } };
+document.getElementById('pw').addEventListener('input',()=>{ if(!verified) return; lockPage(); document.getElementById('status').textContent='Password changed — click Load listings to verify again.'; });
 function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;')}
 function slug(s){return (s||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')}
 function collections(){const s=[]; products.forEach(p=>{if(p.collection&&!s.includes(p.collection)) s.push(p.collection)}); return s}
@@ -124,21 +132,26 @@ function syncEdit(){if(editIdx<0) return; const p=products[editIdx];
  p.description=document.getElementById('fDesc').value; p.styling=document.getElementById('fStyling').value.split('\n').map(s=>s.trim()).filter(Boolean);
  p.custom_sizing=document.getElementById('fCustom').value; p.details=document.getElementById('fDetails').value; p.shipping_returns=document.getElementById('fShip').value;
  if(products.filter(x=>x.handle===p.handle).length>1) alert('Warning: another listing already uses this handle. Change it, or the two listings will clash.');}
-async function uploadFile(file, kind){const pw=document.getElementById('pw').value; if(!pw){alert('Enter the admin password');return null}
+async function uploadFile(file, kind){if(!requireVerified()) return null; const pw=document.getElementById('pw').value; if(!pw){alert('Enter the admin password');return null}
  document.getElementById('status').textContent='Uploading…';
  const data=await new Promise(res=>{const r=new FileReader(); r.onload=()=>res(r.result); r.readAsDataURL(file)});
  const r=await fetch('/api/upload',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:pw,filename:file.name,data})});
  const j=await r.json().catch(()=>({})); if(!r.ok){document.getElementById('status').textContent='Upload failed: '+(j.error||r.status);return null}
  document.getElementById('status').textContent='Uploaded: '+j.url; return j.url;}
-document.getElementById('loadBtn').onclick=async()=>{const r=await fetch('products.json?v=3'); products=await r.json();
+document.getElementById('loadBtn').onclick=async()=>{const pw=document.getElementById('pw').value; if(!pw){ document.getElementById('status').textContent='Enter the admin password first.'; lockPage(); return; }
+ document.getElementById('status').textContent='Checking password…';
+ const v=await fetch('/api/verify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:pw})});
+ if(!v.ok){ document.getElementById('status').textContent='Wrong admin password.'; lockPage(); return; }
+ unlockPage();
+ const r=await fetch('products.json?v=3'); products=await r.json();
  if(products.length){stdShip=products[0].shipping_returns||''; products.forEach(p=>{if(p.custom_sizing&&!customTpl[p.collection]) customTpl[p.collection]=p.custom_sizing});}
  renderDashboard(); refreshCollectionLists(); renderList(); document.getElementById('status').textContent=products.length+' listings loaded.'};
 document.getElementById('search').oninput=renderList; document.getElementById('filterCollection').onchange=renderList;
-document.getElementById('addBtn').onclick=()=>{products.push({handle:'',title:'New Piece',collection:collections()[0]||'New Collection',images:[],image_colours:[],videos:[],description:'',styling:[],colours:[],sizes:['XS','S','M','L','XL'],variants:[],custom_sizing:'',details:'',shipping_returns:stdShip,size_chart:'',seo_title:'',seo_description:'',etsy_url:'https://www.etsy.com/shop/MagraciaOfficial'}); renderList(); renderDashboard(); refreshCollectionLists(); edit(products.length-1)};
-document.getElementById('createCollectionBtn').onclick=()=>{const name=document.getElementById('newCollection').value.trim(); if(!name){alert('Type a collection name first');return}
+document.getElementById('addBtn').onclick=()=>{if(!requireVerified()) return; products.push({handle:'',title:'New Piece',collection:collections()[0]||'New Collection',images:[],image_colours:[],videos:[],description:'',styling:[],colours:[],sizes:['XS','S','M','L','XL'],variants:[],custom_sizing:'',details:'',shipping_returns:stdShip,size_chart:'',seo_title:'',seo_description:'',etsy_url:'https://www.etsy.com/shop/MagraciaOfficial'}); renderList(); renderDashboard(); refreshCollectionLists(); edit(products.length-1)};
+document.getElementById('createCollectionBtn').onclick=()=>{if(!requireVerified()) return; const name=document.getElementById('newCollection').value.trim(); if(!name){alert('Type a collection name first');return}
  products.push({handle:'',title:'New Piece',collection:name,images:[],image_colours:[],videos:[],description:'',styling:[],colours:[],sizes:['XS','S','M','L','XL'],variants:[],custom_sizing:'',details:'',shipping_returns:stdShip,size_chart:'',seo_title:'',seo_description:'',etsy_url:'https://www.etsy.com/shop/MagraciaOfficial'}); renderList(); renderDashboard(); refreshCollectionLists(); edit(products.length-1)};
-document.getElementById('backBtn').onclick=()=>{syncEdit(); renderList(); renderDashboard(); refreshCollectionLists(); document.getElementById('editor').style.display='none'};
-document.getElementById('saveBtn').onclick=()=>{syncEdit(); renderList(); renderDashboard(); refreshCollectionLists(); document.getElementById('status').textContent='Listing updated in this editor. Click “Save all changes to live site” to publish.'};
+document.getElementById('backBtn').onclick=()=>{if(!requireVerified()) return; syncEdit(); renderList(); renderDashboard(); refreshCollectionLists(); document.getElementById('editor').style.display='none'};
+document.getElementById('saveBtn').onclick=()=>{if(!requireVerified()) return; syncEdit(); renderList(); renderDashboard(); refreshCollectionLists(); document.getElementById('status').textContent='Listing updated in this editor. Click “Save all changes to live site” to publish.'};
 document.getElementById('rebuildBtn').onclick=rebuildVariants;
 document.getElementById('setAllBtn').onclick=()=>{const v=document.getElementById('setAll').value; if(v==='') return; products[editIdx].variants.forEach(x=>x.stock=parseInt(v,10)); rebuildVariants()};
 document.getElementById('inStockBtn').onclick=()=>{products[editIdx].variants.forEach(x=>x.stock=null); rebuildVariants()};
@@ -150,10 +163,10 @@ document.getElementById('uploadVidBtn').onclick=async()=>{const f=document.getEl
 document.getElementById('addChartBtn').onclick=()=>{const u=document.getElementById('chartUrl').value.trim(); if(u){products[editIdx].size_chart=u; renderSizeChart(); showChecks()}};
 document.getElementById('uploadChartBtn').onclick=async()=>{const f=document.getElementById('chartFile').files[0]; if(!f){alert('Choose a size chart image first');return} const url=await uploadFile(f); if(url){products[editIdx].size_chart=url; renderSizeChart(); showChecks()}};
 document.getElementById('removeChartBtn').onclick=()=>{products[editIdx].size_chart=''; renderSizeChart(); showChecks()};
-async function saveAll(){const pw=document.getElementById('pw').value; if(!pw){alert('Enter the admin password');return}
+async function saveAll(){if(!requireVerified()) return; const pw=document.getElementById('pw').value; if(!pw){alert('Enter the admin password');return}
  syncEdit(); document.getElementById('status').textContent='Saving…';
  const r=await fetch('/api/admin',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:pw,products})});
  const j=await r.json().catch(()=>({})); document.getElementById('status').textContent=r.ok?'Saved. Vercel will redeploy shortly.':('Save failed: '+(j.error||r.status));}
 document.getElementById('saveAllBtn').onclick=saveAll;
-document.getElementById('downloadBtn').onclick=()=>{syncEdit(); const a=document.createElement('a'); a.href='data:application/json,'+encodeURIComponent(JSON.stringify(products,null,2)); a.download='products.json'; a.click()};
+document.getElementById('downloadBtn').onclick=()=>{if(!requireVerified()) return; syncEdit(); const a=document.createElement('a'); a.href='data:application/json,'+encodeURIComponent(JSON.stringify(products,null,2)); a.download='products.json'; a.click()};
 </script></body></html>
