@@ -24,6 +24,7 @@
 <main>
 <section class="hero" style="background-image:url('https://cdn.shopify.com/s/files/1/1017/0076/3970/files/Models_posing_near_large_rock_202607021745_Magracia_Eclipse_Mesh-Sleeve_Shirt_ed475d78e17229f7_Magracia_5c5101f6e400949b.webp?v=1784808352')">
 <div class="hero-text"><p class="eyebrow">Silk · Satin · Georgette</p><h2>Wear the room,<br><em>not just the outfit.</em></h2><p>Elegant women's clothing for every occasion. Silk shirts, co-ord sets, pants and shrugs, made to be worn, not just photographed.</p><p><a class="btn btn-gold" href="#collection">Shop the Collection</a><a class="btn btn-outline" href="https://www.etsy.com/shop/MagraciaOfficial">Visit Our Etsy Shop</a></p></div></section>
+<div class="wrap"><section class="new-arrivals reveal"><div class="sec-head"><h2>New Arrivals</h2><span class="sec-sub">Fresh from the Women Jacket Collection</span></div><div class="arrivals-grid" id="arrivalsGrid"></div></section></div>
 <div class="values"><div><b>Made with care</b><span>Thoughtful, feminine design</span></div><div><b>Custom sizing</b><span>Measured to fit you</span></div><div><b>Buy on Etsy</b><span>Secure checkout there</span></div></div>
 <div class="wrap">
 <section class="reveal"><div class="sec-head"><h2>Shop by Collection</h2><span class="sec-sub" id="colCount">Collections · pieces</span></div><div class="tiles" id="tiles"></div></section>
@@ -48,6 +49,9 @@ fetch('products.json?v=9').then(r=>r.json()).then(products=>{
       '<article class="card"><a href="product.html?handle='+encodeURIComponent(p.handle)+'"><div class="imgwrap"><img src="'+(p.images[0]||'')+'" alt="'+p.title.replace(/"/g,'')+'" loading="lazy"></div></a><div class="card-body"><span class="label">'+p.collection+'</span><h3>'+p.title+'</h3><a class="viewlink" href="product.html?handle='+encodeURIComponent(p.handle)+'">View Piece →</a></div></article>').join('')+'</div>';
     wrap.appendChild(sec);
   });
+  const jackets=products.filter(p=>p.collection==='Women Jacket Collection');
+  const ag=document.getElementById('arrivalsGrid');
+  if(ag){ag.innerHTML=jackets.map(p=>'<article class="card"><a href="product.html?handle='+encodeURIComponent(p.handle)+'"><div class="imgwrap"><img src="'+(p.images[0]||'')+'" alt="'+p.title.replace(/"/g,'')+'" loading="lazy"></div></a><div class="card-body"><span class="label">New Arrival</span><h3>'+p.title+'</h3><p class="arrival-colours">'+(p.colours||[]).join(' · ')+'</p><a class="btn btn-gold" href="product.html?handle='+encodeURIComponent(p.handle)+'">View Jacket →</a></div></article>').join('');}
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.1});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 });
