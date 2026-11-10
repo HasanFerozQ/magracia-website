@@ -31,7 +31,7 @@ fetch('products.json?v=9').then(r=>r.json()).then(products=>{
   function br(s){return (s||'').replace(/\n/g,'<br>')}
   function stockText(){const vs=(p.variants||[]).filter(v=>v.colour===colour); if(!vs.length) return 'In stock'; return vs.some(v=>v.stock===null||v.stock===undefined||v.stock>0)?'In stock':'Out of stock'}
   // Colour -> image: image_colours is parallel to images; '' means the photo is shown for every colour.
-  function visibleImages(){return (p.images||[]).map((im,i)=>({src:im,idx:i})).filter(o=>!p.image_colours||!p.image_colours[o.idx]||p.image_colours[o.idx]===colour)}
+  function visibleImages(){const all=(p.images||[]).map((im,i)=>({src:im,idx:i})); if(p.show_all_photos) return all; return all.filter(o=>!p.image_colours||!p.image_colours[o.idx]||p.image_colours[o.idx]===colour)}
   function videoBlock(){
     if(!p.videos||!p.videos.length) return '';
     return p.videos.map(v=>{
@@ -56,7 +56,7 @@ fetch('products.json?v=9').then(r=>r.json()).then(products=>{
     '<details><summary>Shipping &amp; Returns</summary><p>'+br(p.shipping_returns)+'</p></details>'+
     '<p><a class="btn buy" href="'+p.etsy_url+'">BUY NOW ON ETSY</a></p><p><a href="/#collection">← Back to the collection</a></p></div>';
   }
-  window.setColour=c=>{colour=c; mainIdx=0; render()};
+  window.setColour=c=>{colour=c; if(p.show_all_photos){const vis=visibleImages(); const j=vis.findIndex(o=>(p.image_colours||[])[o.idx]===c); mainIdx=j>=0?j:0;} else mainIdx=0; render()};
   window.setMain=i=>{const vis=visibleImages(); if(!vis.length) return; mainIdx=(i+vis.length)%vis.length; const m=document.getElementById('mainImg'); if(m) m.src=vis[mainIdx].src; const c=document.getElementById('galCount'); if(c) c.textContent=(mainIdx+1)+' / '+vis.length; document.querySelectorAll('.thumbs img').forEach((x,j)=>x.classList.toggle('active',j===mainIdx)); const act=document.querySelector('.thumbs img.active'); if(act) act.scrollIntoView({block:'nearest',inline:'center'})};
   window.nextMain=()=>setMain(mainIdx+1); window.prevMain=()=>setMain(mainIdx-1);
   render();
