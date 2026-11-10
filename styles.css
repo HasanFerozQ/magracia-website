@@ -96,3 +96,23 @@ header h1.logo{margin:0}header h1.logo img{height:64px;width:auto;display:block}
 @media (max-width:560px){.gallery img.main{height:420px}}
 .product>*{min-width:0}.gallery{min-width:0;overflow:hidden}.thumbs{max-width:100%}
 .product{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr)}.gallery{min-width:0;overflow:hidden}.thumbs{overflow-x:auto;max-width:100%}
+
+/* Homepage contact band */
+.contact-band{padding:72px 0}
+.contact-card{background:var(--paper);border:1px solid var(--line);max-width:780px;margin:0 auto;padding:56px 48px;text-align:center}
+.contact-card .sec-sub{margin:0 0 10px}
+.contact-card h2{font-size:46px;margin:0}
+.contact-card h2:after{content:"";display:block;width:56px;height:2px;background:var(--gold);margin:14px auto 0}
+.contact-intro{color:var(--muted);max-width:520px;margin:20px auto 32px}
+.contact-rows{display:flex;justify-content:center;gap:64px;flex-wrap:wrap;margin:0 0 32px}
+.contact-rows span{display:block;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.contact-rows a{font-size:19px;color:var(--ink);text-decoration:none}
+.contact-rows a:hover{color:var(--gold)}
+.contact-socials{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:0 0 30px}
+.contact-note{border-top:1px solid var(--line);padding-top:22px;margin:0;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;font-size:12px}
+@media (max-width:640px){
+  .contact-band{padding:48px 0}
+  .contact-card{padding:40px 24px}
+  .contact-card h2{font-size:34px}
+  .contact-rows{gap:24px}
+}
