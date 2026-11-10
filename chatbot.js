@@ -195,8 +195,10 @@ function answer(qRaw){
   var prods=findProducts(q);
   if(prods.length===1) lastProd=prods[0];
   var p = prods.length===1 ? prods[0] : (prods.length>1 ? null : (currentProduct() || lastProd));
+  var named = prods.length===1 || (prods.length===0 && !!currentProduct());
+  var anaphor = q.indexOf(" it ")!==-1 || q.indexOf(" this ")!==-1 || q.indexOf(" that ")!==-1;
   var has = function(){ for(var i=0;i<arguments.length;i++) if(q.indexOf(" "+arguments[i]+" ")!==-1 || q.indexOf(arguments[i])!==-1) return true; return false; };
-  var isGreet = /(^|\s)(hi|hello|hey|salam|assalam)\s/.test(q) || q.trim()==="hi" || q.trim()==="hello";
+  var isGreet = /(^|\s)(hi|hello|hey|salam|assalam|aoa)\s/.test(q) || q.trim()==="hi" || q.trim()==="hello";
   if(isGreet) return "Hi, I am Magracia\u2019s helper. Ask me about a piece — its colours, sizes, fabric, delivery, returns or duties — or tap a suggestion below. What are you looking for?";
   if(q.indexOf("thank")!==-1) return "You are welcome. If you need anything else about a Magracia piece, delivery or returns, just ask.";
   if(q.indexOf("bye")!==-1 || q.indexOf("goodbye")!==-1) return "Take care, and thank you for visiting Magracia. You can find us again here, or email support@magracia.com.";
@@ -209,11 +211,15 @@ function answer(qRaw){
     if(p) return esc(p.title)+" has "+(p.images||[]).length+" photos in its gallery."+(p.image_colours?("\nPer colour: "+(p.colours||[]).map(function(c){ return c+" "+countColour(p,c); }).join(", ")+"."):"");
     return "Tell me which piece you mean and I will count its gallery photos. For example: “How many photos does Zaria have?”";
   }
-  if(has("silk pieces","cotton pieces","georgette pieces","linen pieces","satin pieces","show me silk","show me cotton","show me georgette","show me linen","show me satin")){
-    var fw = has("silk")?"silk":has("cotton")?"cotton":has("georgette")?"georgette":has("linen")?"linen":"satin";
+  if(has("photo","photos","picture","pictures","image","images")){
+    if(p) return esc(p.title)+" has "+(p.images||[]).length+" photos in its gallery — view them on its product page: "+prodLink(p)+".";
+    return "Tell me which piece you mean and I will tell you how many photos it has and where to see them. For example: \"Photos of Vesper?\"";
+  }
+  if(has("silk pieces","cotton pieces","georgette pieces","linen pieces","satin pieces","leather pieces","wool pieces","show me silk","show me cotton","show me georgette","show me linen","show me satin","show me leather","show me wool")){
+    var fw = has("silk")?"silk":has("cotton")?"cotton":has("georgette")?"georgette":has("linen")?"linen":has("leather")?"leather":has("wool")?"wool":"satin";
     var fh=products.filter(function(x){ var d=(x.description||"").toLowerCase(); var f=(FABRIC[x.handle]||"").toLowerCase(); return d.indexOf(fw)!==-1 || f.indexOf(fw)!==-1; });
     if(!fh.length) return "No piece on this site is described as "+fw+" in its listing text.";
-    return "Pieces described with "+fw+" ("+fh.length+"):\n"+fh.map(function(x){ return "• "+x.title; }).join("\n")+"\nAsk me about any of these by name.";
+    return "Pieces described with "+fw+" ("+fh.length+"):\n"+fh.map(function(x){ return "• "+x.title; }).join("\n")+"\nAsk me about any of these by name."+(fw==="leather"?"\nNote: Vesper is 100% genuine lambskin leather; HighNote's sleeves are top-grade faux leather, not genuine leather.":"");
   }
   if(has("evening","work","office","casual","party","summer","warm weather","winter","wedding","formal","dinner") && !prods.length && has("show","pieces","for","suggest","recommend","looking")){
     var kw = has("evening")?"evening":has("work")||has("office")?"work":has("casual")?"casual":has("party")?"party":has("summer")||has("warm weather")?"warm":has("winter")?"winter":has("wedding")?"wedding":has("formal")?"formal":"dinner";
@@ -233,20 +239,40 @@ function answer(qRaw){
   if(has("visit","store","shop location","physical shop","where are you","based")){
     return "Magracia is Pakistan-based and sells online through Etsy — the site does not list a physical shop to visit, and I do not give a street address here. Contact is by email (support@magracia.com) or the Contact page.";
   }
+  if(has("try on","try it on","fitting room","try before")){
+    return "There is no physical shop to try pieces on — Magracia sells online through Etsy. Use the size chart on a piece's product page, or custom sizing, to get the fit right. If it does not fit, the return options are in the Refund Policy — see "+link("refund.html","Refund Policy")+".";
+  }
   if(has("opening hours","open hours","when are you open","hours")){
     return "No opening hours are listed on this site, and I am an automated helper, not a live person. You can email support@magracia.com or use the Contact page at any time; messages from that form are sent to Magracia’s email.";
   }
   if(has("men","mens","kids","children","boys","girls")){
-    return "Magracia’s listings on this site are women’s clothing only — shirts, co-ord sets, pants and shrugs for women. No men’s or children’s pieces are listed.";
+    return "Magracia’s listings on this site are women’s clothing only — shirts, co-ord sets, pants, shrugs and jackets for women. No men’s or children’s pieces are listed.";
   }
   if(has("wholesale","bulk","resell","retailer")){
     return "Wholesale and bulk orders are not mentioned on this site, so I will not invent terms for them. Ask Magracia via support@magracia.com or the Contact page.";
   }
-  if(has("new arrival","new arrivals","latest","newest","just launched")){
-    return "The site does not label any piece as a new arrival and its product data carries no launch dates, so I cannot say which piece is newest. The full range is 18 pieces in 4 collections — ask me to list a collection.";
+  if(has("new arrival","new arrivals","latest","newest","just launched","what is new","what s new")){
+    return "The homepage's New Arrivals are the four jackets from the Women Jacket Collection: Vesper Lamb Skin Jacket with Fishnet Sleeves, Nord Varsity Jacket, HighNote Varsity Jacket and Weed Wool Varsity Jacket. The full range is 22 pieces in 5 collections — ask me to list a collection.";
   }
-  if(has("handmade","made in","origin","where is it made")){
-    return "The listings on this site do not state handmade status or a country of manufacture for individual pieces, so I will not claim either. Magracia is Pakistan-based and sells through Etsy. For origin or making details on a specific piece, email support@magracia.com.";
+  if(has("leather","faux leather","genuine leather","real leather","original leather","lambskin","lamb skin","wool") && !has("handmade","price","cost","how much","size","colour","color","delivery","shipping","return","refund","exchange","wash","care","order","buy","stock","photo","chart")){
+    if(has("wool") && !has("leather")){
+      if(p && (named || anaphor) && p.handle==="weed-wool-varsity-jacket") return "Yes — the Weed Wool Varsity Jacket is a black wool varsity jacket with red, yellow and green stripes down the sleeves. The other jackets are not wool: Vesper is lambskin leather, HighNote has faux-leather sleeves, and Nord is brushed fabric.";
+      if(p && (named || anaphor)) return esc(p.title)+" — its listing does not name wool as a fabric, so I will not claim it is wool. The wool piece on this site is the Weed Wool Varsity Jacket.";
+      return "Wool on this site: the Weed Wool Varsity Jacket is a black wool varsity jacket with red, yellow and green stripes down the sleeves. The other jackets are not wool — Vesper is lambskin leather, HighNote has faux-leather sleeves, and Nord is brushed fabric. No other listing names wool.";
+    }
+    if(p && (named || anaphor)){
+      if(p.handle==="vesper") return "Yes — Vesper is 100% genuine lambskin leather (0.7–0.9 mm), as its listing states, with heavy black fishnet sleeves. It is also listed as handmade.";
+      if(p.handle==="highnote-varsity-jacket") return "HighNote's sleeves are top-grade faux leather — not genuine leather — with a maroon brushed body. Its listing states this clearly, and that it is handmade.";
+      if(p.handle==="nord-varsity-jacket") return "Nord has no leather — it is a handmade varsity jacket in soft, warm brushed fabric.";
+      if(p.handle==="weed-wool-varsity-jacket") return "Weed Wool has no leather — it is a handmade black wool varsity jacket with red, yellow and green stripes down the sleeves.";
+      return esc(p.title)+" — its listing does not name leather, so I will not claim it is leather. The leather pieces on this site are Vesper (genuine lambskin) and HighNote (faux-leather sleeves).";
+    }
+    return "Leather on this site, from the listings:\n• Vesper Lamb Skin Jacket with Fishnet Sleeves — 100% genuine lambskin leather (0.7–0.9 mm).\n• HighNote Varsity Jacket — top-grade faux-leather sleeves, not genuine leather.\n• Nord Varsity Jacket — brushed fabric, no leather.\n• Weed Wool Varsity Jacket — wool, no leather.\nNo other listing names leather. Ask me about a piece by name for its full fabric.";
+  }
+  if(has("handmade","made in","origin","where is it made") && !has("price","cost")){
+    if(p && (named || anaphor) && (p.handle==="vesper"||p.handle==="nord-varsity-jacket"||p.handle==="highnote-varsity-jacket"||p.handle==="weed-wool-varsity-jacket")) return "Yes — "+esc(p.title)+" is listed as handmade on this site, in both its description and its details. Magracia is Pakistan-based and sells through Etsy. The listings do not name a country of manufacture for individual pieces; for making details on a specific piece, email support@magracia.com.";
+    if(p && (named || anaphor)) return esc(p.title)+" — its listing does not state handmade status or a country of manufacture, so I will not claim either. Magracia is Pakistan-based and sells through Etsy. For making details on a specific piece, email support@magracia.com.";
+    return "Handmade and origin, from the listings: the four jackets — Vesper, Nord, HighNote and Weed Wool — are all listed as handmade. The other pieces do not state handmade status, and no listing names a country of manufacture for an individual piece, so I will not claim either. Magracia is Pakistan-based and sells through Etsy. For making details on a specific piece, email support@magracia.com.";
   }
   if(has("what is a shacket","what is shacket","what is a co-ord","what is coord","what is a shrug","what is shrug")){
     if(has("shacket")) return "A shacket, as Magracia describes it: an oversized button-down Georgette shacket paired with matching straight-leg Cotton trousers — designed to layer over anything you already own.";
@@ -255,9 +281,9 @@ function answer(qRaw){
   }
   if(has("how many products","how many pieces","how many items","how many colours","how many colors")){
     var allc=allColours();
-    return "Magracia has 18 pieces in 4 collections, with "+allc.length+" distinct colour names across the listings. Ask me to list a collection, or to show pieces in a specific colour.";
+    return "Magracia has 22 pieces in 5 collections, with "+allc.length+" distinct colour names across the listings. Ask me to list a collection, or to show pieces in a specific colour.";
   }
-  if(p && has("have","available","get") && !has("stock")){
+  if(p && (named || anaphor) && has("have","available","get") && !has("stock")){
     var sz2=null; ["2xs","xxs","2xl","3xl","4xl","xxl","xs","s","m","l","xl"].forEach(function(s){ if(q.indexOf(" "+s+" ")!==-1) sz2=s.toUpperCase(); });
     var col2=null; (p.colours||[]).forEach(function(c){ if(q.indexOf(c.toLowerCase())!==-1) col2=c; });
     if(sz2||col2) return stockText(p,col2,sz2);
@@ -269,16 +295,16 @@ function answer(qRaw){
     return "Made on a fresh order: the listing shipping text says processing time is 1–4 business days, made on a fresh order, then standard shipping 5–14 business days with tracking. The Shipping Policy page separately says orders are processed within 1–2 business days before dispatch. Delivery times may vary by destination and customs clearance.";
   }
 
-  if(p && SIZECHARTS[p.handle] && has("measurement","bust","waist","hip","chest","sleeve","length","size chart measurements")){
+  if(p && (named || anaphor) && SIZECHARTS[p.handle] && has("measurement","bust","waist","hip","chest","sleeve","length","size chart measurements")){
     var szm2=q.match(/\b(2xs|xxs|2xl|3xl|4xl|xxl|xs|s|m|l|xl)\b/); var sz2=szm2?szm2[1].toUpperCase():null;
     return chartText(p, sz2);
   }
-  if(p && !SIZECHARTS[p.handle] && has("measurement","bust","waist","hip") && has("size")){
+  if(p && (named || anaphor) && !SIZECHARTS[p.handle] && has("measurement","bust","waist","hip") && has("size")){
     return esc(p.title)+" does not have a size chart on its product page yet, so I cannot quote chart measurements for it. Custom sizing is offered instead — ask me about custom sizing for the measurements needed, or email support@magracia.com.";
   }
 
   /* ---- Free training expansion: compare, search, country, care, about, privacy, terms, payment, tracking, size help, styling ---- */
-  if((q.indexOf("compare")!==-1 || q.indexOf(" versus ")!==-1 || q.indexOf(" vs ")!==-1) && prods.length>=2){
+  if((q.indexOf("compare")!==-1 || q.indexOf(" versus ")!==-1 || q.indexOf(" vs ")!==-1 || q.indexOf("difference")!==-1 || q.indexOf("better")!==-1) && prods.length>=2){
     var a=prods[0], b=prods[1];
     return "Comparing, side by side (I will not say one is better — that is your choice):\n\n"+a.title+" ("+a.collection+")\nColours: "+(a.colours||[]).join(", ")+"\nSizes: "+(a.sizes||[]).join(", ")+"\nFabric: "+(FABRIC[a.handle]||"Not named in the listing.")+"\nSize chart: "+(a.size_chart?"Yes, on its product page.":"No, not yet.")+"\n\n"+b.title+" ("+b.collection+")\nColours: "+(b.colours||[]).join(", ")+"\nSizes: "+(b.sizes||[]).join(", ")+"\nFabric: "+(FABRIC[b.handle]||"Not named in the listing.")+"\nSize chart: "+(b.size_chart?"Yes, on its product page.":"No, not yet.")+"\n\n"+prodLink(a)+" · "+prodLink(b);
   }
@@ -291,6 +317,7 @@ function answer(qRaw){
   if((has("pant")||has("trouser")) && !prods.length && has("show","list","which","all","browse","shop")) return listByCollection("Women Pants And Trousers");
   if((has("co-ord")||has("coord")||has("set")) && !prods.length && has("show","list","which","all","browse","shop")) return listByCollection("Co-ord Sets");
   if(has("shirt") && !prods.length && has("show","list","which","all","browse","shop")) return listByCollection("Women Shirt Collection");
+  if(has("jacket","jackets","varsity") && prods.length!==1 && has("show","list","which","all","browse","shop","have")) return listByCollection("Women Jacket Collection");
   if(has("wash","care","clean","iron","dry")){
     return "Care: Magracia\u2019s listings on this site do not give washing or ironing instructions, so I will not invent them. The only care note in the policies is that damage from improper washing or ironing, misuse, or normal wear and tear may not qualify for a return. Follow the care label on the garment itself, or ask Magracia via support@magracia.com or the "+link("contact.html","Contact page")+" before washing a piece you are unsure about.";
   }
@@ -300,14 +327,17 @@ function answer(qRaw){
   if(has("terms","conditions","legal")){
     return "Terms: Magracia\u2019s Terms of Service cover access and accounts, products, orders, prices and billing, shipping and delivery, intellectual property, optional tools, third-party links, privacy, feedback, errors, prohibited uses, termination, warranties, liability, indemnification, governing law and changes. Full text: "+link("terms.html","Terms of Service")+". Purchases themselves are completed on Etsy, where Etsy\u2019s checkout terms also apply.";
   }
-  if(has("track","tracking","where is my order","order status") && !has("delivery","shipping")){
+  if(has("track","tracking","where is my order","order status","not received","never arrived","hasn t arrived","not arrived","late","delayed","missing order") && !has("delivery","shipping")){
     return "Order tracking: I cannot look up an individual order — I have no order data and no backend. Orders bought on Etsy are tracked through Etsy, and Magracia\u2019s shipping information says a tracking number is provided and delivery times may vary by destination and customs clearance. For a specific order, message Magracia on Etsy or email support@magracia.com with your order details.";
   }
   if(has("pay","payment","cod","cash on delivery","discount","sale","offer","coupon","gift")){
     return "Payment and offers: there are no prices, checkout, discounts, sales, cash-on-delivery or gift options stated on this site, so I will not invent any. Payment is through Etsy checkout when you buy a piece there. If a listing shows an offer or a gift option, it will be on that Etsy listing itself — otherwise, ask Magracia via support@magracia.com or the "+link("contact.html","Contact page")+".";
   }
+  if(has("safe","secure","legit","scam","trustworthy","is it safe")){
+    return "Buying is through Etsy: there is no checkout or payment on this site, so no card details are entered here. You complete the purchase on Magracia's Etsy shop, where Etsy's checkout terms apply. Browse any piece here first, then use its 'Buy Now on Etsy' button.";
+  }
   if(has("about","who are you","who is magracia","slogan","chosen")){
-    return "Magracia — \u201cChosen, Not Chased.\u201d Women\u2019s silk shirts, satin co-ord sets, pants and shrugs, made in Pakistan and sold through Etsy. Find Magracia on "+link("https://www.etsy.com/shop/MagraciaOfficial","Etsy")+", "+link("https://www.instagram.com/shopmagracia","Instagram")+" and "+link("https://www.facebook.com/profile.php?id=61591413465941","Facebook")+". Contact is by email (support@magracia.com) or the "+link("contact.html","Contact page")+".";
+    return "Magracia — \u201cChosen, Not Chased.\u201d Women\u2019s silk shirts, satin co-ord sets, pants, shrugs and jackets, made in Pakistan and sold through Etsy. Find Magracia on "+link("https://www.etsy.com/shop/MagraciaOfficial","Etsy")+", "+link("https://www.instagram.com/shopmagracia","Instagram")+" and "+link("https://www.facebook.com/profile.php?id=61591413465941","Facebook")+". Contact is by email (support@magracia.com) or the "+link("contact.html","Contact page")+".";
   }
   if(has("instagram","facebook","social")){
     return "Magracia on socials: "+link("https://www.instagram.com/shopmagracia","Instagram")+", "+link("https://www.facebook.com/profile.php?id=61591413465941","Facebook")+", and the "+link("https://www.etsy.com/shop/MagraciaOfficial","Etsy shop")+".";
@@ -332,7 +362,7 @@ function answer(qRaw){
   if((has("uk")||has("united kingdom")||has("england")||has("eu")||has("europe")) && has("delivery","shipping","ship","arrive","how long","tax","duty","tariff")){
     return "Delivery and duties to the UK / EU: the seller covers applicable Delivered Duty Paid (DDP) charges, including import duties and customs fees where applicable. Buyers are responsible for VAT / sales tax collected by Etsy at checkout. For delivery time, use the standard listing window of 5–14 business days, varying by destination and customs clearance — the Shipping Policy page does not give a separate UK / EU day count. Full details: "+link("shipping.html","Shipping Policy")+".";
   }
-  if(has("canada","australia","india","germany","france","italy","spain","netherlands","saudi","qatar","kuwait","oman","bahrain") && has("delivery","shipping","ship","arrive")){
+  if(has("canada","australia","india","germany","france","italy","spain","netherlands","saudi","qatar","kuwait","oman","bahrain","japan","brazil","south africa","new zealand","ireland","sweden","norway","denmark","belgium","switzerland","austria","portugal","greece","turkey","egypt","kenya","nigeria","singapore","malaysia","indonesia","thailand","philippines","vietnam","korea","china","mexico","argentina","chile","colombia","peru","poland","bangladesh","nepal","sri lanka") && has("delivery","shipping","ship","arrive")){
     return "Delivery to that country: Magracia\u2019s Shipping Policy page lists Pakistan (domestic), the US and the UAE, while its DDP section also covers the UK, EU, USA and other international destinations (buyers responsible for customs duties, import taxes, VAT and sales taxes unless otherwise stated). The page does not give a separate day count for your country, so use the standard 5–14 business days as a guide and confirm before ordering via support@magracia.com or the "+link("contact.html","Contact page")+".";
   }
   /* colour-count follow-up: e.g. after Sable, "in navy?" */
@@ -346,53 +376,68 @@ if(prods.length>1 && (has("colour","color","size","fabric","material","stock","a
   if(has("contact","email","phone","call","human","talk to","support")){
     return "You can reach Magracia at support@magracia.com, or through the contact form on the "+link("contact.html","Contact page")+" — messages from that form are sent to Magracia\u2019s email. I am an automated helper on this site, not a live person.";
   }
-  if(has("price","cost","how much","checkout","buy","order","purchase","etsy")){
+  if(has("whatsapp","order by phone","phone order","call to order")){
+    return "Orders are placed on Etsy — the site does not list phone or WhatsApp ordering. The phone number and email are for questions about a piece, sizing or an order: support@magracia.com, +92-331-8035-398, or the "+link("contact.html","Contact page")+".";
+  }
+  if(has("price","cost","how much","checkout","buy","order","purchase","etsy","cheapest","expensive","cheaper")){
     if(p) return "There are no prices and no checkout on this site. "+esc(p.title)+" is bought on Etsy: "+etsyLink(p)+". You can also browse it here first: "+prodLink(p)+".";
     return "There are no prices and no checkout on this site — every piece is bought on Etsy. Choose a piece and I will give you its Etsy link, or browse the "+link("https://www.etsy.com/shop/MagraciaOfficial","Magracia Etsy shop")+".";
   }
   if(has("tax","duty","duties","tariff","customs","ddp","vat")){
     return "Taxes, duties and DDP, as stated on Magracia\u2019s shipping information:\n• UK & EU: the seller covers applicable Delivered Duty Paid (DDP) charges, including import duties and customs fees where applicable. Buyers are responsible for VAT / sales tax collected by Etsy at checkout.\n• USA: buyers are responsible for any applicable DDP-related import duties, tariffs and customs charges. Any VAT / sales tax collected by Etsy is charged at checkout.\n• Other international destinations: buyers are responsible for customs duties, import taxes, VAT, sales taxes and other import-related charges, unless otherwise stated.\nFull details: "+link("shipping.html","Shipping Policy")+".";
   }
-  if(has("return","refund","exchange","damaged","wrong item","defective")){
+  if(has("return","refund","exchange","damaged","wrong item","defective","does not fit","doesn t fit","don t fit")){
     var base = "Returns — please read both notes, because the site policy and the listing text differ slightly:\n• Site Refund Policy: you have 14 days after receiving your item to request a return. The item must be unworn or unused, with tags and in its original packaging, with receipt or proof of purchase. Contact support@magracia.com before sending anything back. If approved, a refund is made to your original payment method within 10 business days.\n• Listing text on Etsy: returns within 7 working days from delivery, and custom-size articles are not eligible for refunds or exchanges. For a damaged item, contact via Etsy Messages preferably within 48 hours, with clear photos of the item, the shipping package and the shipping label. Damage from improper washing or ironing, misuse, or normal wear and tear may not qualify.\n• Exchanges: the fastest route stated on the site policy is to return the accepted item and make a separate purchase for the new one.\nFull details: "+link("refund.html","Refund Policy")+". For a specific order, contact support@magracia.com or message on Etsy before returning anything.";
     if(p) return esc(p.title)+":\n"+base;
     return base;
   }
+  if(has("how to measure","measure myself","take my measurements","taking measurements","measuring myself","how do i measure")){
+    return "How to measure (general guidance — use inches, as Magracia's custom sizing asks for):\n• Bust: around the fullest part, tape level and not too tight.\n• Waist: around the narrowest part of your waist.\n• Hips: around the fullest part of your hips.\n• Shoulder width: from one shoulder edge to the other, across the back.\n• Sleeve length: from the shoulder point to the wrist, with your arm slightly bent.\n• Length: from the shoulder to where you want the piece to end.\nCompare your numbers with the size chart on the piece's product page, or send them for custom sizing. If you are between sizes, ask Magracia via support@magracia.com.";
+  }
   if(has("custom","measurement","measure","sizing")){
-    return "Custom sizing is offered to help a piece fit comfortably. Measurements are given in inches, at checkout or through an Etsy message, depending on the piece:\n• Shirts: Bust, Chest, Waist/Hip.\n• Pants and trousers: Waist, Length, Inseam.\n• Shrugs: Bust/Chest, Waist/Hip, Shoulder Width, Sleeve Length (shoulder to cuff), Shrug Length (shoulder to hem).\n• Co-ord sets: shirt measurements, plus pant measurements if applicable, plus shrug measurements if applicable.\nCustom-sized items are final sale on the listing text — they are not eligible for return. Size charts, where a listing has one, are shown on that product page.";
+    return "Custom sizing is offered to help a piece fit comfortably. Measurements are given in inches, at checkout or through an Etsy message, depending on the piece:\n• Shirts: Bust, Chest, Waist/Hip.\n• Pants and trousers: Waist, Length, Inseam.\n• Shrugs: Bust/Chest, Waist/Hip, Shoulder Width, Sleeve Length (shoulder to cuff), Shrug Length (shoulder to hem).\n• Co-ord sets: shirt measurements, plus pant measurements if applicable, plus shrug measurements if applicable.\n• Jackets: Bust, Chest, Waist, Shoulder Width, Sleeve Length (shoulder to cuff), Jacket Length.\nCustom-sized items are final sale on the listing text — they are not eligible for return. Size charts, where a listing has one, are shown on that product page.";
+  }
+  if(has("alter","alteration","alterations","hem it","take it in")){
+    return "Alterations are not mentioned on this site, so I will not invent terms for them. Custom sizing is offered instead — measurements in inches, at checkout or through an Etsy message — and custom-sized items are final sale. Ask Magracia via support@magracia.com if you need something changed.";
+  }
+  if(has("custom colour","custom color","different colour","different color")){
+    return "Custom colours are not mentioned on this site — each listing names its own colours. If you want a piece in a colour it is not listed in, ask Magracia via support@magracia.com or the "+link("contact.html","Contact page")+".";
   }
   if(has("size chart","chart")){
-    if(p) return p.size_chart ? esc(p.title)+" has a size chart on its product page — open it there to see the measurements." : esc(p.title)+" does not have a size chart on its product page yet. The listings with a size chart are Sable, Silk, Mesh-Sleeve Button-Up, Eclipse, Open Front Linen Shrug, Georgette Long Shrug, Rib Longline Shrug and Vera Georgette Shrug.";
-    return "Size charts are on the product page for Sable, Silk, Mesh-Sleeve Button-Up, Eclipse, Open Front Linen Shrug, Georgette Long Shrug, Rib Longline Shrug and Vera Georgette Shrug. The other 10 listings do not have one yet.";
+    if(p && (named || anaphor)) return p.size_chart ? esc(p.title)+" has a size chart on its product page — open it there to see the measurements." : esc(p.title)+" does not have a size chart on its product page yet. The listings with a size chart are Sable, Silk, Mesh-Sleeve Button-Up, Eclipse, Open Front Linen Shrug, Georgette Long Shrug, Rib Longline Shrug, Vera Georgette Shrug, Vesper Lamb Skin Jacket, Nord Varsity Jacket, HighNote Varsity Jacket and Weed Wool Varsity Jacket.";
+    return "Size charts are on the product page for Sable, Silk, Mesh-Sleeve Button-Up, Eclipse, Open Front Linen Shrug, Georgette Long Shrug, Rib Longline Shrug, Vera Georgette Shrug, Vesper Lamb Skin Jacket, Nord Varsity Jacket, HighNote Varsity Jacket and Weed Wool Varsity Jacket. The other 10 listings do not have one yet.";
   }
   if(has("delivery","shipping","ship","arrive","how long","tracking","track","dispatch","processing")){
     return "Delivery, as stated on Magracia\u2019s site:\n• Standard shipping on listings: 5–14 business days, with a tracking number. Delivery times may vary by destination and customs clearance.\n• Shipping Policy page: Pakistan 5–7 business days; US & UAE 7–14 business days, depending on customs and location. Orders are processed within 1–2 business days before dispatch on that page, and you receive tracking details once it ships.\n• Listing shipping text also mentions processing of 1–4 business days, made on a fresh order.\n• Costs on the policy page: free shipping for domestic orders in Pakistan; paid shipping for international orders (UAE / USA).\n• Delays can happen because of customs, weather or courier issues beyond Magracia\u2019s control.\nFull details: "+link("shipping.html","Shipping Policy")+".";
   }
   if(has("colour","color","colours","colors")){
-    if(p) return esc(p.title)+" comes in: "+esc((p.colours||[]).join(", "))+"."+(p.handle==="sable-stripe-shirt"?" On this site, picking a colour on the Sable page filters the gallery to that colour\u2019s photos.":" On this site, picking a colour filters the gallery to that colour\u2019s photos on every listing.");
-    return "Tell me which piece you mean and I will list its colours. For example: \u201cWhat colours does Zaria come in?\u201d";
+    if(p && (named || anaphor)) return esc(p.title)+" comes in: "+esc((p.colours||[]).join(", "))+"."+(p.handle==="sable-stripe-shirt"?" On this site, picking a colour on the Sable page filters the gallery to that colour\u2019s photos.":" On this site, picking a colour filters the gallery to that colour\u2019s photos on every listing.");
+    return "Across the site the colours are: "+allColours().join(", ")+". Tell me which piece you mean and I will list its colours. For example: \u201cWhat colours does Zaria come in?\u201d";
   }
   if(has("size","sizes","xs","xl","small","large","fit")){
-    if(p) return esc(p.title)+" comes in sizes: "+esc((p.sizes||[]).join(", "))+"."+(p.size_chart?" It has a size chart on its product page.":" It does not have a size chart on its product page yet.")+" Custom sizing is also offered — ask me about custom sizing for the measurements needed.";
-    return "Tell me which piece you mean and I will list its sizes. For example: \u201cWhat sizes does Dorne come in?\u201d";
+    if(p && (named || anaphor)) return esc(p.title)+" comes in sizes: "+esc((p.sizes||[]).join(", "))+"."+(p.size_chart?" It has a size chart on its product page.":" It does not have a size chart on its product page yet.")+" Custom sizing is also offered — ask me about custom sizing for the measurements needed.";
+    return "Sizes vary by piece — most shirts, pants and shrugs are XS–XL, co-ord sets are S–XL, and the four jackets are XXS–4XL (Rib goes up to XXL). Tell me which piece you mean and I will list its exact sizes. For example: \u201cWhat sizes does Dorne come in?\u201d";
+  }
+  if(has("restock","back in stock","when available","will it come back","come back in stock")){
+    return "The site does not list restock dates, so I will not guess when a piece comes back. If a colour or size shows as out of stock, check the listing again later or ask Magracia via support@magracia.com.";
   }
   if(has("stock","available","availability","in stock","out of stock")){
-    if(p){
+    if(p && (named || anaphor)){
       var col=null, sz=null; (p.colours||[]).forEach(function(c){ if(q.indexOf(c.toLowerCase())!==-1) col=c; }); ["2xs","xxs","2xl","3xl","4xl","xxl","xs","s","m","l","xl"].forEach(function(s){ if(q.indexOf(" "+s+" ")!==-1) sz=s.toUpperCase(); });
       return stockText(p,col,sz);
     }
     return "Tell me the piece, and ideally a colour and a size, and I will check that exact combination. For example: \u201cIs Sable in Navy, size M, in stock?\u201d";
   }
   if(has("fabric","material","made of","cotton","silk","georgette","linen","satin","knit")){
-    if(p) return esc(p.title)+" — fabric: "+(FABRIC[p.handle]||"The listing does not give a fabric composition for this piece on this site, so I will not guess one.");
-    return "Tell me which piece you mean and I will tell you what fabric its listing names. For example: \u201cWhat fabric is Dorne?\u201d";
+    if(p && (named || anaphor)) return esc(p.title)+" — fabric: "+(FABRIC[p.handle]||"The listing does not give a fabric composition for this piece on this site, so I will not guess one.");
+    return "The listings name silk, satin, cotton, georgette, linen, lambskin leather, faux leather, wool and brushed fabric across different pieces. Tell me which piece you mean and I will tell you its fabric. For example: \u201cWhat fabric is Dorne?\u201d";
   }
   if(has("included","include","pieces","piece","set","what is in","whats included","what\u2019s included")){
     if(p) return summary(p);
     return "Tell me which piece or set you mean. For example: \u201cWhat is included in Zaria?\u201d";
   }
-  if(has("collection","collections","sell","shop","products","list","browse","women","shirts","pants","trousers","shrugs","co-ord","coord")){
-    var out="Magracia has 18 pieces in 4 collections:\n• Women Shirt Collection (5): Sable Stripe Sheer Shirt, Silk Shirts For Women, Nyx Half Net Shirt, Mesh-Sleeve Button-Up Shirt, Eclipse | Mesh-Sleeve Shirt.\n• Co-ord Sets (5): Zaria 3-Piece Satin Co-ord Set, Dorne – Luxury Silk Co-Ord Set, Engima Co-Ord Set, Aster Co-ord Set, Shacket Co-ord Set.\n• Women Pants And Trousers (4): Balloon Pants For Women, Leaf Pants For Women, Cotton Fit Trouser, Floaty Wide Leg Pants.\n• Women Shrug Collection (4): Rib Longline Shrug, Vera Georgette Shrug, Georgette Long Shrug, Open Front Linen Shrug.\nAsk me about any piece by name for its colours, sizes and Etsy link.";
+  if(has("collection","collections","sell","shop","products","list","browse","women","shirts","pants","trousers","shrugs","co-ord","coord","everything","all pieces")){
+    var out="Magracia has 22 pieces in 5 collections:\n• Women Shirt Collection (5): Sable Stripe Sheer Shirt, Silk Shirts For Women, Nyx Half Net Shirt, Mesh-Sleeve Button-Up Shirt, Eclipse | Mesh-Sleeve Shirt.\n• Co-ord Sets (5): Zaria 3-Piece Satin Co-ord Set, Dorne – Luxury Silk Co-Ord Set, Engima Co-Ord Set, Aster Co-ord Set, Shacket Co-ord Set.\n• Women Pants And Trousers (4): Balloon Pants For Women, Leaf Pants For Women, Cotton Fit Trouser, Floaty Wide Leg Pants.\n• Women Shrug Collection (4): Rib Longline Shrug, Vera Georgette Shrug, Georgette Long Shrug, Open Front Linen Shrug.\n• Women Jacket Collection (4): Vesper Lamb Skin Jacket with Fishnet Sleeves, Nord Varsity Jacket, HighNote Varsity Jacket, Weed Wool Varsity Jacket.\nAsk me about any piece by name for its colours, sizes and Etsy link.";
     return out;
   }
   if(p) return summary(p);
@@ -400,7 +445,7 @@ if(prods.length>1 && (has("colour","color","size","fabric","material","stock","a
   return "I do not have that in Magracia\u2019s listings or policies, so I will not guess. I can answer about a specific piece (colours, sizes, fabric, size chart, what is included, styling), compare two pieces, shop by colour / size / collection, how to buy on Etsy, delivery times and delivery to a specific country, shipping costs, taxes and duties (DDP), returns and exchanges, custom sizing, care, privacy and terms, and contact details. Or email support@magracia.com for anything else.";
 }
 function setChips(){
-  var labels=["Colours & sizes","Delivery time","Returns","Taxes & duties","How to buy","Compare pieces","Shop by colour","Contact us"];
+  var labels=["Colours & sizes","Delivery time","Returns","Taxes & duties","How to buy","Compare pieces","Shop by colour","New arrivals","Leather & handmade","Contact us"];
   chipsEl.innerHTML="";
   labels.forEach(function(l){ var b=document.createElement("button"); b.className="mg-chip"; b.type="button"; b.textContent=l; b.addEventListener("click",function(){ handle(l); }); chipsEl.appendChild(b); });
 }
