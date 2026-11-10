@@ -3476,15 +3476,24 @@
       "Burgundy"
     ],
     "sizes": [
+      "XXS",
       "XS",
       "S",
       "M",
       "L",
-      "XL"
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL"
     ],
     "variants": [
       {
         "colour": "Camel Brown",
+        "size": "XXS",
+        "stock": null
+      },
+      {
+        "colour": "Camel Brown",
         "size": "XS",
         "stock": null
       },
@@ -3509,6 +3518,26 @@
         "stock": null
       },
       {
+        "colour": "Camel Brown",
+        "size": "2XL",
+        "stock": null
+      },
+      {
+        "colour": "Camel Brown",
+        "size": "3XL",
+        "stock": null
+      },
+      {
+        "colour": "Camel Brown",
+        "size": "4XL",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "XXS",
+        "stock": null
+      },
+      {
         "colour": "Black",
         "size": "XS",
         "stock": null
@@ -3534,6 +3563,26 @@
         "stock": null
       },
       {
+        "colour": "Black",
+        "size": "2XL",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "3XL",
+        "stock": null
+      },
+      {
+        "colour": "Black",
+        "size": "4XL",
+        "stock": null
+      },
+      {
+        "colour": "Burgundy",
+        "size": "XXS",
+        "stock": null
+      },
+      {
         "colour": "Burgundy",
         "size": "XS",
         "stock": null
@@ -3556,6 +3605,21 @@
       {
         "colour": "Burgundy",
         "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Burgundy",
+        "size": "2XL",
+        "stock": null
+      },
+      {
+        "colour": "Burgundy",
+        "size": "3XL",
+        "stock": null
+      },
+      {
+        "colour": "Burgundy",
+        "size": "4XL",
         "stock": null
       }
     ],
@@ -3617,15 +3681,24 @@
       "Rose Pink"
     ],
     "sizes": [
+      "XXS",
       "XS",
       "S",
       "M",
       "L",
-      "XL"
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL"
     ],
     "variants": [
       {
         "colour": "Navy",
+        "size": "XXS",
+        "stock": null
+      },
+      {
+        "colour": "Navy",
         "size": "XS",
         "stock": null
       },
@@ -3650,6 +3723,26 @@
         "stock": null
       },
       {
+        "colour": "Navy",
+        "size": "2XL",
+        "stock": null
+      },
+      {
+        "colour": "Navy",
+        "size": "3XL",
+        "stock": null
+      },
+      {
+        "colour": "Navy",
+        "size": "4XL",
+        "stock": null
+      },
+      {
+        "colour": "Burgundy",
+        "size": "XXS",
+        "stock": null
+      },
+      {
         "colour": "Burgundy",
         "size": "XS",
         "stock": null
@@ -3675,6 +3768,26 @@
         "stock": null
       },
       {
+        "colour": "Burgundy",
+        "size": "2XL",
+        "stock": null
+      },
+      {
+        "colour": "Burgundy",
+        "size": "3XL",
+        "stock": null
+      },
+      {
+        "colour": "Burgundy",
+        "size": "4XL",
+        "stock": null
+      },
+      {
+        "colour": "Rose Pink",
+        "size": "XXS",
+        "stock": null
+      },
+      {
         "colour": "Rose Pink",
         "size": "XS",
         "stock": null
@@ -3697,6 +3810,21 @@
       {
         "colour": "Rose Pink",
         "size": "XL",
+        "stock": null
+      },
+      {
+        "colour": "Rose Pink",
+        "size": "2XL",
+        "stock": null
+      },
+      {
+        "colour": "Rose Pink",
+        "size": "3XL",
+        "stock": null
+      },
+      {
+        "colour": "Rose Pink",
+        "size": "4XL",
         "stock": null
       }
     ],
