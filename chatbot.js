@@ -81,9 +81,9 @@ var FABRIC={
 "vera-georgette-shrug":"Lightweight georgette, fluid open front.",
 "georgette-long-shrug":"Georgette, front open, with loose full sleeves.",
 "open-front-shrug":"Linen — a lightly textured linen weave, built for warm-weather layering.",
-"vesper":"Premium lambskin leather (0.7-0.9 mm) in Camel Brown, Black or Burgundy, with heavy black fishnet sleeves, large mesh.",
+"vesper":"100% genuine lambskin leather (0.7-0.9 mm) in Camel Brown, Black or Burgundy, with heavy black fishnet sleeves, large mesh.",
 "nord-varsity-jacket":"Soft, warm brushed fabric varsity jacket in Navy, Burgundy or Rose Pink, with cream-striped ribbed collar, cuffs and hem, snap-button front and slanted welt pockets.",
-"highnote-varsity-jacket":"Maroon varsity jacket with beige faux-leather sleeves, cream-striped ribbed collar, cuffs and hem, snap-button front and slanted welt pockets."
+"highnote-varsity-jacket":"Maroon varsity jacket with top-grade beige faux-leather sleeves, cream-striped ribbed collar, cuffs and hem, snap-button front and slanted welt pockets."
 };
 var SHORT={
 "sable":["sable-stripe-shirt"],"silk":["silk-shirts-for-women"],"nyx":["nyx-half-net-shirt"],
