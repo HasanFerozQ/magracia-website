@@ -1,18 +1,78 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow"><title>Magracia Admin - Private</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="stylesheet" href="styles.css?v=10">
 <style>
-.admin h2{margin-top:28px}.admin .card{background:#fff;border:1px solid #e5dcc3;padding:16px;margin:12px 0;border-radius:8px}
-.admin .warn{color:#9a3b12}.admin .ok{color:#1d6b3a}.admin small{color:#777}
-.admin .imgrow{display:flex;gap:10px;align-items:center;margin:8px 0}.admin .imgrow img{width:80px;height:100px;object-fit:cover;border:1px solid #eee}
-.admin .imgrow select{width:auto}.admin .row{display:flex;gap:12px}.admin .row>*{flex:1}
-.admin .pill{display:inline-block;background:#f3ead6;border-radius:20px;padding:2px 10px;margin:2px;font-size:13px}
-.admin details{margin:14px 0}.admin details summary{cursor:pointer;font-weight:700}
-.admin .counter{font-size:13px;color:#777}
+/* Magracia admin — same palette as the shop: ink, wine, cream, gold */
+main.admin{padding-top:104px}
+.admin section{padding:24px 0 72px}
+.admin h2{margin:0 0 6px;font-size:32px;line-height:1.15}
+.admin h2:after{content:"";display:block;width:48px;height:2px;background:var(--gold);margin-top:8px}
+.admin-title{font-size:40px !important}
+.admin-intro{color:var(--muted);font-size:15px;max-width:680px}
+.admin .card{background:var(--paper);border:1px solid var(--line);padding:24px;margin:16px 0;border-radius:14px;box-shadow:0 2px 10px rgba(22,16,19,.05)}
+.admin .warn{color:#9a3b12}.admin .ok{color:#1d6b3a}.admin small{color:var(--muted)}
+.admin .counter{font-size:13px;color:var(--muted)}
+.admin-tag{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(176,141,87,.55);padding:8px 14px;border-radius:20px;white-space:nowrap}
+/* Lock / sign-in card */
+.admin .lock-card{max-width:620px;margin:24px auto;border-top:3px solid var(--gold)}
+.lock-card #pw{display:inline-block;width:calc(100% - 58px);vertical-align:middle}
+.lock-card #pwEye{width:48px;padding:11px 0;text-align:center}
+.lock-card #loadBtn{width:100%;margin-top:14px}
+.lock-card #status{display:block;margin-top:14px;font-size:13px;color:var(--muted)}
+/* Dashboard stat card */
+#dashboard .card{background:var(--ink);color:#e9dfd2;border-color:var(--ink)}
+#dashboard .card h2{color:#fff}
+#dashboard .card p{font-size:15px;margin:8px 0}
+#dashboard .ok{color:#9ed6a8}
+#dashboard .warn{color:#f2b27c}
+/* Buttons */
+.admin .btn{padding:13px 22px;font-size:11px}
+.admin button:not(.btn){background:#fff;border:1px solid var(--line);border-radius:8px;padding:7px 12px;cursor:pointer;font-family:inherit;font-size:13px;color:var(--ink)}
+.admin button:not(.btn):hover{border-color:var(--ink)}
+.admin .imgrow button:not(.btn):hover{border-color:var(--wine);color:var(--wine)}
+#adminActions{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+/* Forms */
+.admin label{display:block;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin:16px 0 4px}
+.admin input,.admin select,.admin textarea{padding:12px 14px;font-size:15px}
+.admin input:focus,.admin select:focus,.admin textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(176,141,87,.18)}
+.admin input[type="checkbox"]{width:auto;margin:0 6px 0 0}
+.admin input[type="number"]{width:130px;display:inline-block}
+.admin input[type="file"]{padding:8px}
+#setAll{width:130px}
+/* Listings table */
+#list{overflow-x:auto;border-radius:12px}
+.admin table{border-radius:12px;overflow:hidden}
+.admin th{background:var(--ink);color:#fff;font-size:11px;letter-spacing:.16em;text-transform:uppercase;padding:12px 12px;border-color:var(--ink)}
+.admin td{padding:12px;border-color:var(--line);vertical-align:middle}
+#list tr:nth-child(even) td{background:#faf6ec}
+#list tr:hover td{background:#f3ead6}
+#list td img{border-radius:8px}
+/* Collections pills */
+.admin .pill{display:inline-block;background:#f3ead6;color:var(--ink);border:1px solid var(--line);border-radius:20px;padding:6px 14px;margin:4px 4px 4px 0;font-size:13px}
+/* Editor sections */
+.admin details{margin:0 0 16px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:0 20px 20px}
+.admin details summary{cursor:pointer;font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:500;padding:16px 0 0}
+.admin .row{display:flex;gap:16px}.admin .row>*{flex:1}
+.admin .imgrow{display:flex;gap:12px;align-items:center;margin:10px 0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px}
+.admin .imgrow img{width:96px;height:120px;object-fit:cover;border:1px solid var(--line);border-radius:8px}
+.admin .imgrow select{width:auto;min-width:150px}
+#sizeChartBox img{border-radius:8px}
+#editTitle{margin-bottom:4px}
+#checks p{margin:8px 0}
+@media(max-width:640px){
+  .admin .card{padding:18px}
+  .admin h2{font-size:26px}
+  .admin-title{font-size:30px !important}
+  .admin .row{flex-direction:column}
+  header h1.logo img{height:44px}
+  .admin-tag{padding:6px 10px;font-size:10px}
+  .lock-card #pw{width:calc(100% - 58px)}
+}
 </style></head>
-<body><header><h1>MAGRACIA ADMIN</h1></header><main class="wrap admin"><section>
-<p>This page is not linked from the shop. Do not share its address. Nothing on this page works until the admin password is entered and verified — the password is checked on the server.</p>
-<div class="card"><label>Admin password <input type="password" id="pw" autocomplete="current-password"> <button class="btn" id="pwEye" type="button" aria-label="Show password" title="Show password">&#128065;</button></label>
-<button class="btn" id="loadBtn">Load listings</button> <span id="status">Enter the admin password to unlock this page.</span></div>
+<body><header><h1 class="logo"><img src="/images/1793279692618-magracia-logo.png" alt="Magracia"></h1><span class="admin-tag">Admin · Private</span></header><main class="wrap admin"><section>
+<h2 class="admin-title">Manage your shop</h2>
+<p class="admin-intro">This page is not linked from the shop. Do not share its address. Nothing on this page works until the admin password is entered and verified — the password is checked on the server.</p>
+<div class="card lock-card"><h2>Sign in</h2><label>Admin password <input type="password" id="pw" autocomplete="current-password"> <button class="btn" id="pwEye" type="button" aria-label="Show password" title="Show password">&#128065;</button></label>
+<button class="btn btn-gold" id="loadBtn">Load listings</button> <span id="status">Enter the admin password to unlock this page.</span></div>
 <div id="dashboard" style="display:none"></div>
 <div class="card" id="collectionsCard" style="display:none"><h2>Collections</h2><p id="collections"></p>
 <p><input id="newCollection" placeholder="New collection name, e.g. Evening Wear"> <button class="btn" id="createCollectionBtn">Create collection + new listing</button></p>
@@ -60,9 +120,9 @@
 <label>Shipping &amp; Returns <textarea id="fShip" rows="4"></textarea></label>
 <p><button class="btn" id="standardShipBtn">Use the standard Shipping &amp; Returns text</button></p>
 </details>
-<p><button class="btn" id="saveBtn">Save this listing</button> <button class="btn" id="backBtn">Back to list</button></p>
+<p><button class="btn btn-gold" id="saveBtn">Save this listing</button> <button class="btn" id="backBtn">Back to list</button></p>
 </div>
-<p id="adminActions" style="display:none"><button class="btn" id="addBtn">+ Add new listing</button> <button class="btn" id="saveAllBtn">Save all changes to live site</button> <button class="btn" id="downloadBtn">Download products.json</button></p>
+<p id="adminActions" style="display:none"><button class="btn" id="addBtn">+ Add new listing</button> <button class="btn btn-gold" id="saveAllBtn">Save all changes to live site</button> <button class="btn" id="downloadBtn">Download products.json</button></p>
 <p>Saving commits products.json to GitHub and Vercel redeploys. Uploaded images and videos are saved in the repo under /images/ and served from the live site.</p>
 </section></main>
 <script>
