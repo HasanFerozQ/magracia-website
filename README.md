@@ -7,6 +7,4 @@
   2. GITHUB_TOKEN - a fine-grained token with Contents read/write for this repo only.
   The server function api/admin.js checks the password on the server and commits products.json to GitHub, then Vercel redeploys.
   Until those variables are set, the admin page can still download an updated products.json to commit manually.
-- Images: paste an image URL when adding a listing. Before cancelling Shopify, save product images locally, or Shopify CDN links may stop working.
-
-Trigger: Vercel auto-deploy check - 28 Oct 2026.
+- Images: paste an image URL when adding a listing. All 272 original product photos are self-hosted in /images/ (Nov 2026) — no Shopify CDN links remain on the site.
