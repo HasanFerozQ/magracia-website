@@ -7,11 +7,11 @@
 // with ?og=1, which the rewrite explicitly excludes via `missing`, so
 // even a crawler that follows the refresh lands on the static page and
 // stops. Unknown handle (or none) -> the generic site OG tags.
-// Product data is read from products.json on disk, with a live fetch of
-// the deployed products.json as fallback; vercel.json also lists
-// products.json under includeFiles so it is guaranteed to be bundled.
-import { readFileSync } from 'node:fs';
-
+// Product data comes from a live fetch of the deployed products.json
+// (deliberately no fs read: the bundled function path on Vercel does not
+// sit next to products.json). The handler never throws: any failure still
+// returns the generic OG tags with a 200, so a scraper never sees a 500.
+// Only plain Node response APIs (writeHead/end) are used.
 const SITE = 'https://magracia.com';
 const GENERIC = {
   title: 'Magracia | Silk Shirts, Satin Co-ord Sets, Pants & Shrugs for Women',
@@ -38,23 +38,16 @@ function absImage(src) {
 
 async function loadProducts() {
   try {
-    const data = JSON.parse(readFileSync(new URL('../products.json', import.meta.url), 'utf8'));
-    if (Array.isArray(data)) return data;
-  } catch (e) { /* fall through to live fetch */ }
-  try {
     const r = await fetch(`${SITE}/products.json`, { headers: { Accept: 'application/json' } });
-    if (r.ok) {
-      const data = await r.json();
-      if (Array.isArray(data)) return data;
-    }
-  } catch (e) { /* fall through: generic tags */ }
-  return [];
+    if (!r.ok) return [];
+    const data = await r.json();
+    return Array.isArray(data) ? data : [];
+  } catch (e) {
+    return [];
+  }
 }
 
-export default async function handler(req, res) {
-  const handle = (req.query?.handle || '').toString().trim();
-  const products = await loadProducts();
-  const p = handle ? products.find((x) => x.handle === handle) : null;
+function render(p, handle) {
   let title = GENERIC.title;
   let description = GENERIC.description;
   let image = GENERIC.image;
@@ -74,7 +67,7 @@ export default async function handler(req, res) {
   // NOT be HTML-escaped — only a literal </script sequence is neutralised.
   const ldJson = p ? JSON.stringify({ '@context': 'https://schema.org', '@type': 'Product', name: p.title, description, image: p.images || [], category: p.collection, brand: { '@type': 'Brand', name: 'Magracia' }, url }).replace(/<\//g, '<\\/') : '';
   const ld = p ? `<script type="application/ld+json">${ldJson}</script>` : '';
-  const html = `<!doctype html><html lang="en"><head><meta charset="utf-8">`
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8">`
     + `<title>${esc(title)}</title>`
     + `<meta name="description" content="${esc(description)}">`
     + `<link rel="canonical" href="${esc(url)}">`
@@ -91,5 +84,19 @@ export default async function handler(req, res) {
     + `<meta http-equiv="refresh" content="0; url=${esc(target)}">`
     + ld
     + `</head><body><p><a href="${esc(target)}">Continue to Magracia &rarr;</a></p></body></html>`;
-  res.status(200).setHeader('Content-Type', 'text/html; charset=utf-8').send(html);
+}
+
+export default async function handler(req, res) {
+  try {
+    const handle = (req.query?.handle || '').toString().trim();
+    const products = await loadProducts();
+    const p = handle ? products.find((x) => x.handle === handle) : null;
+    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+    res.end(render(p, handle));
+  } catch (e) {
+    try {
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+      res.end(render(null));
+    } catch (e2) { /* nothing left to try */ }
+  }
 }
