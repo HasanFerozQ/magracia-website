@@ -19,24 +19,23 @@ export default async function handler(req, res) {
     // Find the list, creating it on first use.
     let listId = null;
     const lists = await fetch('https://api.brevo.com/v3/contacts/lists?limit=50', { headers });
-    if (lists.ok) {
-      const data = await lists.json();
-      const found = (data.lists || []).find(l => l.name === 'Magracia Newsletter');
-      if (found) listId = found.id;
-    }
+    if (!lists.ok) return res.status(502).json({ error: 'Could not join the list right now, please try again', stage: 'list-lookup', brevoStatus: lists.status });
+    const data = await lists.json();
+    const found = (data.lists || []).find(l => l.name === 'Magracia Newsletter');
+    if (found) listId = found.id;
     if (!listId) {
       const created = await fetch('https://api.brevo.com/v3/contacts/lists', {
         method: 'POST', headers,
         body: JSON.stringify({ name: 'Magracia Newsletter', folderId: 1 }),
       });
-      if (!created.ok) return res.status(502).json({ error: 'Could not join the list right now, please try again' });
+      if (!created.ok) return res.status(502).json({ error: 'Could not join the list right now, please try again', stage: 'list-create', brevoStatus: created.status });
       listId = (await created.json()).id;
     }
     const added = await fetch('https://api.brevo.com/v3/contacts', {
       method: 'POST', headers,
       body: JSON.stringify({ email, listIds: [listId], updateEnabled: true }),
     });
-    if (!added.ok) return res.status(502).json({ error: 'Could not join the list right now, please try again' });
+    if (!added.ok) return res.status(502).json({ error: 'Could not join the list right now, please try again', stage: 'contact-add', brevoStatus: added.status });
     // Tell Hasan. If this fails the signup still stands, so never fail the request for it.
     try {
       await fetch('https://api.brevo.com/v3/smtp/email', {
