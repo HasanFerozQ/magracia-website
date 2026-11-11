@@ -1,6 +1,1 @@
-{
-  "headers": [
-    {"source": "/(.*\\.html)", "headers": [{"key": "Cache-Control", "value": "public, max-age=0, must-revalidate"}]},
-    {"source": "/products.json", "headers": [{"key": "Cache-Control", "value": "public, max-age=0, must-revalidate"}]}
-  ]
-}
+{"functions":{"api/og-product.js":{"includeFiles":"products.json"}},"headers":[{"headers":[{"key":"Cache-Control","value":"public, max-age=0, must-revalidate"}],"source":"/(.*\\.html)"},{"headers":[{"key":"Cache-Control","value":"public, max-age=0, must-revalidate"}],"source":"/products.json"}],"rewrites":[{"destination":"/api/og-product","has":[{"key":"user-agent","type":"header","value":"(?i).*(facebookexternalhit|facebot|twitterbot|linkedinbot|slackbot|whatsapp|telegrambot|pinterestbot|discordbot|applebot|skypeuripreview|bingpreview).*"}],"missing":[{"key":"og","type":"query"}],"source":"/product.html"}]}
