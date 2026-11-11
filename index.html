@@ -87,11 +87,15 @@ fetch('products.json?v=10').then(r=>r.json()).then(products=>{
       card.style.display=show?'':'none';
       if(show)shown.add(card.dataset.handle);
     });
+    const filtering=q||activeColour||activeFabric;
     document.querySelectorAll('#collection section').forEach(sec=>{
-      sec.style.display=[...sec.querySelectorAll('.card')].some(c=>c.style.display!=='none')?'':'none';
+      const cards=[...sec.querySelectorAll('.card')];
+      const vis=cards.filter(c=>c.style.display!=='none').length;
+      sec.style.display=vis?'':'none';
+      const sub=sec.querySelector('.sec-sub');
+      if(sub)sub.textContent=filtering?(vis+' of '+cards.length+' pieces'):(cards.length+' pieces');
     });
     if(ag){const asec=ag.closest('section'); if(asec)asec.style.display=[...ag.querySelectorAll('.card')].some(c=>c.style.display!=='none')?'':'none';}
-    const filtering=q||activeColour||activeFabric;
     document.getElementById('shopCount').textContent=filtering?('Showing '+shown.size+' of '+products.length+' pieces'):(products.length+' pieces');
     document.getElementById('clearFilters').hidden=!filtering;
     let nm=document.getElementById('noMatch');
