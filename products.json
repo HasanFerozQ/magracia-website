@@ -1,6 +1,7 @@
 [
   {
     "handle": "sable-stripe-shirt",
+    "fabric": ["Satin"],
     "title": "Sable Stripe Sheer Shirt",
     "collection": "Women Shirt Collection",
     "images": [
@@ -241,6 +242,7 @@
   },
   {
     "handle": "silk-shirts-for-women",
+    "fabric": ["Silk"],
     "title": "Silk Shirts For Women",
     "collection": "Women Shirt Collection",
     "images": [
@@ -537,6 +539,7 @@
   },
   {
     "handle": "nyx-half-net-shirt",
+    "fabric": ["Mesh"],
     "title": "Nyx Half Net Shirt",
     "collection": "Women Shirt Collection",
     "images": [
@@ -701,6 +704,7 @@
   },
   {
     "handle": "mesh-sleeve-button-up-shirt",
+    "fabric": ["Cotton", "Mesh"],
     "title": "Mesh-Sleeve Button-Up Shirt",
     "collection": "Women Shirt Collection",
     "images": [
@@ -846,6 +850,7 @@
   },
   {
     "handle": "eclipse-mesh-sleeve-tailored-shirt",
+    "fabric": ["Mesh"],
     "title": "Eclipse | Mesh-Sleeve Shirt",
     "collection": "Women Shirt Collection",
     "images": [
@@ -991,6 +996,7 @@
   },
   {
     "handle": "zaria-3-piece-satin-co-ord-set",
+    "fabric": ["Georgette", "Satin"],
     "title": "Zaria 3-Piece Satin Co-ord Set",
     "collection": "Co-ord Sets",
     "images": [
@@ -1141,6 +1147,7 @@
   },
   {
     "handle": "dorne-silk-co-ord-set",
+    "fabric": ["Silk"],
     "title": "Dorne – Luxury Silk Co-Ord Set",
     "collection": "Co-ord Sets",
     "images": [
@@ -1351,6 +1358,7 @@
   },
   {
     "handle": "engima-co-ord-set",
+    "fabric": ["Cotton"],
     "title": "Engima Co-Ord Set",
     "collection": "Co-ord Sets",
     "images": [
@@ -1513,6 +1521,7 @@
   },
   {
     "handle": "aster-co-ord-set",
+    "fabric": ["Cotton"],
     "title": "Aster Co-ord Set",
     "collection": "Co-ord Sets",
     "images": [
@@ -1673,6 +1682,7 @@
   },
   {
     "handle": "shacket-co-ord-set",
+    "fabric": ["Georgette", "Cotton"],
     "title": "Shacket Co-ord Set",
     "collection": "Co-ord Sets",
     "images": [
@@ -1801,6 +1811,7 @@
   },
   {
     "handle": "balloon-pants-for-women",
+    "fabric": [],
     "title": "Balloon Pants For Women",
     "collection": "Women Pants And Trousers",
     "images": [
@@ -1959,6 +1970,7 @@
   },
   {
     "handle": "leaf-pants-for-women",
+    "fabric": ["Cotton"],
     "title": "Leaf Pants For Women",
     "collection": "Women Pants And Trousers",
     "images": [
@@ -2095,6 +2107,7 @@
   },
   {
     "handle": "cotton-fit-trouser",
+    "fabric": ["Cotton"],
     "title": "Cotton Fit Trouser",
     "collection": "Women Pants And Trousers",
     "images": [
@@ -2349,6 +2362,7 @@
   },
   {
     "handle": "floaty-wide-leg-pants",
+    "fabric": [],
     "title": "Floaty Wide Leg Pants",
     "collection": "Women Pants And Trousers",
     "images": [
@@ -2537,6 +2551,7 @@
   },
   {
     "handle": "rib-longline-shrug",
+    "fabric": ["Knit"],
     "title": "Rib Longline Shrug",
     "collection": "Women Shrug Collection",
     "images": [
@@ -2755,6 +2770,7 @@
   },
   {
     "handle": "vera-georgette-shrug",
+    "fabric": ["Georgette"],
     "title": "Vera Georgette Shrug",
     "collection": "Women Shrug Collection",
     "images": [
@@ -2939,6 +2955,7 @@
   },
   {
     "handle": "georgette-long-shrug",
+    "fabric": ["Georgette"],
     "title": "Georgette Long Shrug",
     "collection": "Women Shrug Collection",
     "images": [
@@ -3197,6 +3214,7 @@
   },
   {
     "handle": "open-front-shrug",
+    "fabric": ["Linen"],
     "title": "Open Front Linen Shrug",
     "collection": "Women Shrug Collection",
     "images": [
@@ -3429,6 +3447,7 @@
   },
   {
     "handle": "vesper",
+    "fabric": ["Leather", "Mesh"],
     "title": "Vesper Lamb Skin Jacket with Fishnet Sleeves",
     "collection": "Women Jacket Collection",
     "images": [
@@ -3633,6 +3652,7 @@
   },
   {
     "handle": "nord-varsity-jacket",
+    "fabric": ["Brushed fabric"],
     "title": "Nord Varsity Jacket",
     "collection": "Women Jacket Collection",
     "show_all_photos": true,
@@ -3839,6 +3859,7 @@
   },
   {
     "handle": "highnote-varsity-jacket",
+    "fabric": ["Faux leather", "Brushed fabric"],
     "title": "HighNote Varsity Jacket",
     "collection": "Women Jacket Collection",
     "images": [
@@ -3938,6 +3959,7 @@
   },
   {
     "handle": "weed-wool-varsity-jacket",
+    "fabric": ["Wool"],
     "title": "Weed Wool Varsity Jacket",
     "collection": "Women Jacket Collection",
     "images": [

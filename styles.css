@@ -120,3 +120,37 @@ header h1.logo{margin:0}header h1.logo img{height:64px;width:auto;display:block}
 /* Keep anchor landings clear of the fixed header */
 #shop-by-collection,#collection{scroll-margin-top:110px}
 section[id^="col-"]{scroll-margin-top:110px}
+
+/* Homepage search + colour/fabric filters */
+.shop-tools{margin:8px 0 8px}
+#shopSearch{width:100%;max-width:560px;display:block;margin:0 auto 18px;padding:13px 18px;font:inherit;font-size:16px;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:999px;outline:none}
+#shopSearch:focus{border-color:var(--gold)}
+.chip-row{display:flex;align-items:flex-start;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.chip-label{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);padding-top:11px;min-width:52px;text-align:right}
+.chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;max-width:720px}
+.chip{font:inherit;font-size:13px;padding:8px 14px;border:1px solid var(--line);border-radius:999px;background:var(--paper);color:var(--ink);cursor:pointer}
+.chip:hover{border-color:var(--gold)}
+.chip.active{background:var(--gold);border-color:var(--gold);color:#fff}
+.shop-count{text-align:center;color:var(--muted);font-size:14px;margin:6px 0 0}
+.clear-filters{font:inherit;font-size:13px;background:none;border:none;color:var(--gold);cursor:pointer;text-decoration:underline;padding:0}
+.no-match{text-align:center;color:var(--muted);padding:32px 0}
+
+/* Homepage newsletter band */
+.news-band{padding:72px 0}
+.news-card{background:var(--paper);border:1px solid var(--line);max-width:780px;margin:0 auto;padding:56px 48px;text-align:center}
+.news-card .sec-sub{margin:0 0 10px}
+.news-card h2{font-size:46px;margin:0}
+.news-card h2:after{content:"";display:block;width:56px;height:2px;background:var(--gold);margin:14px auto 0}
+.news-intro{color:var(--muted);max-width:520px;margin:20px auto 28px}
+#newsForm{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+#newsEmail{flex:1;min-width:240px;max-width:360px;padding:14px 18px;font:inherit;font-size:16px;color:var(--ink);background:#fff;border:1px solid var(--line);outline:none}
+#newsEmail:focus{border-color:var(--gold)}
+.news-msg{min-height:22px;margin:18px 0 0;color:var(--muted)}
+.news-msg.ok{color:#2e6b34}
+.news-msg.err{color:#8c2f2f}
+@media (max-width:640px){
+  .news-band{padding:48px 0}
+  .news-card{padding:40px 24px}
+  .news-card h2{font-size:34px}
+  .chip-label{min-width:0;text-align:left}
+}
