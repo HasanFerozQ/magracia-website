@@ -48,7 +48,7 @@ footer{background:var(--ink);color:#cfc4bd;padding:64px 36px 28px}.foot{display:
 .foot-bottom{text-align:center;margin-top:44px;padding-top:24px;border-top:1px solid rgba(255,255,255,.14);color:#a99d94}
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s,transform .7s}.reveal.visible{opacity:1;transform:none}
 /* product page */
-.product{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;max-width:1280px;margin:0 auto;padding:130px 32px 64px}
+.product{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:64px;max-width:1280px;margin:0 auto;padding:130px 32px 64px}
 .gallery img.main{width:100%;height:640px;object-fit:contain;background:var(--cream);border-radius:0}
 .gallery{position:relative}.mainwrap{position:relative}.galnav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(22,16,19,.75);color:#fff;border:0;width:44px;height:44px;font-size:26px;line-height:1;cursor:pointer;border-radius:50%;z-index:2}.galnav:hover{background:var(--gold)}.galnav.prev{left:12px}.galnav.next{right:12px}.galcount{position:absolute;right:12px;bottom:12px;background:rgba(22,16,19,.75);color:#fff;font-size:12px;letter-spacing:.14em;padding:5px 10px;border-radius:20px}
 .thumbs{display:flex;gap:10px;flex-wrap:nowrap;overflow-x:auto;margin-top:14px;padding-bottom:6px;scroll-snap-type:x proximity;scrollbar-width:thin}.thumbs img{flex:0 0 auto;width:76px;height:96px;object-fit:cover;border-radius:0;cursor:pointer;border:2px solid var(--line);scroll-snap-align:start}.thumbs img.active{border-color:var(--gold)}
@@ -106,7 +106,7 @@ header h1.logo{margin:0}header h1.logo img{height:64px;width:auto;display:block}
 @media (max-width:900px){.gallery img.main{height:480px}}
 @media (max-width:560px){.gallery img.main{height:420px}}
 .product>*{min-width:0}.gallery{min-width:0;overflow:hidden}.thumbs{max-width:100%}
-.product{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr)}.gallery{min-width:0;overflow:hidden}.thumbs{overflow-x:auto;max-width:100%}
+.gallery{min-width:0;overflow:hidden}.thumbs{overflow-x:auto;max-width:100%}
 
 /* Homepage contact band */
 .contact-band{padding:72px 0}
