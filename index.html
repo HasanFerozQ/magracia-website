@@ -60,27 +60,32 @@ fetch('products.json?v=10').then(r=>r.json()).then(products=>{
   const jackets=products.filter(p=>p.collection==='Women Jacket Collection');
   const ag=document.getElementById('arrivalsGrid');
   if(ag){ag.innerHTML=jackets.map(p=>'<article class="card" '+cardAttrs(p)+'><a href="product.html?handle='+encodeURIComponent(p.handle)+'"><div class="imgwrap"><img src="'+(p.images[0]||'')+'" alt="'+p.title.replace(/"/g,'')+'" loading="lazy"></div></a><div class="card-body"><span class="label">New Arrival</span><h3>'+p.title+'</h3><p class="arrival-colours">'+(p.colours||[]).join(' · ')+'</p><a class="btn btn-gold" href="product.html?handle='+encodeURIComponent(p.handle)+'">View Jacket →</a></div></article>').join('');}
-  // New Arrivals carousel: arrows + dots over the scroll-snap track
+  // New Arrivals carousel: arrows + dots over the scroll-snap track.
+  // Dots are slide positions (scrollWidth decides how many), not one per card:
+  // with 2 cards visible there are 4 positions for 5 jackets, so no dead dot.
   const arrPrev=document.getElementById('arrPrev'), arrNext=document.getElementById('arrNext'), arrDots=document.getElementById('arrDots');
   function arrivalCards(){return ag?[...ag.querySelectorAll('.card')].filter(c=>c.style.display!=='none'):[];}
+  function arrivalStepPx(){const c=arrivalCards()[0]; return c?c.offsetWidth+28:0;}
+  function arrivalMax(){return ag?Math.max(0,ag.scrollWidth-ag.clientWidth):0;}
+  function arrivalDotCount(){const s=arrivalStepPx(); return s?Math.floor(arrivalMax()/s)+1:0;}
   function updateArrivalNav(){
-    const cards=arrivalCards(); if(!cards.length||!ag)return;
-    const atStart=ag.scrollLeft<=4, atEnd=ag.scrollLeft+ag.clientWidth>=ag.scrollWidth-4;
-    if(arrPrev)arrPrev.disabled=atStart; if(arrNext)arrNext.disabled=atEnd;
-    const g=ag.getBoundingClientRect(), mid=g.left+g.width/2; let idx=0,best=1e9;
-    cards.forEach((c,i)=>{const r=c.getBoundingClientRect(); const d=Math.abs((r.left+r.width/2)-mid); if(d<best){best=d;idx=i;}});
+    if(!ag)return;
+    const s=arrivalStepPx(), n=arrivalDotCount();
+    if(arrPrev)arrPrev.disabled=ag.scrollLeft<=4;
+    if(arrNext)arrNext.disabled=ag.scrollLeft>=arrivalMax()-4;
+    const idx=s?Math.min(n-1,Math.max(0,Math.round(ag.scrollLeft/s))):0;
     if(arrDots)arrDots.querySelectorAll('button').forEach((b,i)=>b.classList.toggle('active',i===idx));
   }
   function buildArrivalDots(){
-    if(!arrDots)return; const n=arrivalCards().length;
-    arrDots.innerHTML=Array.from({length:n},(_,i)=>'<button type="button" aria-label="Go to arrival '+(i+1)+'" data-i="'+i+'"></button>').join('');
-    arrDots.querySelectorAll('button').forEach(b=>b.onclick=()=>{const c=arrivalCards()[+b.dataset.i]; if(c)c.scrollIntoView({behavior:'smooth',inline:'start',block:'nearest'});});
+    if(!arrDots)return; const n=arrivalDotCount(), s=arrivalStepPx();
+    arrDots.innerHTML=Array.from({length:n},(_,i)=>'<button type="button" aria-label="Go to slide '+(i+1)+'" data-i="'+i+'"></button>').join('');
+    arrDots.querySelectorAll('button').forEach(b=>b.onclick=()=>{const i=+b.dataset.i; ag.scrollTo({left:(i===n-1?arrivalMax():i*s),behavior:'smooth'});});
     updateArrivalNav();
   }
-  function arrivalStep(dir){const cards=arrivalCards(); if(!cards.length)return; ag.scrollBy({left:dir*(cards[0].offsetWidth+28),behavior:'smooth'});}
+  function arrivalStep(dir){ag.scrollBy({left:dir*arrivalStepPx(),behavior:'smooth'});}
   if(arrPrev)arrPrev.onclick=()=>arrivalStep(-1);
   if(arrNext)arrNext.onclick=()=>arrivalStep(1);
-  if(ag){ag.addEventListener('scroll',()=>requestAnimationFrame(updateArrivalNav),{passive:true}); buildArrivalDots();}
+  if(ag){ag.addEventListener('scroll',()=>requestAnimationFrame(updateArrivalNav),{passive:true}); let arrRt; window.addEventListener('resize',()=>{clearTimeout(arrRt); arrRt=setTimeout(buildArrivalDots,150);}); buildArrivalDots();}
   // Search + colour/fabric filters (chips are single-select; click again to clear)
   let activeColour='', activeFabric='';
   const norm=s=>(s||'').toLowerCase();
