@@ -18,13 +18,13 @@
 <meta property="og:url" content="https://magracia.com/">
 <meta property="og:site_name" content="Magracia">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Magracia","url":"https://magracia.com/","slogan":"Chosen, not chased.","email":"support@magracia.com","telephone":"+92-331-8035-398","address":{"@type":"PostalAddress","streetAddress":"Block 13, Gulistan-e-Johar","addressLocality":"Karachi","postalCode":"75400","addressCountry":"PK"},"sameAs":["https://www.etsy.com/shop/MagraciaOfficial","https://www.facebook.com/profile.php?id=61591413465941","https://www.instagram.com/shopmagracia"]}</script><link rel="stylesheet" href="styles.css?v=20"></head>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Magracia","url":"https://magracia.com/","slogan":"Chosen, not chased.","email":"support@magracia.com","telephone":"+92-331-8035-398","address":{"@type":"PostalAddress","streetAddress":"Block 13, Gulistan-e-Johar","addressLocality":"Karachi","postalCode":"75400","addressCountry":"PK"},"sameAs":["https://www.etsy.com/shop/MagraciaOfficial","https://www.facebook.com/profile.php?id=61591413465941","https://www.instagram.com/shopmagracia"]}</script><link rel="stylesheet" href="styles.css?v=21"></head>
 <body>
 <header><button class="menu-btn" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu(this)">☰</button><nav><a href="/">HOME</a><a href="#collection">SHOP</a></nav><h1 class="logo"><a href="/"><img src="/images/1793279692618-magracia-logo.png" alt="Magracia"></a></h1><nav><a href="contact.html">CONTACT</a><a href="https://www.etsy.com/shop/MagraciaOfficial">ETSY SHOP</a></nav><nav class="mobile-menu" id="mobileMenu"><a href="/">HOME</a><a href="/#collection">SHOP</a><a href="contact.html">CONTACT</a><a href="https://www.etsy.com/shop/MagraciaOfficial">ETSY SHOP</a></nav></header>
 <main>
 <section class="hero" style="background-image:url('/images/Models_posing_near_large_rock_202607021745_Magracia_Eclipse_Mesh-Sleeve_Shirt_ed475d78e17229f7_Magracia_5c5101f6e400949b.webp')">
 <div class="hero-text"><p class="eyebrow">Silk · Satin · Georgette</p><h2>Wear the room,<br><em>not just the outfit.</em></h2><p>Elegant women's clothing for every occasion. Silk shirts, co-ord sets, pants and shrugs, made to be worn, not just photographed.</p><p><a class="btn btn-gold" href="#shop-by-collection">Shop the Collection</a><a class="btn btn-outline" href="https://www.etsy.com/shop/MagraciaOfficial">Visit Our Etsy Shop</a></p></div></section>
-<div class="wrap"><section class="new-arrivals reveal"><div class="sec-head"><h2>New Arrivals</h2><span class="sec-sub">Fresh from the Women Jacket Collection</span></div><div class="arrivals-grid" id="arrivalsGrid"></div></section></div>
+<div class="wrap"><section class="new-arrivals reveal"><div class="sec-head"><h2>New Arrivals</h2><span class="sec-sub">Fresh from the Women Jacket Collection</span></div><div class="arrivals-grid" id="arrivalsGrid"></div><div class="arr-controls"><button class="arrnav" id="arrPrev" type="button" aria-label="Previous arrivals">‹</button><div class="arrdots" id="arrDots"></div><button class="arrnav" id="arrNext" type="button" aria-label="Next arrivals">›</button></div></section></div>
 <div class="values"><div><b>Made with care</b><span>Thoughtful, feminine design</span></div><div><b>Custom sizing</b><span>Measured to fit you</span></div><div><b>Buy on Etsy</b><span>Secure checkout there</span></div></div>
 <div class="wrap">
 <section class="reveal" id="shop-by-collection"><div class="sec-head"><h2>Shop by Collection</h2><span class="sec-sub" id="colCount">Collections · pieces</span></div><div class="tiles" id="tiles"></div></section>
@@ -60,6 +60,27 @@ fetch('products.json?v=10').then(r=>r.json()).then(products=>{
   const jackets=products.filter(p=>p.collection==='Women Jacket Collection');
   const ag=document.getElementById('arrivalsGrid');
   if(ag){ag.innerHTML=jackets.map(p=>'<article class="card" '+cardAttrs(p)+'><a href="product.html?handle='+encodeURIComponent(p.handle)+'"><div class="imgwrap"><img src="'+(p.images[0]||'')+'" alt="'+p.title.replace(/"/g,'')+'" loading="lazy"></div></a><div class="card-body"><span class="label">New Arrival</span><h3>'+p.title+'</h3><p class="arrival-colours">'+(p.colours||[]).join(' · ')+'</p><a class="btn btn-gold" href="product.html?handle='+encodeURIComponent(p.handle)+'">View Jacket →</a></div></article>').join('');}
+  // New Arrivals carousel: arrows + dots over the scroll-snap track
+  const arrPrev=document.getElementById('arrPrev'), arrNext=document.getElementById('arrNext'), arrDots=document.getElementById('arrDots');
+  function arrivalCards(){return ag?[...ag.querySelectorAll('.card')].filter(c=>c.style.display!=='none'):[];}
+  function updateArrivalNav(){
+    const cards=arrivalCards(); if(!cards.length||!ag)return;
+    const atStart=ag.scrollLeft<=4, atEnd=ag.scrollLeft+ag.clientWidth>=ag.scrollWidth-4;
+    if(arrPrev)arrPrev.disabled=atStart; if(arrNext)arrNext.disabled=atEnd;
+    const g=ag.getBoundingClientRect(), mid=g.left+g.width/2; let idx=0,best=1e9;
+    cards.forEach((c,i)=>{const r=c.getBoundingClientRect(); const d=Math.abs((r.left+r.width/2)-mid); if(d<best){best=d;idx=i;}});
+    if(arrDots)arrDots.querySelectorAll('button').forEach((b,i)=>b.classList.toggle('active',i===idx));
+  }
+  function buildArrivalDots(){
+    if(!arrDots)return; const n=arrivalCards().length;
+    arrDots.innerHTML=Array.from({length:n},(_,i)=>'<button type="button" aria-label="Go to arrival '+(i+1)+'" data-i="'+i+'"></button>').join('');
+    arrDots.querySelectorAll('button').forEach(b=>b.onclick=()=>{const c=arrivalCards()[+b.dataset.i]; if(c)c.scrollIntoView({behavior:'smooth',inline:'start',block:'nearest'});});
+    updateArrivalNav();
+  }
+  function arrivalStep(dir){const cards=arrivalCards(); if(!cards.length)return; ag.scrollBy({left:dir*(cards[0].offsetWidth+28),behavior:'smooth'});}
+  if(arrPrev)arrPrev.onclick=()=>arrivalStep(-1);
+  if(arrNext)arrNext.onclick=()=>arrivalStep(1);
+  if(ag){ag.addEventListener('scroll',()=>requestAnimationFrame(updateArrivalNav),{passive:true}); buildArrivalDots();}
   // Search + colour/fabric filters (chips are single-select; click again to clear)
   let activeColour='', activeFabric='';
   const norm=s=>(s||'').toLowerCase();
@@ -96,6 +117,7 @@ fetch('products.json?v=10').then(r=>r.json()).then(products=>{
       if(sub)sub.textContent=filtering?(vis+' of '+cards.length+' pieces'):(cards.length+' pieces');
     });
     if(ag){const asec=ag.closest('section'); if(asec)asec.style.display=[...ag.querySelectorAll('.card')].some(c=>c.style.display!=='none')?'':'none';}
+    buildArrivalDots();
     document.getElementById('shopCount').textContent=filtering?('Showing '+shown.size+' of '+products.length+' pieces'):(products.length+' pieces');
     document.getElementById('clearFilters').hidden=!filtering;
     let nm=document.getElementById('noMatch');
