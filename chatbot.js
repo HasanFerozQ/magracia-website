@@ -82,7 +82,7 @@ var FABRIC={
 "georgette-long-shrug":"Georgette, front open, with loose full sleeves.",
 "open-front-shrug":"Linen — a lightly textured linen weave, built for warm-weather layering.",
 "vesper":"Handmade jacket in 100% genuine lambskin leather (0.7-0.9 mm) in Camel Brown, Black or Burgundy, with heavy black fishnet sleeves, large mesh.",
-"nord-varsity-jacket":"Handmade varsity jacket in soft, warm brushed fabric, in Navy, Burgundy or Rose Pink, with cream-striped ribbed collar, cuffs and hem, snap-button front and slanted welt pockets.",
+"nord-varsity-jacket":"Handmade varsity jacket in soft, warm brushed fabric, in Navy Blue, Burgundy or Rose Pink, with cream-striped ribbed collar, cuffs and hem, snap-button front and slanted welt pockets.",
 "highnote-varsity-jacket":"Handmade maroon varsity jacket with top-grade beige faux-leather sleeves, cream-striped ribbed collar, cuffs and hem, snap-button front and slanted welt pockets.",
 "weed-wool-varsity-jacket":"Handmade black wool varsity jacket with red, yellow and green stripes down the sleeves, white-striped ribbed collar, cuffs and hem, gold snap-button front and slanted welt pockets.",
 "black-widow-leather-jacket":"Handmade black leather jacket in 100% genuine lambskin with a red hourglass panel down the back, quilted shoulder panels, snap-button collar, straight front zipper, zippered side pockets, buckle waist straps and zip cuffs."
@@ -311,7 +311,7 @@ function answer(qRaw){
     return "Comparing, side by side (I will not say one is better — that is your choice):\n\n"+a.title+" ("+a.collection+")\nColours: "+(a.colours||[]).join(", ")+"\nSizes: "+(a.sizes||[]).join(", ")+"\nFabric: "+(FABRIC[a.handle]||"Not named in the listing.")+"\nSize chart: "+(a.size_chart?"Yes, on its product page.":"No, not yet.")+"\n\n"+b.title+" ("+b.collection+")\nColours: "+(b.colours||[]).join(", ")+"\nSizes: "+(b.sizes||[]).join(", ")+"\nFabric: "+(FABRIC[b.handle]||"Not named in the listing.")+"\nSize chart: "+(b.size_chart?"Yes, on its product page.":"No, not yet.")+"\n\n"+prodLink(a)+" · "+prodLink(b);
   }
   if(has("which","show","list","all") && !prods.length){
-    var cols=allColours(); var foundCol=null; cols.forEach(function(c){ if(q.indexOf(c.toLowerCase())!==-1) foundCol=c; });
+    var cols=allColours(); var foundCol=null; cols.forEach(function(c){ if(q.indexOf(c.toLowerCase())!==-1 && (!foundCol || c.length>foundCol.length)) foundCol=c; });
     if(foundCol) return listByColour(foundCol);
     var szm=q.match(/\b(2xs|xxs|2xl|3xl|4xl|xxl|xs|s|m|l|xl)\b/); if(szm && has("size")) return listBySize(szm[1].toUpperCase());
   }
@@ -428,7 +428,7 @@ if(prods.length>1 && (has("colour","color","size","fabric","material","stock","a
       var col=null, sz=null; (p.colours||[]).forEach(function(c){ if(q.indexOf(c.toLowerCase())!==-1) col=c; }); ["2xs","xxs","2xl","3xl","4xl","xxl","xs","s","m","l","xl"].forEach(function(s){ if(q.indexOf(" "+s+" ")!==-1) sz=s.toUpperCase(); });
       return stockText(p,col,sz);
     }
-    return "Tell me the piece, and ideally a colour and a size, and I will check that exact combination. For example: \u201cIs Sable in Navy, size M, in stock?\u201d";
+    return "Tell me the piece, and ideally a colour and a size, and I will check that exact combination. For example: \u201cIs Sable in Navy Blue, size M, in stock?\u201d";
   }
   if(has("fabric","material","made of","cotton","silk","georgette","linen","satin","knit")){
     if(p && (named || anaphor)) return esc(p.title)+" — fabric: "+(FABRIC[p.handle]||"The listing does not give a fabric composition for this piece on this site, so I will not guess one.");
