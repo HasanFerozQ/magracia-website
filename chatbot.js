@@ -86,7 +86,7 @@ var FABRIC={
 "highnote-varsity-jacket":"Handmade maroon varsity jacket with top-grade beige faux-leather sleeves, cream-striped ribbed collar, cuffs and hem, snap-button front and slanted welt pockets.",
 "weed-wool-varsity-jacket":"Handmade black wool varsity jacket with red, yellow and green stripes down the sleeves, white-striped ribbed collar, cuffs and hem, gold snap-button front and slanted welt pockets.",
 "black-widow-leather-jacket":"Handmade black leather jacket in 100% genuine lambskin with a red hourglass panel down the back, quilted shoulder panels, snap-button collar, straight front zipper, zippered side pockets, buckle waist straps and zip cuffs.",
-"balfern-cropped-leather-jacket":"Handmade cropped leather jacket in calf and sheep leather, with quilted padded sleeves, structured shoulders and a central zipper."
+"balfern-cropped-leather-jacket":"Handmade cropped leather jacket in lamb and sheep leather, with quilted padded sleeves, structured shoulders and a central zipper."
 };
 var SHORT={
 "sable":["sable-stripe-shirt"],"silk":["silk-shirts-for-women"],"nyx":["nyx-half-net-shirt"],
@@ -265,13 +265,13 @@ function answer(qRaw){
     if(p && (named || anaphor)){
       if(p.handle==="vesper") return "Yes — Vesper is 100% genuine lambskin leather (0.7–0.9 mm), as its listing states, with heavy black fishnet sleeves. It is also listed as handmade.";
       if(p.handle==="black-widow-leather-jacket") return "Yes — the Black Widow Leather Jacket is 100% genuine lambskin leather, as its listing states, with a red hourglass panel down the back. It is also listed as handmade.";
-      if(p.handle==="balfern-cropped-leather-jacket") return "Yes — the Balfern Cropped Leather Jacket is calf and sheep leather, as its listing states. It is also listed as handmade.";
+      if(p.handle==="balfern-cropped-leather-jacket") return "Yes — the Balfern Cropped Leather Jacket is lamb and sheep leather, as its listing states. It is also listed as handmade.";
       if(p.handle==="highnote-varsity-jacket") return "HighNote's sleeves are top-grade faux leather — not genuine leather — with a maroon brushed body. Its listing states this clearly, and that it is handmade.";
       if(p.handle==="nord-varsity-jacket") return "Nord has no leather — it is a handmade varsity jacket in soft, warm brushed fabric.";
       if(p.handle==="weed-wool-varsity-jacket") return "Weed Wool has no leather — it is a handmade black wool varsity jacket with red, yellow and green stripes down the sleeves.";
-      return esc(p.title)+" — its listing does not name leather, so I will not claim it is leather. The leather pieces on this site are Vesper (genuine lambskin), Black Widow (genuine lambskin), Balfern (calf and sheep leather) and HighNote (faux-leather sleeves).";
+      return esc(p.title)+" — its listing does not name leather, so I will not claim it is leather. The leather pieces on this site are Vesper (genuine lambskin), Black Widow (genuine lambskin), Balfern (lamb and sheep leather) and HighNote (faux-leather sleeves).";
     }
-    return "Leather on this site, from the listings:\n• Vesper Lamb Skin Jacket with Fishnet Sleeves — 100% genuine lambskin leather (0.7–0.9 mm).\n• Black Widow Leather Jacket — 100% genuine lambskin leather.\n• Balfern Cropped Leather Jacket — calf and sheep leather.\n• HighNote Varsity Jacket — top-grade faux-leather sleeves, not genuine leather.\n• Nord Varsity Jacket — brushed fabric, no leather.\n• Weed Wool Varsity Jacket — wool, no leather.\nNo other listing names leather. Ask me about a piece by name for its full fabric.";
+    return "Leather on this site, from the listings:\n• Vesper Lamb Skin Jacket with Fishnet Sleeves — 100% genuine lambskin leather (0.7–0.9 mm).\n• Black Widow Leather Jacket — 100% genuine lambskin leather.\n• Balfern Cropped Leather Jacket — lamb and sheep leather.\n• HighNote Varsity Jacket — top-grade faux-leather sleeves, not genuine leather.\n• Nord Varsity Jacket — brushed fabric, no leather.\n• Weed Wool Varsity Jacket — wool, no leather.\nNo other listing names leather. Ask me about a piece by name for its full fabric.";
   }
   if(has("handmade","made in","origin","where is it made") && !has("price","cost")){
     if(p && (named || anaphor) && (p.handle==="vesper"||p.handle==="nord-varsity-jacket"||p.handle==="highnote-varsity-jacket"||p.handle==="weed-wool-varsity-jacket"||p.handle==="black-widow-leather-jacket"||p.handle==="balfern-cropped-leather-jacket")) return "Yes — "+esc(p.title)+" is listed as handmade on this site, in both its description and its details. Magracia is Pakistan-based and sells through Etsy. The listings do not name a country of manufacture for individual pieces; for making details on a specific piece, email support@magracia.com.";
